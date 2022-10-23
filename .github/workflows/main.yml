@@ -11,7 +11,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container: mikhail2001/young_devs_image
-    # needs: [check]
     steps:
     - uses: actions/checkout@v2 
     - name: GO BUILD
@@ -24,7 +23,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container: mikhail2001/young_devs_image
-    # needs: [build]
     steps:
       - uses: actions/checkout@v2 
       - run: make build TEST_OPT=ON
@@ -37,11 +35,6 @@ jobs:
         with:
           name: coverage-report
           path: build/report
-      - name: CODECOV PANEL ON README
-        run: |
-          wget https://uploader.codecov.io/latest/linux/codecov
-          chmod +x codecov
-          ./codecov -t ${{ secrets.token_codecov }}
       - name: GO VALGRIND TESTS
         run: make valgrind_tests  
       - name: GO VALGRIND TARGET
