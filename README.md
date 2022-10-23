@@ -5,10 +5,10 @@
 <вставьте описание>
 
 ## Разработчики
-- [Михаил Мяделец](https://t.me/@MikhailMy_15) - капитан команды
-- [Владислав Еремихин](https://t.me/@pvrts)
-- [Дмитрий Верин](https://t.me/@carthago1)
-- [Максим Данилин](https://t.me/@choza_max)
+- [Михаил Мяделец](https://t.me/MikhailMy_15) - капитан команды
+- [Владислав Еремихин](https://t.me/pvrts)
+- [Дмитрий Верин](https://t.me/carthago1)
+- [Максим Данилин](https://t.me/choza_max)
 
 ## Ментор
 - [Кириллов Денис](https://t.me/denactive)
