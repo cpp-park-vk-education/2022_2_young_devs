@@ -1,3 +1,5 @@
+[![GitHub Actions](https://github.com/cpp-park-vk-education/2022_2_young_devs/actions/workflows/main.yml/badge.svg)](https://github.com/cpp-park-vk-education/2022_2_young_devs/actions/workflows/main.yml)
+
 # 2022_2_young_devs
 Математическая онлайн-игра с элементами соцсети. Семестровый проект в Технопарке
 
