@@ -1,0 +1,56 @@
+on: push
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    container: mikhail2001/young_devs_image
+    steps:
+      - uses: actions/checkout@v2 
+      - name: GO LINTER CHECK
+        run: make check || exit 0
+  build:
+    runs-on: ubuntu-latest
+    container: mikhail2001/young_devs_image
+    # needs: [check]
+    steps:
+    - uses: actions/checkout@v2 
+    - name: GO BUILD
+      run: make build
+    - name: Upload artifacts (EXECUTABLE FILE)
+      uses: actions/upload-artifact@v2
+      with:
+        name: executable-file
+        path: build/fib
+  test:
+    runs-on: ubuntu-latest
+    container: mikhail2001/young_devs_image
+    # needs: [build]
+    steps:
+      - uses: actions/checkout@v2 
+      - run: make build TEST_OPT=ON
+      - run: make run
+      - run: make test
+      - name: GO TEST COVERAGE
+        run: make coverage
+      - name: Upload artifacts (COVERAGE REPORT) 
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-report
+          path: build/report
+      - name: CODECOV PANEL ON README
+        run: |
+          wget https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov -t ${{ secrets.token_codecov }}
+      - name: GO VALGRIND TESTS
+        run: make valgrind_tests  
+      - name: GO VALGRIND TARGET
+        run: make valgrind_target  
+      - name: GO SANITIZER
+        run: |
+          make build SANITIZE_OPT=ON
+          make run
+      - name: GO SCAN-BUILD
+        run: |
+          make build
+          make scan_build
