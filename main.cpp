@@ -3,6 +3,8 @@
 #include <array>
 #include <algorithm>
 #include <cassert>
+#include <cstring>
+#include <cmath>
 #include <thread>
 #include <mutex>
 #include <condition_variable>
@@ -55,6 +57,8 @@ public:
     virtual typename std::vector<int16_t>::iterator Begin() = 0;
     virtual typename std::vector<int16_t>::iterator End() = 0;
     virtual size_t Size() const = 0;
+    virtual void Clear() = 0;
+    virtual void SetField(IGameField *field) = 0;
 
     virtual int16_t operator[](size_t index) const = 0;
     virtual int16_t& operator[](size_t index) = 0; 
@@ -63,10 +67,10 @@ public:
 class IGameLogic
 {
 public:
-    virtual void ClearState() = 0;
     virtual bool MakeStep(uint16_t indexCell, size_t indexPlayer) = 0;
     virtual bool EndOfGame() = 0;
     virtual ReportGame GetReportGame() const = 0;
+    virtual void SetState(IGameField *field = nullptr) = 0;
     virtual IGameField *GetField() const = 0;
 };
 
@@ -88,16 +92,16 @@ class IGameLoop
 {
 protected:
     size_t _countPlayers;
-    virtual void InitializeGame() = 0;
+    virtual void InitializeGame(IGameField *field = nullptr) = 0;
     virtual void MakeStep(size_t indexPlayer) = 0;
     virtual bool EndOfGame() = 0;
     virtual void PrintWinner() = 0;
     virtual ~IGameLoop() = default;
 public:
     IGameLoop(size_t countPlayers) : _countPlayers(countPlayers) {}
-    void Play()
+    void Play(IGameField *field = nullptr)
     {
-        InitializeGame();
+        InitializeGame(field);
         size_t indexPlayer = 0;
         while (!EndOfGame())
         {
@@ -211,6 +215,15 @@ public:
     {
         return _field.end();
     }
+    virtual void Clear() override
+    {
+        std::fill(_field.begin(), _field.end(), E);
+    }
+    // копирует данные, указателем не владеет
+    virtual void SetField(IGameField *field) override
+    {
+        std::copy(field->Begin(), field->End(), _field.begin());
+    }
 private:
     size_t                     _n; 
     std::vector<int16_t>       _field;
@@ -223,11 +236,19 @@ public:
     {
         _field = (field == nullptr) ? new TicTacToeField(_n) : field;
     }
-    virtual void ClearState() override
+    // копирует данные, указателем не владеет
+    virtual void SetState(IGameField *field = nullptr) override
     {
-        _winner = E;
-        std::fill(_field->Begin(), _field->End(), E);
-        std::fill(_sums.begin(), _sums.end(), 0);
+        if (!field)
+        {
+            _field->Clear();
+            _winner = E;
+            std::fill(_sums.begin(), _sums.end(), 0);
+        }
+        else
+        {
+            _field->SetField(field);
+        }
     }
     virtual bool MakeStep(uint16_t indexCell, size_t indexPlayer) override 
     {
@@ -318,14 +339,20 @@ public:
         }
     }
 protected:
-    virtual void InitializeGame() override
+    virtual void InitializeGame(IGameField *field = nullptr) override
     {
-        _gameLogic->ClearState();
+        stopGame = false;
+        _gameLogic->SetState(field);
     }
     virtual void MakeStep(size_t indexPlayer) override
     {
         _output->Output(_gameLogic->GetField());
         uint16_t indexCell = _input->InputIndex();
+        if (indexCell == 911)
+        {
+            stopGame = true;
+            return;
+        }
         while (!_gameLogic->MakeStep(indexCell, indexPlayer))
         {
             _input->Undo();
@@ -334,6 +361,10 @@ protected:
     }
     virtual bool EndOfGame() override
     {
+        if (stopGame)
+        {
+            return true;
+        }
         return _gameLogic->EndOfGame();
     }   
     virtual void PrintWinner() override
@@ -351,22 +382,19 @@ protected:
     }
 private:
     // разные интерфейсы одного объекта
+    bool stopGame =     false;
     IGameLogic *        _gameLogic;
     IInput  *           _input;
     IOutput *           _output;
 };
 
 // тестовые заглушки
-
 class GameTestField : public IGameField
 {
 public:
     GameTestField(size_t n = 3) : _n(n), _testField(n * n, 0) 
     {
-        for (size_t i = 0; i < _testField.size(); ++i)
-        {
-            _testField[i] = std::rand() % 10;
-        }
+        std::fill(_testField.begin(), _testField.end(), 7);
     }
     virtual typename std::vector<int16_t>::iterator Begin() override
     {
@@ -392,6 +420,17 @@ public:
     {
         return _testField[index];
     }
+
+    virtual void Clear() override
+    {
+        std::fill(_testField.begin(), _testField.end(), 7);
+    }
+    // копирует данные, указателем не владеет
+    virtual void SetField(IGameField *field) override
+    {
+        std::copy(field->Begin(), field->End(), _testField.begin());
+    }
+
 private:
     size_t _n;
     std::vector<int16_t> _testField;
@@ -404,9 +443,9 @@ public:
     {
         _field = (field == nullptr) ? new GameTestField(n) : field;
     }
-    virtual void ClearState() override
+    virtual void SetState(IGameField *field = nullptr) override
     {
-        (void)0;
+        _field->Clear();
     }
     virtual bool MakeStep(uint16_t indexCell, size_t indexPlayer) override
     {
@@ -438,6 +477,40 @@ private:
     IGameField              *_field;
 };
 
+// работает для крестиков-ноликов 3x3
+class IManagerField
+{
+public:
+    virtual IGameField *DecompressField(std::string const &str) = 0;
+    virtual std::string CompressField(IGameField *field) = 0;
+};
+
+class ManagerTicTacToeField : public IManagerField
+{
+public:
+    virtual IGameField *DecompressField(std::string const &str) override
+    {
+        size_t size = (str[0] - 48) * 10 + (str[1] - 48);
+        IGameField *field = new TicTacToeField(std::sqrt(size)); 
+        for (size_t i = 0; i < size; ++i)
+        {
+            (*field)[i] = str[i + 2] - 48;
+        }
+        return field;
+    }
+    virtual std::string CompressField(IGameField *field) override
+    {
+        size_t size = field->Size() * field->Size();
+        std::string strCompressField(size + 2, 0);
+        strCompressField[0] = (size / 10) + 48;
+        strCompressField[1] = (size % 10) + 48;
+        for (size_t i = 0; i < size; ++i)
+        {
+            strCompressField[i + 2] = (*field)[i] + 48;
+        }
+        return strCompressField;
+    }
+};
 
 template <typename TypeGameLoop>
 class GameLoopBuilder
@@ -501,25 +574,55 @@ void Go()
     std::thread user(UserEvents);
 
     // *********** [ NETEST ] ***********
-    // IGameLoop* ticTacToe = GameLoopBuilder<TicTacToeLoop>()\
-    //         .withGameLogic(new TicTacToeLogic)\
-    //         .withInput(new InputEvent)\
-    //         .withOutput(new OutputConsole)\
-    //         .build();
 
-    // *********** [ TEST ] *********** 
-    IGameLoop* ticTacToe = GameLoopBuilder<TicTacToeLoop>()\
-            .withGameLogic(new GameTestLogic)\
+    IGameLogic *gameLogic = new TicTacToeLogic;
+    {
+        IGameLoop* ticTacToe = GameLoopBuilder<TicTacToeLoop>()\
+            .withGameLogic(gameLogic)\
             .withInput(new InputEvent)\
             .withOutput(new OutputConsole)\
             .build();
 
-    ticTacToe->Play();
+        ticTacToe->Play();
+    }
+
+        
+    std::cout << "*********[  Game ended   ]*********\n\n";
+    std::cout << "*********[ Continue game ]*********\n\n";
+
+
+    ManagerTicTacToeField manager;
+    std::string strField = manager.CompressField(gameLogic->GetField());
+    std::cout << "Field of last game: " << strField << '\n';
+    delete gameLogic;
+
+    // заполняем поле через строку
+    IGameField* field = manager.DecompressField(strField);
+    
+    {
+        IGameLoop* ticTacToe = GameLoopBuilder<TicTacToeLoop>()\
+            .withGameLogic(new TicTacToeLogic)\
+            .withInput(new InputEvent)\
+            .withOutput(new OutputConsole)\
+            .build();
+
+        // начинаем игру с прошлого состояния
+        ticTacToe->Play(field);
+    }
+
+    delete field;
 
     std::cout << "Waiting user...\n";
     user.join();
     std::cout << "User completed!\n";
 }
+
+    // *********** [ TEST ] *********** 
+    // IGameLoop* ticTacToe = GameLoopBuilder<TicTacToeLoop>()\
+    //         .withGameLogic(new GameTestLogic)\
+    //         .withInput(new InputEvent)\
+    //         .withOutput(new OutputConsole)\
+    //         .build();
 
 int main()
 {
