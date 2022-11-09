@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(fib_lib)
+project(game_lib)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -Werror")
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -Werror")
+find_package(Threads REQUIRED)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 if(TEST_OPT)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fPIC -O0")
@@ -28,5 +30,5 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDE_DIRS})
 message("SOURCES =          ${SOURCES}")
 message("INCLUDE_DIRS =     ${INCLUDE_DIRS}")
 
-set(FIB_LIB_LIBRARIES       ${PROJECT_NAME}     PARENT_SCOPE)
-set(FIB_LIB_INCLUDE_DIRS    ${INCLUDE_DIRS}     PARENT_SCOPE)
+set(GAME_LIB_LIBRARIES       ${PROJECT_NAME}     PARENT_SCOPE)
+set(GAME_LIB_INCLUDE_DIRS    ${INCLUDE_DIRS}     PARENT_SCOPE)

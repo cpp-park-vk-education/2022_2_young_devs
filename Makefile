@@ -1,10 +1,10 @@
 BUILD_DIR 	= build
 TESTS_DIR 	= tests
-LIB_DIR 	= fib_lib
+LIB_DIR 	= game_lib
 
 # project(xxx) on CMakeLists
 TESTS_EXE 	= test_fib
-TARGET_EXE 	= fib
+TARGET_EXE 	= game
 
 PATH_LINTERS_SCRIPT = linters/run.sh
 
@@ -50,4 +50,3 @@ scan_build:
 
 formating:
 	clang-format -i --style=Microsoft  main.cpp ${LIB_DIR}/include/*.h ${LIB_DIR}/src/*.cpp ${TESTS_DIR}/*.cpp
-

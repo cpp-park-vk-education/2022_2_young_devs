@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(test_fib)
+project(test_game)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -12,8 +12,8 @@ file(GLOB SOURCES *.cpp)
 find_package(GTest REQUIRED)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
-target_include_directories(${PROJECT_NAME} PUBLIC ${FIB_LIB_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PUBLIC ${GAME_LIB_INCLUDE_DIRS})
 
-target_link_libraries(${PROJECT_NAME} ${FIB_LIB_LIBRARIES} GTest::GTest gtest_main)
+target_link_libraries(${PROJECT_NAME} ${GAME_LIB_LIBRARIES} GTest::GTest gtest_main)
 
 gtest_discover_tests(${PROJECT_NAME})
