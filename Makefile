@@ -49,4 +49,7 @@ scan_build:
 	cd ${BUILD_DIR} && scan-build $(MAKE) --no-print-directory
 
 formating:
-	clang-format -i --style=Microsoft  main.cpp ${LIB_DIR}/include/*.h ${LIB_DIR}/src/*.cpp ${TESTS_DIR}/*.cpp
+	clang-format -i -style=file  main.cpp ${LIB_DIR}/include/*.h ${LIB_DIR}/src/*.cpp ${TESTS_DIR}/*.cpp
+
+
+# clang-format -i -style="{BasedOnStyle: Microsoft, IndentWidth: 4, UseTab: Always, AccessModifierOffset: 0}"  main.cpp ${LIB_DIR}/include/*.h ${LIB_DIR}/src/*.cpp ${TESTS_DIR}/*.cpp

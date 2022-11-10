@@ -2,11 +2,11 @@
 
 set -o pipefail
 
-SRC_PATHS="main.cpp fib_lib/src/*.cpp"
-INCLUDE_PATHS="fib_lib/include/*.h"
+SRC_PATHS="main.cpp game_lib/src/*.cpp"
+INCLUDE_PATHS="game_lib/include/*.h"
 TESTS_PATHS="tests/*.cpp"
 
-INCLUDE_DIRECTORIES="fib_lib/include"
+INCLUDE_DIRECTORIES="game_lib/include"
 
 function print_header() {
     echo -e "\n***** ${1} *****"
