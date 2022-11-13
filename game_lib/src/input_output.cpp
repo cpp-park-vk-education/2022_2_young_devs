@@ -1,10 +1,10 @@
 #include "input_output.h"
 #include <condition_variable>
 #include <iomanip>
-#include <iostream>
 #include <mutex>
 #include <shared_mutex>
 #include <thread>
+#include <unistd.h>
 
 std::mutex mutex;
 std::condition_variable cv;
@@ -14,25 +14,22 @@ ssize_t needsInputIndexPlayer = -1;
 bool continueLoop = false;
 bool endGame = false;
 
-uint16_t InputConsole::InputIndex()
+// ************ InputStream ************ 
+
+InputStream::InputStream(std::istream &in) : _in(in)
 {
-	std::cout << "Enter index of cell\n";
+}
+
+uint16_t InputStream::InputCommand()
+{
 	uint16_t indexCell;
-	std::cin >> indexCell;
-	_seqIndices.push_back(indexCell);
+	_in >> indexCell;
 	return indexCell;
 }
-void InputConsole::Undo()
-{
-	if (!_seqIndices.empty())
-	{
-		_seqIndices.pop_back();
-	}
-}
 
-// ---------------------------------------------------------
+// ************ InputEvent ************ 
 
-uint16_t InputEvent::InputIndex()
+uint16_t InputEvent::InputCommand()
 {
 	{
 		std::unique_lock<std::mutex> lock(mutex);
@@ -49,51 +46,62 @@ uint16_t InputEvent::InputIndex()
 	continueLoop = false;
 	uint16_t indexLocal = indexGlobal;
 	indexGlobal = -1;
-	_seqIndices.push_back(indexLocal);
 	return indexLocal;
 }
-void InputEvent::Undo()
-{
-	if (!_seqIndices.empty())
-	{
-		_seqIndices.pop_back();
-	}
-}
 
-// ------------------------------------------------------------
+// ************ InputBot ************ 
 
-uint16_t InputBot::InputIndex()
+uint16_t InputBot::InputCommand()
 {
-	std::cout << "Bot's step...\n";
+	sleep(1);
 	for (size_t i = 0; i < _field->Size() * _field->Size(); ++i)
 	{
-		if ((*_field)[i] == E)
+		if (_field->At(i) == E)
 		{
-			_seqIndices.push_back(i);
 			return i;
 		}
 	}
 	// return ?
 }
-void InputBot::Undo()
+
+// ************ OutputStreamTicTacToe ************ 
+
+OutputStreamTicTacToe::OutputStreamTicTacToe(std::ostream &out) : _out(out)
 {
-	_seqIndices.pop_back();
 }
 
-// ------------------------------------------------------------
-
-void OutputConsole::Output(IGameField *field) const
+void OutputStreamTicTacToe::Output(IGameField *field) const
 {
 	for (size_t i = 0; i < field->Size() * field->Size(); ++i)
 	{
-		std::cout << std::setw(2) << (*field)[i] << ' ';
+		std::string strCell;
+#define PRINT(a) strCell = #a;
+		switch(field->At(i))
+		{
+			case X:
+			{
+				PRINT(X);
+				break;
+			}
+			case O:
+			{
+				PRINT(O);
+				break;
+			}
+			case E:
+			{
+				strCell = "-";
+				break;
+			}
+		}
+		_out << std::setw(2) << strCell  << ' ';
 		if (i % field->Size() == field->Size() - 1)
 		{
-			std::cout << '\n';
+			_out << '\n';
 		}
 	}
 }
-void OutputConsole::OutputMsg(std::string const &message) const
+void OutputStreamTicTacToe::OutputMsg(std::string const &message) const
 {
-	std::cout << message << '\n';
+	_out << message << '\n';
 }

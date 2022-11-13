@@ -1,0 +1,32 @@
+ -  -  - 
+ -  -  - 
+ -  -  - 
+> Waiting for player 0's step
+ X  -  - 
+ -  -  - 
+ -  -  - 
+> Waiting for player 1's step
+ X  O  - 
+ -  -  - 
+ -  -  - 
+> Waiting for player 0's step
+ X  O  X 
+ -  -  - 
+ -  -  - 
+> Waiting for player 1's step
+ X  O  X 
+ O  -  - 
+ -  -  - 
+> Waiting for player 0's step
+ X  O  X 
+ O  X  - 
+ -  -  - 
+> Waiting for player 1's step
+ X  O  X 
+ O  X  O 
+ -  -  - 
+> Waiting for player 0's step
+ X  O  X 
+ O  X  O 
+ X  -  - 
+Winner is X

@@ -1,18 +1,22 @@
 #include "game_field.h"
 #include <cassert>
+#include <iostream>
+
+// ************ TicTacToeField ************ 
 
 TicTacToeField::TicTacToeField(size_t n) : _n(n), _field(n * n, E)
 {
 }
-int16_t TicTacToeField::operator[](size_t index) const
+int16_t TicTacToeField::At(size_t index) const
 {
 	assert(index < _field.size());
 	return _field[index];
 }
-int16_t &TicTacToeField::operator[](size_t index)
+
+void TicTacToeField::ChangeField(size_t indexCell, int16_t valueCell)
 {
-	assert(index < _field.size());
-	return _field[index];
+	assert(indexCell < _field.size());
+	_field[indexCell] = valueCell;
 }
 
 size_t TicTacToeField::Size() const
@@ -31,11 +35,12 @@ void TicTacToeField::Clear()
 {
 	std::fill(_field.begin(), _field.end(), E);
 }
-// копирует данные, указателем не владеет
 void TicTacToeField::SetField(IGameField *field)
 {
 	std::copy(field->Begin(), field->End(), _field.begin());
 }
+
+// ************ GameTestField ************ 
 
 GameTestField::GameTestField(size_t n) : _n(n), _testField(n * n, 0)
 {
@@ -56,21 +61,21 @@ size_t GameTestField::Size() const
 	return 3;
 }
 
-int16_t GameTestField::operator[](size_t index) const
+int16_t GameTestField::At(size_t index) const
 {
 	return _testField[index];
 }
 
-int16_t &GameTestField::operator[](size_t index)
+void GameTestField::ChangeField(size_t indexCell, int16_t valueCell)
 {
-	return _testField[index];
+	_testField[indexCell] = valueCell;
 }
 
 void GameTestField::Clear()
 {
 	std::fill(_testField.begin(), _testField.end(), 7);
 }
-// копирует данные, указателем не владеет
+
 void GameTestField::SetField(IGameField *field)
 {
 	std::copy(field->Begin(), field->End(), _testField.begin());

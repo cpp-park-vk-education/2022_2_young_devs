@@ -1,23 +1,30 @@
+#include <iostream>
+
 #include "game_loop.h"
 
-void IGameLoop::Play(bool isNewGame)
+using namespace std::string_literals;
+
+void IGameLoop::Play(OPTION_PLAY option)
 {
-	InitializeGame(isNewGame);
-	size_t indexPlayer = 0;
+	InitializeGame(option);
+	size_t _currentPlayer = 0;
 	while (!EndOfGame())
 	{
-		MakeStep(indexPlayer);
-		indexPlayer = (indexPlayer + 1) % _countPlayers;
+		_currentPlayer = MakeStep(_currentPlayer);
 	}
 	PrintWinner();
 }
 
-TicTacToeLoop::TicTacToeLoop(IGameLogic *gameLogic, IInput *input1, IInput *input2, IOutput *output) : IGameLoop(2)
+TicTacToeLoop::TicTacToeLoop(IGameLogic *gameLogic, IInput *input1, IInput *input2, IOutput *output,
+							 IGameProgress *progress)
+	: IGameLoop(2)
 {
-	_input1 = (input1 == nullptr) ? new InputConsole : input1;
-	_input2 = (input2 == nullptr) ? new InputConsole : input2;
-	_output = (output == nullptr) ? new OutputConsole : output;
-	_gameLogic = (gameLogic == nullptr) ? new TicTacToeLogic(3) : gameLogic;
+	_input1 = (input1 == nullptr) 		? new InputStream 			: input1;
+	_input2 = (input2 == nullptr) 		? new InputStream 			: input2;
+	_output = (output == nullptr) 		? new OutputStreamTicTacToe : output;
+	_gameLogic = (gameLogic == nullptr) ? new TicTacToeLogic(3) 	: gameLogic;
+	// _progress может быть nullptr (не записываем историю игры)
+	_progress = progress;
 }
 
 TicTacToeLoop::~TicTacToeLoop()
@@ -25,49 +32,84 @@ TicTacToeLoop::~TicTacToeLoop()
 	// TODO
 }
 
-void TicTacToeLoop::InitializeGame(bool isNewGame)
+void TicTacToeLoop::InitializeGame(OPTION_PLAY option)
 {
-	stopGame = false;
-	_gameLogic->SetNewGame(isNewGame);
+	isStopped = false;
+	if (option = NEW_GAME)
+	{
+		_gameLogic->SetNewGame();
+	}
 }
 
-void TicTacToeLoop::MakeStep(size_t indexPlayer)
+size_t TicTacToeLoop::MakeStep(size_t indexPlayer)
 {
 	_output->Output(_gameLogic->GetField());
 	IInput *currentInput;
 	currentInput = (indexPlayer % 2 == 0) ? _input1 : _input2;
-	uint16_t indexCell = currentInput->InputIndex();
-	if (indexCell == 911)
+	_output->OutputMsg("> Waiting for player "s + std::to_string(indexPlayer) + "'s step"s);
+	uint16_t indexCell = currentInput->InputCommand();
+	// обработка команд: 10 - пауза, 11 - 19 - откат на 1 - 9 шагов соответственно
+	if (indexCell == 10)
 	{
-		stopGame = true;
-		return;
+		isStopped = true;
+		return indexPlayer;
 	}
-	while (!_gameLogic->MakeStep(indexCell, indexPlayer))
+	if (_progress && indexCell >= 11 && indexCell <= 19)
 	{
-		currentInput->Undo();
-		indexCell = currentInput->InputIndex();
+		_progress->Rollback(_gameLogic->GetField(), indexCell % 10);
+		_gameLogic->ReloadField();
+		if (indexCell % 2 != 0)
+		{
+			return (indexPlayer + 1) % _countPlayers;
+		}
+		else
+		{
+			return indexPlayer;
+		}
 	}
+	while (!_gameLogic->MakeStep(indexCell, indexPlayer, _progress))
+	{
+		_output->OutputMsg("> You made a mistake");
+		indexCell = currentInput->InputCommand();
+	}
+	return (indexPlayer + 1) % _countPlayers;
+	// Замечание: после неправильного ввода вторая попытка - только индекс ячейки, команду нельзя (пофиксить)
 }
 
 bool TicTacToeLoop::EndOfGame()
 {
-	if (stopGame)
+	if (isStopped)
 	{
 		return true;
 	}
-	return _gameLogic->EndOfGame();
+	bool isEnd = _gameLogic->EndOfGame();
+	if (isEnd)
+	{
+		_progress->AddWinner(_currentPlayer);
+		return true;
+	}
+	return false;
 }
 
 void TicTacToeLoop::PrintWinner()
 {
 	_output->Output(_gameLogic->GetField());
 	ReportGame report = _gameLogic->GetReportGame();
-	if (report.isDraw)
+	if (isStopped)
 	{
-		_output->OutputMsg("The game ended in a draw\n");
+		_output->OutputMsg("Game is stopped!");
+	}
+	else if (report.isDraw)
+	{
+		_output->OutputMsg("The game ended in a draw");
 	}
 	else
 	{
-		_output->OutputMsg(std::string("Winner is ") + (report.indexPlayer == 0 ? "X\n" : "O\n"));
+		_output->OutputMsg("Winner is "s + (report.indexPlayer == 0 ? 'X' : 'O'));
 	}
+}
+
+IGameProgress *TicTacToeLoop::GetGameProgress() const
+{
+	return _progress;
 }

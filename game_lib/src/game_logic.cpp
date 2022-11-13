@@ -1,30 +1,46 @@
 #include "game_logic.h"
 #include <algorithm>
+#include <iostream>
+
+// ************ TicTacToeLogic ************ 
 
 TicTacToeLogic::TicTacToeLogic(size_t n, IGameField *field) : _n(n), _sums(n * 2 + 2, 0)
 {
-	_field = (field == nullptr) ? new TicTacToeField(_n) : field;
-}
-// копирует данные, указателем не владеет
-// virtual void setState(IGameField *field = nullptr) override
-void TicTacToeLogic::SetNewGame(bool isNewGame)
-{
-	if (isNewGame)
+	if (field == nullptr)
 	{
-		_field->Clear();
-		_winner = E;
-		std::fill(_sums.begin(), _sums.end(), 0);
+		_field = new TicTacToeField(_n);
+	}
+	else
+	{
+		_field = field;
+		_n = field->Size();
+		// пересчет состояния игры с учетом переданного поля
+		ReloadField();
 	}
 }
-bool TicTacToeLogic::MakeStep(uint16_t indexCell, size_t indexPlayer)
+
+void TicTacToeLogic::SetNewGame()
+{
+	_field->Clear();
+	_winner = E;
+	std::fill(_sums.begin(), _sums.end(), 0);
+}
+bool TicTacToeLogic::MakeStep(uint16_t indexCell, size_t indexPlayer, IGameProgress *progress)
 {
 	CELL cell = indexPlayer % 2 == 0 ? X : O;
-	if (indexCell >= (_n * _n) || (*_field)[indexCell] != E)
+	if (indexCell >= (_n * _n) || _field->At(indexCell) != E)
 	{
+		// индекс за пределами игрового поля или индекс занятой ячейки
 		return false;
 	}
-	(*_field)[indexCell] = (int16_t)cell;
-	CommitState(indexCell, cell);
+	_field->ChangeField(indexCell, (int16_t)cell);
+	// итеративный пересчет состояния игры после каждого хода
+	CommitStep(indexCell, cell);
+	if (progress)
+	{
+		// запись хода в историю ходов
+		progress->AddStep(indexCell, indexPlayer, (int16_t)cell);
+	}
 	return true;
 }
 bool TicTacToeLogic::EndOfGame()
@@ -69,7 +85,8 @@ IGameField *TicTacToeLogic::GetField() const
 	return _field;
 }
 
-void TicTacToeLogic::CommitState(uint16_t indexCell, CELL cell)
+// пересчет состояния игры после хода
+void TicTacToeLogic::CommitStep(uint16_t indexCell, CELL cell)
 {
 	_sums[indexCell / _n] += cell;
 	_sums[indexCell % _n + _n] += cell;
@@ -83,18 +100,30 @@ void TicTacToeLogic::CommitState(uint16_t indexCell, CELL cell)
 	}
 }
 
+void TicTacToeLogic::ReloadField()
+{
+	_sums.assign(_field->Size() * 2 + 2, E);
+	for (size_t i = 0; i < _field->Size() * _field->Size(); ++i)
+	{
+		CommitStep(i, (CELL)_field->At(i));
+	}
+}
+
+// ************ GameTestLogic ************ 
+
 GameTestLogic::GameTestLogic(size_t n, IGameField *field)
 {
 	_field = (field == nullptr) ? new GameTestField(n) : field;
 }
-void GameTestLogic::SetNewGame(bool isNewGame)
+void GameTestLogic::SetNewGame()
 {
 	_field->Clear();
 }
-bool GameTestLogic::MakeStep(uint16_t indexCell, size_t indexPlayer)
+bool GameTestLogic::MakeStep(uint16_t indexCell, size_t indexPlayer, IGameProgress *progress)
 {
 	(void)indexCell;
 	(void)indexPlayer;
+	(void)progress;
 	return true;
 }
 bool GameTestLogic::EndOfGame()
@@ -116,4 +145,8 @@ ReportGame GameTestLogic::GetReportGame() const
 IGameField *GameTestLogic::GetField() const
 {
 	return _field;
+}
+
+void GameTestLogic::ReloadField()
+{
 }
