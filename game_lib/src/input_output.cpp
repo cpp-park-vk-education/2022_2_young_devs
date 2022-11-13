@@ -93,6 +93,10 @@ void OutputStreamTicTacToe::Output(IGameField *field) const
 				strCell = "-";
 				break;
 			}
+			default:
+			{
+				strCell = "~";
+			}
 		}
 		_out << std::setw(2) << strCell  << ' ';
 		if (i % field->Size() == field->Size() - 1)

@@ -1,24 +1,24 @@
-         
-         
-         
+ ~  ~  ~ 
+ ~  ~  ~ 
+ ~  ~  ~ 
 > Waiting for player 0's step
-         
-         
-         
+ ~  ~  ~ 
+ ~  ~  ~ 
+ ~  ~  ~ 
 > Waiting for player 1's step
-         
-         
-         
+ ~  ~  ~ 
+ ~  ~  ~ 
+ ~  ~  ~ 
 > Waiting for player 0's step
-         
-         
-         
+ ~  ~  ~ 
+ ~  ~  ~ 
+ ~  ~  ~ 
 > Waiting for player 1's step
-         
-         
-         
+ ~  ~  ~ 
+ ~  ~  ~ 
+ ~  ~  ~ 
 > Waiting for player 0's step
-         
-         
-         
+ ~  ~  ~ 
+ ~  ~  ~ 
+ ~  ~  ~ 
 Winner is O

@@ -242,9 +242,9 @@ void Go()
 
 	// GameTwoPlayers();
 	// GameWithSimpleBot();
-	GameTwoBots();
+	// GameTwoBots();
 	// GameWithPausesAndRollbacks();
-	// GameNoLogic();
+	GameNoLogic();
 }
 
 int main()
