@@ -14,7 +14,7 @@ ssize_t needsInputIndexPlayer = -1;
 bool continueLoop = false;
 bool endGame = false;
 
-// ************ InputStream ************ 
+// ************ InputStream ************
 
 InputStream::InputStream(std::istream &in) : _in(in)
 {
@@ -27,7 +27,7 @@ uint16_t InputStream::InputCommand()
 	return indexCell;
 }
 
-// ************ InputEvent ************ 
+// ************ InputEvent ************
 
 uint16_t InputEvent::InputCommand()
 {
@@ -49,7 +49,7 @@ uint16_t InputEvent::InputCommand()
 	return indexLocal;
 }
 
-// ************ InputBot ************ 
+// ************ InputBot ************
 
 uint16_t InputBot::InputCommand()
 {
@@ -64,7 +64,7 @@ uint16_t InputBot::InputCommand()
 	// return ?
 }
 
-// ************ OutputStreamTicTacToe ************ 
+// ************ OutputStreamTicTacToe ************
 
 OutputStreamTicTacToe::OutputStreamTicTacToe(std::ostream &out) : _out(out)
 {
@@ -76,29 +76,25 @@ void OutputStreamTicTacToe::Output(IGameField *field) const
 	{
 		std::string strCell;
 #define PRINT(a) strCell = #a;
-		switch(field->At(i))
+		switch (field->At(i))
 		{
-			case X:
-			{
-				PRINT(X);
-				break;
-			}
-			case O:
-			{
-				PRINT(O);
-				break;
-			}
-			case E:
-			{
-				strCell = "-";
-				break;
-			}
-			default:
-			{
-				strCell = "~";
-			}
+		case X: {
+			PRINT(X);
+			break;
 		}
-		_out << std::setw(2) << strCell  << ' ';
+		case O: {
+			PRINT(O);
+			break;
+		}
+		case E: {
+			strCell = "-";
+			break;
+		}
+		default: {
+			strCell = "~";
+		}
+		}
+		_out << std::setw(2) << strCell << ' ';
 		if (i % field->Size() == field->Size() - 1)
 		{
 			_out << '\n';

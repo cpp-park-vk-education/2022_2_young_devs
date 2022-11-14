@@ -8,28 +8,28 @@ constexpr uint8_t LEN_SIZE = 1;
 // количество полей в структуре Step (индекс ячейки, индекс игрока, значение ячейки)
 constexpr uint8_t COUNT_FIELDS = 3;
 
-IGameProgress *CompressorTicTacToe::DecompressField(std::string const &strCompressed)
+IRoundStorage *CompressorTicTacToe::DecompressRound(std::string const &strCompressed)
 {
 	size_t sizeField = strCompressed[0] - DIFF_ANSII;
-	IGameProgress *progress = new TicTacToeProgress(sizeField);
+	IRoundStorage *roundStorage = new TicTacToeProgress(sizeField);
 	size_t countSteps = (strCompressed.size() - LEN_SIZE) / COUNT_FIELDS;
 	for (size_t i = 0; i < countSteps; ++i)
 	{
 		size_t indexCell = strCompressed[i * COUNT_FIELDS + 0 + LEN_SIZE] - DIFF_ANSII;
 		size_t indexPlayer = strCompressed[i * COUNT_FIELDS + 1 + LEN_SIZE] - DIFF_ANSII;
 		int16_t valueCell = strCompressed[i * COUNT_FIELDS + 2 + LEN_SIZE] - DIFF_ANSII;
-		progress->AddStep(indexCell, indexPlayer, valueCell);
+		roundStorage->AddStep(indexCell, indexPlayer, valueCell);
 	}
-	return progress;
+	return roundStorage;
 }
 
-std::string CompressorTicTacToe::CompressField(IGameProgress *progress)
+std::string CompressorTicTacToe::CompressRound(IRoundStorage *roundStorage)
 {
-	std::vector<Step> steps = progress->GetSteps();
+	std::vector<Step> steps = roundStorage->GetSteps();
 
 	std::string strCompressed;
 
-	size_t sizeField = progress->GetSizeField();
+	size_t sizeField = roundStorage->GetSizeField();
 	strCompressed += char(sizeField + DIFF_ANSII);
 	for (size_t i = 0; i < steps.size(); ++i)
 	{

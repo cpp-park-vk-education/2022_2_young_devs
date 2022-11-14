@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <iostream>
 
-// ************ TicTacToeLogic ************ 
+// ************ TicTacToeLogic ************
 
 TicTacToeLogic::TicTacToeLogic(size_t n, IGameField *field) : _n(n), _sums(n * 2 + 2, 0)
 {
@@ -109,7 +109,7 @@ void TicTacToeLogic::ReloadField()
 	}
 }
 
-// ************ GameTestLogic ************ 
+// ************ GameTestLogic ************
 
 GameTestLogic::GameTestLogic(size_t n, IGameField *field)
 {

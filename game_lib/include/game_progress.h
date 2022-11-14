@@ -1,27 +1,16 @@
 #pragma once
 
-#include "game_field.h"
-
-struct Step
-{
-	size_t indexCell;
-	size_t indexPlayer;
-	int16_t valueCell;
-};
+#include "round_storage.h"
 
 /*
-	Хранение ходов игроков во время игры: вектор структур Step
+Класс, отвечающий за ход игры
+	- наследует методы класса IRoundStorage, инкапсулирующего логику хранения ходов в рамках одного раунда
+	- добавляет функционал: позволяет откатываться на определенное количество шагов
 */
-class IGameProgress
+class IGameProgress : public IRoundStorage
 {
 public:
-	// возвращает измененное поле
-	virtual size_t GetSizeField() const = 0;
 	virtual void Rollback(IGameField *field, size_t countSteps = 2) = 0;
-	virtual void AddStep(size_t indexCell, size_t indexPlayer, int16_t valueCell) = 0;
-	virtual void AddWinner(size_t indexPlayer) = 0;
-	virtual void InitializeField(IGameField *field) const = 0;
-	virtual std::vector<Step> GetSteps() const = 0;
 };
 
 class TicTacToeProgress : public IGameProgress

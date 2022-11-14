@@ -41,7 +41,7 @@ public:
 
 protected:
 	virtual void InitializeGame(OPTION_PLAY option) override;
-	// возвращает индекс следующего игрока 
+	// возвращает индекс следующего игрока
 	virtual size_t MakeStep(size_t indexPlayer) override;
 	virtual bool EndOfGame() override;
 	virtual void PrintWinner() override;

@@ -2,7 +2,7 @@
 #include <cassert>
 #include <iostream>
 
-// ************ TicTacToeField ************ 
+// ************ TicTacToeField ************
 
 TicTacToeField::TicTacToeField(size_t n) : _n(n), _field(n * n, E)
 {
@@ -40,7 +40,7 @@ void TicTacToeField::SetField(IGameField *field)
 	std::copy(field->Begin(), field->End(), _field.begin());
 }
 
-// ************ GameTestField ************ 
+// ************ GameTestField ************
 
 GameTestField::GameTestField(size_t n) : _n(n), _testField(n * n, 0)
 {

@@ -19,10 +19,10 @@ TicTacToeLoop::TicTacToeLoop(IGameLogic *gameLogic, IInput *input1, IInput *inpu
 							 IGameProgress *progress)
 	: IGameLoop(2)
 {
-	_input1 = (input1 == nullptr) 		? new InputStream 			: input1;
-	_input2 = (input2 == nullptr) 		? new InputStream 			: input2;
-	_output = (output == nullptr) 		? new OutputStreamTicTacToe : output;
-	_gameLogic = (gameLogic == nullptr) ? new TicTacToeLogic(3) 	: gameLogic;
+	_input1 = (input1 == nullptr) ? new InputStream : input1;
+	_input2 = (input2 == nullptr) ? new InputStream : input2;
+	_output = (output == nullptr) ? new OutputStreamTicTacToe : output;
+	_gameLogic = (gameLogic == nullptr) ? new TicTacToeLogic(3) : gameLogic;
 	// _progress может быть nullptr (не записываем историю игры)
 	_progress = progress;
 }

@@ -74,6 +74,7 @@ void UserEvents(size_t indexPlayer)
 	}
 }
 
+// ************************************
 // 1. Игра с примитивным ботом, который ставит O (X) в первую свободную ячейку
 void GameWithSimpleBot()
 {
@@ -97,6 +98,7 @@ void GameWithSimpleBot()
 	delete gameLogic;
 }
 
+// ************************************
 // 2.
 void GameTwoPlayers()
 {
@@ -121,6 +123,7 @@ void GameTwoPlayers()
 	delete gameLogic;
 }
 
+// ************************************
 // 3.
 void GameTwoBots()
 {
@@ -150,10 +153,11 @@ std::string GamePart(size_t indexPart, std::string const &strCompressed = "")
 	IGameField *field;
 	if (!strCompressed.empty())
 	{
-		IGameProgress *progress = compressor.DecompressField(strCompressed);
+		IRoundStorage *roundStorage = compressor.DecompressRound(strCompressed);
 		field = new TicTacToeField(3);
-		progress->InitializeField(field);
+		roundStorage->InitializeField(field);
 		gameLogic = new TicTacToeLogic(field->Size(), field);
+		delete roundStorage;
 	}
 	else
 	{
@@ -179,13 +183,15 @@ std::string GamePart(size_t indexPart, std::string const &strCompressed = "")
 
 	IGameProgress *progress = ticTacToe->GetGameProgress();
 
-	std::string strNewCompressed = compressor.CompressField(progress);
+	// CompressRound принимает IRoundStorage *
+	std::string strNewCompressed = compressor.CompressRound(progress);
 
 	delete gameLogic;
 
 	return strNewCompressed;
 }
 
+// ************************************
 /*
 	4. Игра с паузами и откатами
 		- Команда для паузы: 10
@@ -199,6 +205,7 @@ void GameWithPausesAndRollbacks()
 	GamePart(1, strCompressedGameProgress);
 }
 
+// ************************************
 // 5. Игра без логики
 void GameNoLogic()
 {
@@ -240,10 +247,10 @@ void Go()
 {
 	// Выбор теста
 
-	// GameTwoPlayers();
-	// GameWithSimpleBot();
-	// GameTwoBots();
-	// GameWithPausesAndRollbacks();
+	GameTwoPlayers();
+	GameWithSimpleBot();
+	GameTwoBots();
+	GameWithPausesAndRollbacks();
 	GameNoLogic();
 }
 

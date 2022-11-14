@@ -3,7 +3,7 @@ TESTS_DIR 	= tests
 LIB_DIR 	= game_lib
 
 # project(xxx) on CMakeLists
-TESTS_EXE 	= test_fib
+TESTS_EXE 	= test_game
 TARGET_EXE 	= game
 
 PATH_LINTERS_SCRIPT = linters/run.sh
