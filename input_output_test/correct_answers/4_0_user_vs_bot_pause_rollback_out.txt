@@ -1,0 +1,36 @@
+ -  -  - 
+ -  -  - 
+ -  -  - 
+> Waiting for player 0's step
+ -  -  - 
+ -  X  - 
+ -  -  - 
+> Waiting for player 1's step
+ O  -  - 
+ -  X  - 
+ -  -  - 
+> Waiting for player 0's step
+ O  X  - 
+ -  X  - 
+ -  -  - 
+> Waiting for player 1's step
+ O  X  O 
+ -  X  - 
+ -  -  - 
+> Waiting for player 0's step
+ O  -  - 
+ -  X  - 
+ -  -  - 
+> Waiting for player 0's step
+ O  -  X 
+ -  X  - 
+ -  -  - 
+> Waiting for player 1's step
+ O  O  X 
+ -  X  - 
+ -  -  - 
+> Waiting for player 0's step
+ O  O  X 
+ -  X  - 
+ -  -  - 
+Game is stopped!

@@ -18,10 +18,6 @@ extern ssize_t needsInputIndexPlayer;
 extern bool continueLoop;
 extern bool endGame;
 
-const std::string _BASE_DIR = BASE_DIR;
-
-using namespace std::string_literals;
-
 /*
 	*** НЕКОТОРЫЕ РАССУЖДЕНИЯ В ПРОЦЕССЕ РАЗРАБОТКИ ***
 	1. Если мы вводим индексы с консоли
@@ -78,160 +74,6 @@ void UserEvents(size_t indexPlayer)
 	}
 }
 
-// ************************************
-// 1. Игра с примитивным ботом, который ставит O (X) в первую свободную ячейку
-void GameWithSimpleBot()
-{
-	IGameLogic *gameLogic = new TicTacToeLogic;
-	IGameField *field = gameLogic->GetField();
-
-	std::ofstream file_out(_BASE_DIR + "/input_output_data/1_user_vs_bot_out.txt");
-	std::ifstream file_in(_BASE_DIR + "/input_output_data/1_user_vs_bot_in.txt");
-
-	IGameLoop *ticTacToe = GameLoopBuilder<TicTacToeLoop>()
-							   .withGameLogic(gameLogic)
-							   .withInputPlayerOne(new InputStream(file_in))
-							   .withInputPlayerTwo(new InputBot(1, field))
-							   .withOutput(new OutputStreamTicTacToe(file_out))
-							   .withProgress(new TicTacToeProgress(3))
-							   .build();
-	ticTacToe->Play();
-	file_out.close();
-	file_in.close();
-
-	delete gameLogic;
-}
-
-// ************************************
-// 2.
-void GameTwoPlayers()
-{
-	IGameLogic *gameLogic = new TicTacToeLogic;
-
-	std::ofstream file_out(_BASE_DIR + "/input_output_data/2_user_vs_user_out.txt");
-	std::ifstream file_in_user_0(_BASE_DIR + "/input_output_data/2_user_vs_user_in_0.txt");
-	std::ifstream file_in_user_1(_BASE_DIR + "/input_output_data/2_user_vs_user_in_1.txt");
-
-	IGameLoop *ticTacToe = GameLoopBuilder<TicTacToeLoop>()
-							   .withGameLogic(gameLogic)
-							   .withInputPlayerOne(new InputStream(file_in_user_0))
-							   .withInputPlayerTwo(new InputStream(file_in_user_1))
-							   .withOutput(new OutputStreamTicTacToe(file_out))
-							   .withProgress(new TicTacToeProgress(3))
-							   .build();
-	ticTacToe->Play();
-	file_out.close();
-	file_in_user_0.close();
-	file_in_user_1.close();
-
-	delete gameLogic;
-}
-
-// ************************************
-// 3.
-void GameTwoBots()
-{
-	IGameLogic *gameLogic = new TicTacToeLogic;
-	IGameField *field = gameLogic->GetField();
-
-	std::ofstream file_out(_BASE_DIR + "/input_output_data/3_bot_vs_bot_out.txt");
-
-	IGameLoop *ticTacToe = GameLoopBuilder<TicTacToeLoop>()
-							   .withGameLogic(gameLogic)
-							   .withInputPlayerOne(new InputBot(0, field))
-							   .withInputPlayerTwo(new InputBot(1, field))
-							   .withOutput(new OutputStreamTicTacToe(file_out))
-							   .withProgress(new TicTacToeProgress(3))
-							   .build();
-
-	ticTacToe->Play();
-	file_out.close();
-
-	delete gameLogic;
-}
-
-std::string GamePart(size_t indexPart, std::string const &strCompressed = "")
-{
-	CompressorTicTacToe compressor;
-	IGameLogic *gameLogic;
-	IGameField *field;
-	if (!strCompressed.empty())
-	{
-		IRoundStorage *roundStorage = compressor.DecompressRound(strCompressed);
-		field = new TicTacToeField(3);
-		roundStorage->InitializeField(field);
-		gameLogic = new TicTacToeLogic(field->Size(), field);
-		delete roundStorage;
-	}
-	else
-	{
-		gameLogic = new TicTacToeLogic;
-		field = gameLogic->GetField();
-	}
-
-	std::string strIndexPart = std::to_string(indexPart);
-	std::ofstream file_out(_BASE_DIR + "/input_output_data/4_"s + strIndexPart + "_user_vs_bot_pause_rollback_out.txt"s);
-	std::ifstream file_in(_BASE_DIR + "/input_output_data/4_"s + strIndexPart + "_user_vs_bot_pause_rollback_in.txt"s);
-
-	IGameLoop *ticTacToe = GameLoopBuilder<TicTacToeLoop>()
-							   .withGameLogic(gameLogic)
-							   .withInputPlayerOne(new InputStream(file_in))
-							   .withInputPlayerTwo(new InputBot(1, field))
-							   .withOutput(new OutputStreamTicTacToe(file_out))
-							   .withProgress(new TicTacToeProgress(3))
-							   .build();
-	ticTacToe->Play(CONTINUE);
-
-	file_out.close();
-	file_in.close();
-
-	IGameProgress *progress = ticTacToe->GetGameProgress();
-
-	// CompressRound принимает IRoundStorage *
-	std::string strNewCompressed = compressor.CompressRound(progress);
-
-	delete gameLogic;
-
-	return strNewCompressed;
-}
-
-// ************************************
-/*
-	4. Игра с паузами и откатами
-		- Команда для паузы: 10
-		- Команды для отката: 11-19
-			- единицы означают количество шагов для отката
-			- e.g. 12 - откатить последний ход соперника и свой
-*/
-void GameWithPausesAndRollbacks()
-{
-	std::string strCompressedGameProgress = GamePart(0);
-	GamePart(1, strCompressedGameProgress);
-}
-
-// ************************************
-// 5. Игра без логики
-void GameNoLogic()
-{
-	IGameLogic *gameLogic = new GameTestLogic;
-
-	std::ofstream file_out(_BASE_DIR + "/input_output_data/5_user_vs_user_no_logic_out.txt");
-	std::ifstream file_in_user_0_1(_BASE_DIR + "/input_output_data/5_user_vs_userno_logic_in.txt");
-
-	IGameLoop *ticTacToe = GameLoopBuilder<TicTacToeLoop>()
-							   .withGameLogic(gameLogic)
-							   .withInputPlayerOne(new InputStream(file_in_user_0_1))
-							   .withInputPlayerTwo(new InputStream(file_in_user_0_1))
-							   .withOutput(new OutputStreamTicTacToe(file_out))
-							   .withProgress(new TicTacToeProgress(3))
-							   .build();
-	ticTacToe->Play();
-	file_out.close();
-	file_in_user_0_1.close();
-
-	delete gameLogic;
-}
-
 // Игра, в которой пользовательские потоки "будятся" по уведомлению от игрового потока
 // Пока реализация неполная
 void GameThroughEvents()
@@ -247,19 +89,8 @@ void GameThroughEvents()
 	// std::cout << "User completed!\n";
 }
 
-void Go()
-{
-	// Выбор теста
-
-	// GameTwoPlayers();
-	GameWithSimpleBot();
-	// GameTwoBots();
-	// GameWithPausesAndRollbacks();
-	// GameNoLogic();
-}
 
 int main()
 {
-	Go();
 	return 0;
 }

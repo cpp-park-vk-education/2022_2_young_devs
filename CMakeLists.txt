@@ -35,7 +35,8 @@ endif()
 target_include_directories(${PROJECT_NAME} PUBLIC ${GAME_LIB_INCLUDE_DIRS})
 
 # для config.h
-target_include_directories(${PROJECT_NAME} PUBLIC mylib "${PROJECT_BINARY_DIR}")
+set(BUILD_DIR "${PROJECT_BINARY_DIR}")
+target_include_directories(${PROJECT_NAME} PUBLIC "${BUILD_DIR}")
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ${GAME_LIB_LIBRARIES})
 
