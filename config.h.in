@@ -1,0 +1,1 @@
+#cmakedefine BASE_DIR "@BASE_DIR@"
