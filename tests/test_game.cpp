@@ -3,5 +3,5 @@
 
 TEST(Fib, TestBasics)
 {
-	EXPECT_TRUE(true);
+		
 }

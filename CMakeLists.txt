@@ -10,6 +10,10 @@ option(TEST_OPT     "build test version"            OFF)
 option(DEBUG_OPT    "build debug version"           ON)
 option(SANITIZE_OPT "build with flags -fsanitize"   OFF)
 
+set(BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+configure_file(config.h.in config.h @ONLY)
+
+
 add_subdirectory(game_lib)
 
 add_executable(${PROJECT_NAME} main.cpp)
@@ -29,6 +33,10 @@ endif()
 
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${GAME_LIB_INCLUDE_DIRS})
+
+# для config.h
+target_include_directories(${PROJECT_NAME} PUBLIC mylib "${PROJECT_BINARY_DIR}")
+
 target_link_libraries(${PROJECT_NAME} PRIVATE ${GAME_LIB_LIBRARIES})
 
 if (TEST_OPT)

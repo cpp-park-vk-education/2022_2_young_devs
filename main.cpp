@@ -8,6 +8,8 @@
 #include "game_loop.h"
 #include "game_progress.h"
 
+#include "config.h"
+
 extern std::mutex mutex;
 extern std::condition_variable cv;
 
@@ -15,6 +17,8 @@ extern ssize_t indexGlobal;
 extern ssize_t needsInputIndexPlayer;
 extern bool continueLoop;
 extern bool endGame;
+
+const std::string _BASE_DIR = BASE_DIR;
 
 using namespace std::string_literals;
 
@@ -81,8 +85,8 @@ void GameWithSimpleBot()
 	IGameLogic *gameLogic = new TicTacToeLogic;
 	IGameField *field = gameLogic->GetField();
 
-	std::ofstream file_out("../input_output_data/1_user_vs_bot_out.txt");
-	std::ifstream file_in("../input_output_data/1_user_vs_bot_in.txt");
+	std::ofstream file_out(_BASE_DIR + "/input_output_data/1_user_vs_bot_out.txt");
+	std::ifstream file_in(_BASE_DIR + "/input_output_data/1_user_vs_bot_in.txt");
 
 	IGameLoop *ticTacToe = GameLoopBuilder<TicTacToeLoop>()
 							   .withGameLogic(gameLogic)
@@ -104,9 +108,9 @@ void GameTwoPlayers()
 {
 	IGameLogic *gameLogic = new TicTacToeLogic;
 
-	std::ofstream file_out("../input_output_data/2_user_vs_user_out.txt");
-	std::ifstream file_in_user_0("../input_output_data/2_user_vs_user_in_0.txt");
-	std::ifstream file_in_user_1("../input_output_data/2_user_vs_user_in_1.txt");
+	std::ofstream file_out(_BASE_DIR + "/input_output_data/2_user_vs_user_out.txt");
+	std::ifstream file_in_user_0(_BASE_DIR + "/input_output_data/2_user_vs_user_in_0.txt");
+	std::ifstream file_in_user_1(_BASE_DIR + "/input_output_data/2_user_vs_user_in_1.txt");
 
 	IGameLoop *ticTacToe = GameLoopBuilder<TicTacToeLoop>()
 							   .withGameLogic(gameLogic)
@@ -130,7 +134,7 @@ void GameTwoBots()
 	IGameLogic *gameLogic = new TicTacToeLogic;
 	IGameField *field = gameLogic->GetField();
 
-	std::ofstream file_out("../input_output_data/3_bot_vs_bot_out.txt");
+	std::ofstream file_out(_BASE_DIR + "/input_output_data/3_bot_vs_bot_out.txt");
 
 	IGameLoop *ticTacToe = GameLoopBuilder<TicTacToeLoop>()
 							   .withGameLogic(gameLogic)
@@ -166,8 +170,8 @@ std::string GamePart(size_t indexPart, std::string const &strCompressed = "")
 	}
 
 	std::string strIndexPart = std::to_string(indexPart);
-	std::ofstream file_out("../input_output_data/4_"s + strIndexPart + "_user_vs_bot_pause_rollback_out.txt"s);
-	std::ifstream file_in("../input_output_data/4_"s + strIndexPart + "_user_vs_bot_pause_rollback_in.txt"s);
+	std::ofstream file_out(_BASE_DIR + "/input_output_data/4_"s + strIndexPart + "_user_vs_bot_pause_rollback_out.txt"s);
+	std::ifstream file_in(_BASE_DIR + "/input_output_data/4_"s + strIndexPart + "_user_vs_bot_pause_rollback_in.txt"s);
 
 	IGameLoop *ticTacToe = GameLoopBuilder<TicTacToeLoop>()
 							   .withGameLogic(gameLogic)
@@ -211,8 +215,8 @@ void GameNoLogic()
 {
 	IGameLogic *gameLogic = new GameTestLogic;
 
-	std::ofstream file_out("../input_output_data/5_user_vs_user_no_logic_out.txt");
-	std::ifstream file_in_user_0_1("../input_output_data/5_user_vs_userno_logic_in.txt");
+	std::ofstream file_out(_BASE_DIR + "/input_output_data/5_user_vs_user_no_logic_out.txt");
+	std::ifstream file_in_user_0_1(_BASE_DIR + "/input_output_data/5_user_vs_userno_logic_in.txt");
 
 	IGameLoop *ticTacToe = GameLoopBuilder<TicTacToeLoop>()
 							   .withGameLogic(gameLogic)
@@ -247,11 +251,11 @@ void Go()
 {
 	// Выбор теста
 
-	GameTwoPlayers();
+	// GameTwoPlayers();
 	GameWithSimpleBot();
-	GameTwoBots();
-	GameWithPausesAndRollbacks();
-	GameNoLogic();
+	// GameTwoBots();
+	// GameWithPausesAndRollbacks();
+	// GameNoLogic();
 }
 
 int main()
