@@ -1,67 +1,58 @@
 #pragma once
 
-#include <cstdint>
 #include <vector>
-#include <cstddef>
 
-enum CELL
+#include "game_logic.h"
+
+struct StepInfo
 {
-	X = 1,
-	E = 0,
-	O = -1
+    size_t player_id;
+    size_t index;
+    TypeCell cell;
 };
 
-class IGameField
+
+template <class T>
+class GameField
 {
-public:
-	virtual size_t Size() const = 0;
-	virtual void Clear() = 0;
-	virtual void SetField(IGameField *field) = 0;
-	virtual int16_t At(size_t index) const = 0;
-	virtual void ChangeField(size_t indexCell, int16_t valueCell) = 0;
-
-	virtual typename std::vector<int16_t>::iterator Begin() = 0;
-	virtual typename std::vector<int16_t>::iterator End() = 0;
-};
-
-class TicTacToeField : public IGameField
-{
-public:
-	TicTacToeField(size_t n = 3);
-
-	virtual size_t Size() const override;
-	virtual void Clear() override;
-
-	// копирует данные, указателем не владеет
-	virtual void SetField(IGameField *field) override;
-	virtual int16_t At(size_t index) const override;
-	virtual void ChangeField(size_t indexCell, int16_t valueCell) override;
-
-	virtual typename std::vector<int16_t>::iterator Begin() override;
-	virtual typename std::vector<int16_t>::iterator End() override;
-
 private:
-	size_t _n;
-	std::vector<int16_t> _field;
+public:
+    virtual size_t  Size() = 0;
+    virtual void    Clear() = 0;    
+    virtual T       At(size_t index) = 0;
+    virtual void    Set(size_t index, T value) = 0;
+    virtual void    Rollback(size_t countSteps, std::vector<StepInfo> steps) = 0;
+
 };
 
-class GameTestField : public IGameField
+class T_GameField : public GameField<TypeCell>
 {
-public:
-	GameTestField(size_t n = 3);
-	virtual typename std::vector<int16_t>::iterator Begin() override;
-	virtual typename std::vector<int16_t>::iterator End() override;
-
-	virtual size_t Size() const override;
-	virtual void Clear() override;
-
-	// копирует данные, указателем не владеет
-	virtual void SetField(IGameField *field) override;
-
-	virtual int16_t At(size_t index) const override;
-	virtual void ChangeField(size_t indexCell, int16_t valueCell) override;
-
 private:
-	size_t _n;
-	std::vector<int16_t> _testField;
+public:
+    virtual size_t   Dimension() = 0;
+    virtual size_t   Size() = 0;
+    virtual void     Clear() = 0;
+    virtual TypeCell At(size_t index) = 0;
+    virtual void     Set(size_t index, TypeCell value) = 0;
+    virtual void     Rollback(size_t countSteps, std::vector<StepInfo> steps) = 0;
+
+};
+
+class OT_Field : public T_GameField
+{
+private:
+    size_t                  _dim;
+    std::vector<TypeCell>   _field;
+    std::vector<int>        _sums;
+public:
+    OT_Field(size_t dim);
+    virtual size_t   Dimension() override;
+    virtual size_t   Size() override;
+    virtual void     Clear() override;
+    virtual TypeCell At(size_t index) override;
+    virtual void     Set(size_t index, TypeCell cell) override;
+    virtual void     Rollback(size_t countSteps, std::vector<StepInfo> steps) override;
+private:
+    void CommitStep(size_t index, TypeCell cell);
+    void RecalcSums();
 };

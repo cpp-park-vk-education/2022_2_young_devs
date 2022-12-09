@@ -1,62 +1,68 @@
 #pragma once
 
-#include "game_field.h"
-#include "game_progress.h"
-#include <functional>
-#include <sys/types.h>
-#include <vector>
+#include <cstddef>
+#include <string>
 
-struct ReportGame
+class T_GameField;
+
+enum class TypeStatus   { Active = 0, Stopped, Finished };
+enum class TypeAction   { Step = 0, Rollback, Stop };
+enum class TypeGame     { OT = 0, ST };
+enum       TypeCell     { X = 1, E = 0, O = -1 };
+
+struct GameResult
 {
-	bool isDraw = false;
-	ssize_t indexPlayer = -1;
+    bool isEnd;
+    TypeCell winner;
+    size_t winner_id;
+    bool draw;
 };
 
-class IGameLogic
+struct ReportError
 {
-public:
-	virtual bool MakeStep(uint16_t indexCell, size_t indexPlayer, IGameProgress *progress = nullptr) = 0;
-	virtual bool EndOfGame() = 0;
-	virtual ReportGame GetReportGame() const = 0;
-	virtual void SetNewGame() = 0;
-	virtual IGameField *GetField() const = 0;
-	virtual void ReloadField() = 0;
+    size_t          _codeError;
+    std::string     _messageError;
 };
 
-class TicTacToeLogic : public IGameLogic
+struct DataAction
 {
-public:
-	TicTacToeLogic(size_t n = 3, IGameField *field = nullptr);
-	virtual void SetNewGame() override;
-	virtual bool MakeStep(uint16_t indexCell, size_t indexPlayer, IGameProgress *progress = nullptr) override;
-	virtual bool EndOfGame() override;
-	virtual ReportGame GetReportGame() const override;
-	virtual IGameField *GetField() const override;
-	// пересчет состояния игры с учетом текущего поля
-	// т.к. поле могут изменить извне (GameProgress откатывает состояние, изменяя игровое поле)
-	virtual void ReloadField() override;
+    int value;
+    std::string data;
+};
 
+struct ReportAction
+{
+    // чей action
+    size_t          player_id;
+    // что было на входе action
+    DataAction      data;
+    TypeGame        typeGame;
+    TypeAction      typeAction;
+    // статус игры после action
+    TypeStatus      status;
+    bool            isValid;
+    ReportError     error;
+    T_GameField*    field;
+    GameResult      result;
+};
+
+class T_GameLogic
+{
 private:
-	void CommitStep(uint16_t indexCell, CELL cell);
-
-	size_t _n;
-	IGameField *_field;
-	std::vector<int8_t> _sums;
-	CELL _winner = E;
+public:
+    virtual ReportAction MakeStep(TypeCell cell, size_t index, T_GameField *field) = 0;
 };
 
-// Логика-заглушка
-class GameTestLogic : public IGameLogic
+class OT_Logic : public T_GameLogic
 {
-public:
-	GameTestLogic(size_t n = 3, IGameField *field = nullptr);
-	virtual void SetNewGame() override;
-	virtual bool MakeStep(uint16_t indexCell, size_t indexPlayer, IGameProgress *progress = nullptr) override;
-	virtual bool EndOfGame() override;
-	virtual ReportGame GetReportGame() const override;
-	virtual IGameField *GetField() const override;
-	virtual void ReloadField() override;
-
 private:
-	IGameField *_field;
+public:
+    virtual ReportAction MakeStep(TypeCell cell, size_t index, T_GameField *field) override;
+};
+
+class ST_Logic : public T_GameLogic
+{
+private:
+public:
+    virtual ReportAction MakeStep(TypeCell cell, size_t index, T_GameField *field) override;
 };

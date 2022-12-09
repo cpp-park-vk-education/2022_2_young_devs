@@ -1,82 +1,71 @@
-#include "game_field.h"
 #include <cassert>
-#include <iostream>
 
-// ************ TicTacToeField ************
+#include "game_field.h"
 
-TicTacToeField::TicTacToeField(size_t n) : _n(n), _field(n * n, E)
+OT_Field::OT_Field(size_t dim) : _dim(dim), _field(_dim * _dim, TypeCell::E), _sums(_dim * 2 + 2, 0)
 {
 }
-int16_t TicTacToeField::At(size_t index) const
+
+
+size_t OT_Field::Dimension()
 {
-	assert(index < _field.size());
+    return _dim;
+}
+
+size_t OT_Field::Size()
+{
+    return _dim * _dim;
+}
+
+void OT_Field::Clear()
+{
+    std::fill(_field.begin(), _field.end(), TypeCell::E);
+}
+
+TypeCell OT_Field::At(size_t index)
+{
+    assert(index < _field.size());
 	return _field[index];
 }
 
-void TicTacToeField::ChangeField(size_t indexCell, int16_t valueCell)
+void OT_Field::Set(size_t index, TypeCell cell)
 {
-	assert(indexCell < _field.size());
-	_field[indexCell] = valueCell;
+    assert(index < _field.size());
+	_field[index] = cell;
+    CommitStep(index, cell);
 }
 
-size_t TicTacToeField::Size() const
+void OT_Field::Rollback(size_t countSteps, std::vector<StepInfo> steps)
 {
-	return _n;
-}
-typename std::vector<int16_t>::iterator TicTacToeField::Begin()
-{
-	return _field.begin();
-}
-typename std::vector<int16_t>::iterator TicTacToeField::End()
-{
-	return _field.end();
-}
-void TicTacToeField::Clear()
-{
-	std::fill(_field.begin(), _field.end(), E);
-}
-void TicTacToeField::SetField(IGameField *field)
-{
-	std::copy(field->Begin(), field->End(), _field.begin());
+    for (size_t i = 0; i < countSteps; ++i)
+	{
+		StepInfo currentStep = steps.back();
+		Set(currentStep.index, TypeCell::E);
+		steps.pop_back();
+	}
+    RecalcSums();
 }
 
-// ************ GameTestField ************
-
-GameTestField::GameTestField(size_t n) : _n(n), _testField(n * n, 0)
+void OT_Field::RecalcSums()
 {
-	std::fill(_testField.begin(), _testField.end(), 7);
-}
-typename std::vector<int16_t>::iterator GameTestField::Begin()
-{
-	return _testField.begin();
+    _sums.assign(_dim * 2 + 2, TypeCell::E);
+	for (size_t i = 0; i < Size(); ++i)
+	{
+		CommitStep(i, At(i));
+	}
 }
 
-typename std::vector<int16_t>::iterator GameTestField::End()
+void OT_Field::CommitStep(size_t index, TypeCell cell)
 {
-	return _testField.end();
-}
+    _sums[index / _dim] += cell;
+	_sums[index % _dim + _dim] += cell;
 
-size_t GameTestField::Size() const
-{
-	return 3;
-}
-
-int16_t GameTestField::At(size_t index) const
-{
-	return _testField[index];
-}
-
-void GameTestField::ChangeField(size_t indexCell, int16_t valueCell)
-{
-	_testField[indexCell] = valueCell;
-}
-
-void GameTestField::Clear()
-{
-	std::fill(_testField.begin(), _testField.end(), 7);
-}
-
-void GameTestField::SetField(IGameField *field)
-{
-	std::copy(field->Begin(), field->End(), _testField.begin());
+	if (index % _dim == index / _dim)
+	{
+		_sums[_dim * 2] += cell;
+	}
+	if (index / _dim == (_dim - 1) - index % _dim)
+	{
+		_sums[_dim * 2 + 1] += cell;
+	}
 }
