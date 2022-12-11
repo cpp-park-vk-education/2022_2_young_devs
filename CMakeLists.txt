@@ -13,6 +13,12 @@ option(SANITIZE_OPT "build with flags -fsanitize"   OFF)
 set(BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 configure_file(config.h.in config.h @ONLY)
 
+# find_package(Boost 1.71.0 REQUIRED COMPONENTS asio)
+
+# if(NOT Boost_FOUND)
+#     message("Not found Boost")
+#     return()
+# endif()
 
 add_subdirectory(game_lib)
 
@@ -31,13 +37,14 @@ if(SANITIZE_OPT)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address,undefined")
 endif()
 
-
+# target_include_directories(${PROJECT_NAME} PUBLIC ${GAME_LIB_INCLUDE_DIRS} ${Boost_INCLUDE_DIR})
 target_include_directories(${PROJECT_NAME} PUBLIC ${GAME_LIB_INCLUDE_DIRS})
 
 # для config.h
 set(BUILD_DIR "${PROJECT_BINARY_DIR}")
 target_include_directories(${PROJECT_NAME} PUBLIC "${BUILD_DIR}")
 
+# target_link_libraries(${PROJECT_NAME} PRIVATE ${GAME_LIB_LIBRARIES} ${Boost_LIBRARY_DIR})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${GAME_LIB_LIBRARIES})
 
 if (TEST_OPT)

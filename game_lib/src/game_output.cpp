@@ -2,7 +2,7 @@
 
 #include "game_output.h"
 #include "game_field.h"
-
+#include "helpers_func.h"
 
 
 T_StreamOutput::T_StreamOutput(std::ostream &out) : _out(out)
@@ -11,6 +11,7 @@ T_StreamOutput::T_StreamOutput(std::ostream &out) : _out(out)
 
 void T_StreamOutput::Output(ReportAction report)
 {
+    LogReport(report);
     for (size_t i = 0; i < report.field->Size(); ++i)
     {
         std::string strCell;

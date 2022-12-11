@@ -4,16 +4,35 @@
 ReportAction OT_Logic::MakeStep(TypeCell cell, size_t index, T_GameField *field)
 {
     size_t dim = field->Dimension();
-	if (index >= (dim * dim) || field->At(index) != TypeCell::E)
+	if (index >= (dim * dim))
 	{
 		// индекс за пределами игрового поля или индекс занятой ячейки
-		return { .isValid = false };
+		return { 
+			.isValid = false, 
+			.error = { 
+				.codeError = 1, 
+				.messageError = "index out of range",
+			}, 
+			.result = field->IsEnd() 
+		};
+	}
+	if (field->At(index) != TypeCell::E)
+	{
+		return { 
+			.isValid = false, 
+			.error = { 
+				.codeError = 2, 
+				.messageError = "cell is not empty",
+			}, 
+			.result = field->IsEnd() 
+		};
 	}
 	field->Set(index, cell);
-    return { .isValid = true };
+    return { .data = {.value = index }, .isValid = true, .result = field->IsEnd() };
 }
+
 
 ReportAction ST_Logic::MakeStep(TypeCell cell, size_t index, T_GameField *field)
 {
-    // TODO
+    
 }

@@ -1,4 +1,5 @@
 #include <cassert>
+#include <algorithm>
 
 #include "game_field.h"
 
@@ -35,7 +36,7 @@ void OT_Field::Set(size_t index, TypeCell cell)
     CommitStep(index, cell);
 }
 
-void OT_Field::Rollback(size_t countSteps, std::vector<StepInfo> steps)
+void OT_Field::Rollback(size_t countSteps, std::vector<StepInfo> &steps)
 {
     for (size_t i = 0; i < countSteps; ++i)
 	{
@@ -68,4 +69,34 @@ void OT_Field::CommitStep(size_t index, TypeCell cell)
 	{
 		_sums[_dim * 2 + 1] += cell;
 	}
+}
+
+GameResult OT_Field::IsEnd()
+{
+	GameResult result;
+	for (size_t i = 0; i < _sums.size(); ++i)
+	{
+		if (_sums[i] == _dim)
+		{
+			result.isEnd = true;
+			result.winnerCell = TypeCell::X;
+			return result;
+		}
+		if (_sums[i] == -_dim)
+		{
+			result.isEnd = true;
+			result.winnerCell = TypeCell::O;
+			return result;
+		}
+	}
+	auto it = std::find(_field.begin(), _field.end(), TypeCell::E);
+	if (it == _field.end())
+	{
+		result.isEnd = true;
+		result.draw = true;
+		result.winnerCell = TypeCell::E;
+		return result;
+	}
+	result.isEnd = false;
+	return result;
 }

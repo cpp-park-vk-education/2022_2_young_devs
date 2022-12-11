@@ -4,12 +4,6 @@
 
 #include "game_logic.h"
 
-struct StepInfo
-{
-    size_t player_id;
-    size_t index;
-    TypeCell cell;
-};
 
 
 template <class T>
@@ -21,7 +15,7 @@ public:
     virtual void    Clear() = 0;    
     virtual T       At(size_t index) = 0;
     virtual void    Set(size_t index, T value) = 0;
-    virtual void    Rollback(size_t countSteps, std::vector<StepInfo> steps) = 0;
+    virtual void    Rollback(size_t countSteps, std::vector<StepInfo> &steps) = 0;
 
 };
 
@@ -34,8 +28,8 @@ public:
     virtual void     Clear() = 0;
     virtual TypeCell At(size_t index) = 0;
     virtual void     Set(size_t index, TypeCell value) = 0;
-    virtual void     Rollback(size_t countSteps, std::vector<StepInfo> steps) = 0;
-
+    virtual void     Rollback(size_t countSteps, std::vector<StepInfo> &steps) = 0;
+    virtual GameResult IsEnd() = 0;
 };
 
 class OT_Field : public T_GameField
@@ -51,7 +45,8 @@ public:
     virtual void     Clear() override;
     virtual TypeCell At(size_t index) override;
     virtual void     Set(size_t index, TypeCell cell) override;
-    virtual void     Rollback(size_t countSteps, std::vector<StepInfo> steps) override;
+    virtual void     Rollback(size_t countSteps, std::vector<StepInfo> &steps) override;
+    virtual GameResult  IsEnd() override;
 private:
     void CommitStep(size_t index, TypeCell cell);
     void RecalcSums();
