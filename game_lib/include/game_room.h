@@ -44,7 +44,7 @@ private:
     void addStep(size_t player_id, size_t index, TypeCell cell);
 public:
     T_Room() = default;
-    T_Room(Player player_1, Player player_2, T_GameField *field, T_GameLogic *logic, T_Output *output, T_Bot *bot, TypeGame typeGame = TypeGame::OT);
+    T_Room(Player player_1, Player player_2, T_GameField *field, T_GameLogic *logic, T_Output *output, T_Bot *bot = nullptr, TypeGame typeGame = TypeGame::OT);
     virtual ReportAction DoAction(Player player, TypeAction type, DataAction data = {}) override;
     virtual std::vector<Player> GetPlayers() override;
     virtual GameResult GetResult() override;

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <unistd.h>
+#include <fstream>
 
 // т.к. либы header-only, подключение в cmake не требуется
 #include <boost/asio/thread_pool.hpp>
@@ -7,15 +9,26 @@
 #include "game_room.h"
 #include "tasks.h"
 
+/*
+	Задачи
+		- декомпозировать 
+		- структурировать отчеты об ошибке
+		- протестить стратегические с ботом
+		- mutex на момент, когда обращаемся к полю и делаем ход
+		- minimax для бота
+
+*/
+
 int main()
 {
-	T_GameField *field 	= new OT_Field(4);
-	T_GameLogic *logic 	= new OT_Logic;
+	T_GameField *field 	= new ST_Field;
+	T_GameLogic *logic 	= new ST_Logic;
 	T_Output 	*output = new T_StreamOutput;
-	T_Bot       *bot 	= new OT_Bot;
-	Player player_1 	= { .id = 0, .isBot = false, .cell = TypeCell::X };
-	Player player_2 	= { 		 .isBot = true,  .cell = TypeCell::O };
-	GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot);
+	// T_Bot       *bot 	= new OT_Bot;
+	Player player_1 	= { .id = 0, .isBot = false,  .cell = TypeCell::X };
+	Player player_2 	= { .id = 1, .isBot = false,  .cell = TypeCell::O };
+	// GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot);
+	GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, nullptr, TypeGame::ST);
 
 	size_t value;
 	size_t player_id;
@@ -24,20 +37,37 @@ int main()
 
 	boost::asio::thread_pool pool(4);
 
-	while (std::cin >> command >> value)
+	std::ifstream file("test.txt");
+	while (file >> command >> player_id >> value)
 	{
 		switch(command)
 		{
 			case 's':
 			{
-				T_StepTask task(room, player_1, value);
-				boost::asio::post(pool, task);
+				if (player_id == 0)
+				{
+					T_StepTask task(room, player_1, value);
+					boost::asio::post(pool, task);
+				}
+				else
+				{
+					T_StepTask task(room, player_2, value);
+					boost::asio::post(pool, task);
+				}
 				break;
 			}
 			case 'r':
 			{
-				T_RollbackTask task(room, player_1, value);
-				boost::asio::post(pool, task);
+				if (player_id == 0)
+				{
+					T_RollbackTask task(room, player_1, value);
+					boost::asio::post(pool, task);
+				}
+				else
+				{
+					T_RollbackTask task(room, player_2, value);
+					boost::asio::post(pool, task);
+				}
 				break;
 			}
 			default:
@@ -45,6 +75,7 @@ int main()
 				std::cout << "comamnd unknown\n";
 			}
 		}
+		sleep(1);
 	}
 	return 0;
 }

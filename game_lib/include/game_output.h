@@ -14,6 +14,8 @@ public:
 class T_StreamOutput : public T_Output
 {
 private:
+    void OT_Output(ReportAction report);
+    void ST_Output(ReportAction report);
     std::ostream &_out;
 public:
     T_StreamOutput(std::ostream &out = std::cout);

@@ -70,19 +70,19 @@ class T_GameLogic
 {
 private:
 public:
-    virtual ReportAction MakeStep(TypeCell cell, size_t index, T_GameField *field) = 0;
+    virtual ReportAction MakeStep(ReportAction const &report) = 0;
 };
 
 class OT_Logic : public T_GameLogic
 {
 private:
 public:
-    virtual ReportAction MakeStep(TypeCell cell, size_t index, T_GameField *field) override;
+    virtual ReportAction MakeStep(ReportAction const &report) override;
 };
 
 class ST_Logic : public T_GameLogic
 {
 private:
 public:
-    virtual ReportAction MakeStep(TypeCell cell, size_t index, T_GameField *field) override;
+    virtual ReportAction MakeStep(ReportAction const &report) override;
 };

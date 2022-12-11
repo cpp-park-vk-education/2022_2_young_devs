@@ -1,8 +1,10 @@
 #include "bot.h"
 #include "game_field.h"
 
-ReportAction OT_Bot::MakeStep(T_GameField *field, TypeCell cell)
+ReportAction OT_Bot::MakeStep(ReportAction &report)
 {
+	auto field = report.field;
+	TypeCell cell = report.player.cell;
 	size_t i = 0;
     for (; i < field->Size(); ++i)
 	{

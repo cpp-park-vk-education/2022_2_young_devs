@@ -4,6 +4,31 @@
 constexpr size_t n = 6;
 constexpr char sym = ' ';
 
+std::string TypeCellStr(TypeCell cell)
+{
+    std::string strCell;
+#define PRINT(a) strCell = #a;
+    switch (cell)
+    {
+        case X: {
+            PRINT(X);
+            break;
+        }
+        case O: {
+            PRINT(O);
+            break;
+        }
+        case E: {
+            strCell = "-";
+            break;
+        }
+        default: {
+            strCell = "~";
+        }
+    }
+    return strCell;
+}
+
 std::string TypeActionStr(TypeAction action)
 {
     std::string strAction;
@@ -57,9 +82,12 @@ void LogPlayer(Player player, std::ostream &out = std::cout)
     out << std::string(n, sym ) << "isBot? " << player.isBot << "\n";  
 }
 
-void LogReport(ReportAction report, std::ostream &out)
+void LogReport(ReportAction report, std::string message, std::ostream &out)
 {
-    
+    if (!message.empty())
+    {
+        out << message << "\n";
+    }
     out << std::string(20, '*' ) << "\n";
     out << "> Room\n";
     out << std::string(n, sym ) << "room_id = " << report.room_id << "\n";

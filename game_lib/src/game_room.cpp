@@ -1,4 +1,5 @@
 #include "game_room.h"
+#include "helpers_func.h"
 
 GameRoom::GameRoom()
 {
@@ -30,12 +31,8 @@ GameRoom(), _player_1(player_1), _player_2(player_2), _field(field), _logic(logi
 void T_Room::fillReport(ReportAction &report, Player player, TypeAction type, DataAction data)
 {
     report.player       = player; 
-    // if (!player.isBot)
-    // {
-    //     report.data         = data; 
-    //     // иначе поле data уже заполнено в методе Бота
-    // }
     report.typeAction   = type; 
+    report.data         = data;
     report.status       = _status; 
     report.field        = _field; 
     report.typeGame     = _typeGame; 
@@ -96,7 +93,7 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
                 report.error.codeError = 7;
                 report.error.messageError = "Bot can't rollback";
             }
-            else if ((int)_steps.size() - data.value < 0)
+            else if ((int)_steps.size() - data.value < 0 || data.value % 2 != 0)
             {
                 fillReport(report, cur_player, type, data);
                 report.isValid = false;
@@ -131,14 +128,18 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
                 _output->Output(report);
                 return report;
             }
+            fillReport(report, cur_player, type, data);
+            report.data.value = data.value;
+            ReportAction report_after_step;
             if (cur_player.isBot)
             {
-                report = _bot->MakeStep(_field, cell);
+                report_after_step = _bot->MakeStep(report);
             }
             else
             {
-                report = _logic->MakeStep(cell, data.value, _field);
+                report_after_step = _logic->MakeStep(report);
             }
+            report = report_after_step;
             // заполняет isValid и result 
             if (report.isValid)
             {
