@@ -2,24 +2,25 @@
 #define INC_2022_2_YOUNG_DEVS_GAMEWIDGET_H_
 
 #include <Wt/WContainerWidget.h>
+#include <Wt/WText.h>
 
-class GameField;
-class PlayersPanel;
+#include "../GameField/GameField.h"
+//class PlayersPanel;
 
 class GameWidget: public Wt::WContainerWidget {
  public:
-    GameWidget(const std::string &gameName);
+    GameWidget(size_t rows = 3, size_t columns = 3);
 
  private:
     Wt::WText *title_;
 
-    PlayersPanel *panel_;
+    //PlayersPanel *panel_;
 
-    Wt::WText *statusText_
+    Wt::WText *statusText_;
 
     GameField *field_;
 
-    void regiserCell();
+    void registerCell();
 };
 
 
