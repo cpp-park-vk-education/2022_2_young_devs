@@ -1,13 +1,14 @@
 #pragma once
 
 #include "DataBase.h"
+#include "Game.h"
 
 
 struct UserTable
 {
     explicit UserTable(std::vector<std::string> data)
     {
-        id = stoi(data[0]);
+        id = std::stoi(data[0]);
         username = data[1];
         login = data[2];
         password = data[3];
@@ -30,6 +31,7 @@ public:
     explicit User(const std::string &ip = "localhost", const std::string &port = "3306",
                const std::string &user = "cpp_dev", const std::string &password = "123",
                const std::string &db_name = "cpp_project_db");
+    ~User();
 
     void addUser(const std::string &username, const std::string &login, const std::string &password);
     UserTable getUserInfo(size_t user_id);

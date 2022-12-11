@@ -7,6 +7,11 @@ Game::Game(const std::string &ip, const std::string &port, const std::string &us
     database = new DataBase(ip, port, user, password, db_name);
 }
 
+Game::~Game()
+{
+    database->~DataBase();
+}
+
 void Game::addGame(size_t user1_id, size_t user2_id)
 {
     if (user1_id == user2_id)
@@ -32,6 +37,25 @@ void Game::updateGameWinner(size_t game_id, size_t winner_id)
 void Game::deleteGame(size_t game_id)
 {
     database->Delete("DELETE FROM Game WHERE id=?", {"I:" + std::to_string(game_id)});
+}
+
+GameTable Game::getGameInfo(size_t game_id)
+{
+    auto res = database->Select("SELECT * FROM Game WHERE id=?",
+                                {"I:" + std::to_string(game_id)});
+    return GameTable(res[0]);
+}
+
+std::vector<GameTable> Game::getUserGames(size_t user_id)
+{
+    std::vector<GameTable> games;
+    auto res = database->Select("SELECT * FROM Game WHERE user1_id=? OR user2_id=?",
+                                {"I:" + std::to_string(user_id), "I:" + std::to_string(user_id)});
+    for (auto & re : res)
+    {
+        games.emplace_back(re);
+    }
+    return games;
 }
 
 size_t Game::userGames(size_t user_id)
