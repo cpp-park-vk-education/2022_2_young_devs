@@ -29,7 +29,7 @@ void T_StreamOutput::OT_Output(ReportAction report)
 // {
 //     size_t block_no = index / 9;
 //     size_t inner_block_no = index % 9;
-//     size_t i = (block_no / 3 * 3) + inner_block_no / 3;
+//     size_t i = (block_no / 3 * 3) + inner_block_no / 3; 
 //     size_t j = (block_no % 3 * 3) + inner_block_no % 3;
 //     return i * 9 + j;
 // }

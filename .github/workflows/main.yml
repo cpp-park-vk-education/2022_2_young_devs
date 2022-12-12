@@ -35,15 +35,15 @@ jobs:
         with:
           name: coverage-report
           path: build/report
-      - name: GO VALGRIND TESTS
-        run: make valgrind_tests  
-      - name: GO VALGRIND TARGET
-        run: make valgrind_target  
-      - name: GO SANITIZER
-        run: |
-          make build SANITIZE_OPT=ON
-          make run
-      - name: GO SCAN-BUILD
-        run: |
-          make build
-          make scan_build
+      # - name: GO VALGRIND TESTS
+      #   run: make valgrind_tests  
+      # - name: GO VALGRIND TARGET
+      #   run: make valgrind_target  
+      # - name: GO SANITIZER
+      #   run: |
+      #     make build SANITIZE_OPT=ON
+      #     make run
+      # - name: GO SCAN-BUILD
+      #   run: |
+      #     make build
+      #     make scan_build

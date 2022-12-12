@@ -103,8 +103,14 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
                 fillReport(report, cur_player, type, data);
                 report = reportCode7;
             }
+<<<<<<< HEAD
                 // 1. Откат не может быть больше количества шагов
                 // 2. Нельзя откатить один ход бота, только (его ход и свой) * n
+||||||| 3cfaff3
+=======
+            // 1. Откат не может быть больше количества шагов
+            // 2. Нельзя откатить один ход бота, только (его ход и свой) * n
+>>>>>>> 02cb01ac6d1f1c2a279a7b463ad66af66cff0bc8
             else if ((int)_steps.size() - data.value < 0 || data.value % 2 != 0)
             {
                 fillReport(report, cur_player, type, data);
@@ -116,7 +122,12 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
                 fillReport(report, cur_player, type, data);
                 report.isValid = true;
             }
+<<<<<<< HEAD
                 // Нельзя делать откат, если играешь не с ботом
+||||||| 3cfaff3
+=======
+            // Нельзя делать откат, если играешь не с ботом
+>>>>>>> 02cb01ac6d1f1c2a279a7b463ad66af66cff0bc8
             else
             {
                 fillReport(report, cur_player, type, data);
