@@ -49,12 +49,4 @@ public:
     virtual ReportAction DoAction(Player player, TypeAction type, DataAction data = {}) override;
     virtual std::vector<Player> GetPlayers() override;
     virtual GameResult GetResult() override;
-<<<<<<< HEAD
 };
-||||||| 3cfaff3
-    virtual std::string Serialize() override;
-    static T_Room Deserialize(std::string serialize_data);
-};
-=======
-};
->>>>>>> 02cb01ac6d1f1c2a279a7b463ad66af66cff0bc8

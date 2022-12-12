@@ -71,6 +71,8 @@ void T_StreamOutput::Output(ReportAction report)
 T_WtOutput::T_WtOutput(std::vector<Wt::WPushButton *> &cellButtons_):
         cellButtons_(cellButtons_){}
 
+
+
 size_t convertToContinous(size_t index)
 {
      size_t block_no = index / 9;
@@ -86,9 +88,10 @@ void T_WtOutput::Output(ReportAction report)
     // Анализ отчета
     // Обновление поля в браузере
 
-    if (report.isValid) {
-        std::cout << "DATA VALUE " << report.data.value << std::endl;
-        std::cout << "ХОД БОТА " << convertToContinous(report.data.value) << std::endl;
+    if (report.isValid) 
+    {
+        std::cout << "DATA VALUE    " <<        report.data.value << std::endl;
+        std::cout << "ХОД БОТА      " <<        convertToContinous(report.data.value) << std::endl;
 
         cellButtons_[convertToContinous(report.data.value)]->setText("1");
     }

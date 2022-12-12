@@ -29,8 +29,8 @@ GameField::GameField(size_t rows, size_t columns): Wt::WCompositeWidget(),
         T_GameLogic *logic 	= new ST_Logic;
         T_Output 	*output = new T_WtOutput(cellButtons_);
         T_Bot       *bot 	= new ST_Bot;
-        player_1 	= { .id = 0, .isBot = false,  .cell = TypeCell::X };
-        player_2 	= { .isBot = true,  .cell = TypeCell::O };
+        player_1 	= { .id = 0, .isBot = false,    .cell = TypeCell::X };
+        player_2 	= { .isBot = true,              .cell = TypeCell::O };
         // GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot);
         room 		        = new T_Room(player_1, player_2, field, logic, output, bot, TypeGame::ST);
 
@@ -49,13 +49,13 @@ GameField::~GameField() {
 
 void GameField::processButton(Wt::WPushButton *button) {
     /*
-    button->disable();
-    if (playerOrder_) {
-        button->setText("X");
-    } else {
-        button->setText("O");
-    }
-     */
+        button->disable();
+        if (playerOrder_) {
+            button->setText("X");
+        } else {
+            button->setText("O");
+        }
+    */
     auto convertToBlocks = [](size_t index){
         size_t i = index / 9;
         size_t j = index % 9;
@@ -67,16 +67,14 @@ void GameField::processButton(Wt::WPushButton *button) {
     for (size_t i = 0; i < cellButtons_.size(); i++) {
         if (cellButtons_[i] == button) {
 
-            //cellPressed_.emit(numberOfCell++);
+            // cellPressed_.emit(numberOfCell++);
             numberOfCell = i;
-
-
         }
     }
 
     std::cout << "НАШ ХОД" << convertToBlocks(numberOfCell) << std::endl;
 
-    T_StepTask task(room, player_1, convertToBlocks(numberOfCell));
+    T_StepTask  task(room, player_1, convertToBlocks(numberOfCell));
     task();
 
     //if (playerOrder_) {
