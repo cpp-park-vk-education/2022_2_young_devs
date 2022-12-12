@@ -1,3 +1,5 @@
+#include <cassert>
+
 #include "helpers_func.h"
 
 
@@ -79,7 +81,7 @@ void LogPlayer(Player player, std::ostream &out = std::cout)
 {
     out << std::string(n, sym ) << "id = " <<   player.id << "\n";
     out << std::string(n, sym ) << "cell = " << (player.cell == TypeCell::X ? "X" : "O") << "\n";
-    out << std::string(n, sym ) << "isBot? " << player.isBot << "\n";  
+    out << std::string(n, sym ) << "isBot? " << player.isBot << "\n";
 }
 
 void LogReport(ReportAction report, std::string message, std::ostream &out)
@@ -92,9 +94,9 @@ void LogReport(ReportAction report, std::string message, std::ostream &out)
     out << "> Room\n";
     out << std::string(n, sym ) << "room_id = " << report.room_id << "\n";
     out << "> Players\n";
-    
+
     LogPlayer(report.player);
-    
+
     out << "> DataAction\n";
     if (!report.data.data.empty())
     {
@@ -129,7 +131,7 @@ void LogReport(ReportAction report, std::string message, std::ostream &out)
         LogPlayer(report.result.winner);
         out << std::string(n, sym ) << "draw? " << report.result.draw << "\n";
     }
-    
+
     out << "> Steps\n";
     for (size_t i = 0; i < report.steps.size(); ++i)
     {
@@ -140,4 +142,12 @@ void LogReport(ReportAction report, std::string message, std::ostream &out)
     }
 
     out << std::string(20, '*' ) << "\n\n";
+}
+
+
+// mt19937 ???
+int get_rand(int start, int stop)
+{
+    assert(stop >= start);
+    return rand() % (stop - start) + start;
 }

@@ -1,6 +1,8 @@
 #include "game_room.h"
 #include "helpers_func.h"
 
+#include "reports_bug.h"
+
 GameRoom::GameRoom()
 {
     _room_id = id;
@@ -21,58 +23,67 @@ void GameRoom::Stop()
 }
 
 
-T_Room::T_Room(Player player_1, Player player_2, T_GameField *field, T_GameLogic *logic, T_Output *output, T_Bot *bot, TypeGame typeGame) 
-    : 
-GameRoom(), _player_1(player_1), _player_2(player_2), _field(field), _logic(logic), _output(output), _bot(bot), _typeGame(typeGame)
+T_Room::T_Room(Player player_1, Player player_2, T_GameField *field, T_GameLogic *logic, T_Output *output, T_Bot *bot, TypeGame typeGame)
+        :
+        GameRoom(), _player_1(player_1), _player_2(player_2), _field(field), _logic(logic), _output(output), _bot(bot), _typeGame(typeGame)
 {
     _status = TypeStatus::Active;
 }
 
 void T_Room::fillReport(ReportAction &report, Player player, TypeAction type, DataAction data)
 {
-    report.player       = player; 
-    report.typeAction   = type; 
+    report.player       = player;
+    report.typeAction   = type;
     report.data         = data;
-    report.status       = _status; 
-    report.field        = _field; 
-    report.typeGame     = _typeGame; 
-    report.room_id      = _room_id; 
+    report.status       = _status;
+    report.field        = _field;
+    report.typeGame     = _typeGame;
+    report.room_id      = _room_id;
     report.steps        = _steps;
 };
 
-ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
+std::tuple<Player, Player, ReportAction> T_Room::checkPlayer(Player player)
 {
     ReportAction report;
-
+    report.isValid = true;
     Player cur_player;
     Player other_player;
     if (_player_1.id == player.id)
-    {   
+    {
         cur_player = _player_1;
         other_player = _player_2;
     }
     else if (_player_2.id == player.id)
-    {   
+    {
         cur_player = _player_2;
         other_player = _player_1;
     }
     else
     {
         cur_player.id = player.id;
+        report = reportCode2;
+    }
+    return {cur_player, other_player, report};
+}
+
+ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
+{
+
+    auto [cur_player, other_player, report] = checkPlayer(player);
+    if (!report.isValid)
+    {
+        // Игрок не зарегистрирован в этой комнате
         fillReport(report, cur_player, type, data);
-        report.isValid = false;
-        report.error.codeError = 4;
-        report.error.messageError = "The player is not registered in the game room";
-        _output->Output(report);  
+        _output->Output(report);
         return report;
     }
+
+
 
     if (_status == TypeStatus::Finished)
     {
         fillReport(report, cur_player, type, data);
-        report.isValid = false;
-        report.error.codeError = 3;
-        report.error.messageError = "The game is already over";
+        report = reportCode3;
         _output->Output(report);
         return report;
     }
@@ -86,19 +97,18 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
     {
         case TypeAction::Rollback:
         {
+            // Бот не может делать откат
             if (cur_player.isBot)
             {
                 fillReport(report, cur_player, type, data);
-                report.isValid = false;
-                report.error.codeError = 7;
-                report.error.messageError = "Bot can't rollback";
+                report = reportCode7;
             }
+                // 1. Откат не может быть больше количества шагов
+                // 2. Нельзя откатить один ход бота, только (его ход и свой) * n
             else if ((int)_steps.size() - data.value < 0 || data.value % 2 != 0)
             {
                 fillReport(report, cur_player, type, data);
-                report.isValid = false;
-                report.error.codeError = 8;
-                report.error.messageError = "Rollback is impossible.";
+                report = reportCode8;
             }
             else if (other_player.isBot)
             {
@@ -106,12 +116,11 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
                 fillReport(report, cur_player, type, data);
                 report.isValid = true;
             }
+                // Нельзя делать откат, если играешь не с ботом
             else
             {
                 fillReport(report, cur_player, type, data);
-                report.isValid = false;
-                report.error.codeError = 6;
-                report.error.messageError = "Rollback is only available with a bot";
+                report = reportCode6;
             }
             break;
         }
@@ -119,12 +128,11 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
         case TypeAction::Step:
         {
             TypeCell cell = cur_player.cell;
+            // Ходит другой человек
             if (!_steps.empty() && _steps.back().cell == cell)
             {
                 fillReport(report, cur_player, type, data);
-                report.isValid = false;
-                report.error.codeError = 5;
-                report.error.messageError = "The other player must move";
+                report = reportCode5;
                 _output->Output(report);
                 return report;
             }
@@ -140,11 +148,12 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
                 report_after_step = _logic->MakeStep(report);
             }
             report = report_after_step;
-            // заполняет isValid и result 
+            // Если ход правильный, добавляем в вектор ходов
             if (report.isValid)
             {
                 addStep(cur_player.id, report.data.value, cell);
             }
+            // Проверка на конец игры
             if (report.result.isEnd)
             {
                 report.result.winner = cur_player;
@@ -162,9 +171,9 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
 void T_Room::addStep(size_t player_id, size_t index, TypeCell cell)
 {
     StepInfo step = {
-        .player_id = player_id,
-        .index = index,
-        .cell = cell
+            .player_id = player_id,
+            .index = index,
+            .cell = cell
     };
     _steps.push_back(step);
 }
@@ -176,18 +185,6 @@ GameResult T_Room::GetResult()
         return *result;
     }
     return { .isEnd = false };
-}
-
-std::string T_Room::Serialize()
-{
-    puts("s");
-    return {};
-}
-
-T_Room T_Room::Deserialize(std::string serialize_data)
-{
-    puts("1");
-    return {};
 }
 
 std::vector<Player> T_Room::GetPlayers()

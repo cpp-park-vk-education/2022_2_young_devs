@@ -6,17 +6,21 @@ Task::Task(GameRoom *room) : _room(room)
 {
 }
 
-T_StepTask::T_StepTask(GameRoom *room, Player player, size_t index) 
-    : 
-    Task(room), 
-    _player(player),
-    _index(index)
+T_StepTask::T_StepTask(GameRoom *room, Player player, size_t index)
+        :
+        Task(room),
+        _player(player),
+        _index(index)
 {
 }
 
 void T_StepTask::operator()()
 {
     ReportAction report = _room->DoAction(_player, TypeAction::Step, { .value = _index });
+    if (!report.isValid)
+    {
+        return;
+    }
     std::vector<Player> players = _room->GetPlayers();
     // ход бота, если игра с ботом
     if (players[0].id == _player.id && players[1].isBot)
@@ -29,11 +33,11 @@ void T_StepTask::operator()()
     }
 }
 
-T_RollbackTask::T_RollbackTask(GameRoom *room, Player player, size_t stepsCount) 
-    : 
-    Task(room),
-    _player(player),
-    _stepsCount(stepsCount)
+T_RollbackTask::T_RollbackTask(GameRoom *room, Player player, size_t stepsCount)
+        :
+        Task(room),
+        _player(player),
+        _stepsCount(stepsCount)
 {
 }
 

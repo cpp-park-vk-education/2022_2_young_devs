@@ -12,6 +12,8 @@
 #include "../RulesWidget/RulesWidget.h"
 #include "../ScoresWidget/ScoresWidget.h"
 
+#include <boost/asio/thread_pool.hpp>
+#include <boost/asio/post.hpp>
 
 class Game: public Wt::WContainerWidget {
  public:
@@ -19,6 +21,8 @@ class Game: public Wt::WContainerWidget {
 
     void handleInternalPath(const std::string &internalPath);
  private:
+    boost::asio::thread_pool pool;
+
     Wt::WStackedWidget *mainStack_;
 
     GameWidget *game_;

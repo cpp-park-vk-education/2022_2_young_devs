@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game(): game_(0), scores_(0), rules_(0), Wt::WContainerWidget() {
+Game::Game(): game_(0), scores_(0), rules_(0), pool(4), Wt::WContainerWidget() {
     setContentAlignment(Wt::AlignmentFlag::Center);
     std::unique_ptr<Wt::WText> title(
             std::make_unique<Wt::WText>("<h1>Strategic Tic Tac Toe</h1>"));

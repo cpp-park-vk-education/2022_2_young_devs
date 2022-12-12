@@ -14,26 +14,25 @@ enum       TypeCell     { X = 1, E = 0, O = -1 };
 
 struct StepInfo
 {
-    ssize_t player_id;
-    size_t index;
-    TypeCell cell;
+    ssize_t     player_id;
+    size_t      index;
+    TypeCell    cell;
 };
 
 struct Player
 {
     // если бот, так и остается
-    ssize_t id = -1;
-    // Чтобы понять, можно ли делать rollback
-    bool isBot = false;
-    TypeCell cell;
+    ssize_t     id = -1;
+    bool        isBot = false;
+    TypeCell    cell;
 };
 
 struct GameResult
 {
-    bool isEnd = false;
-    TypeCell winnerCell;
-    Player winner;
-    bool draw = false;
+    bool        isEnd = false;
+    TypeCell    winnerCell;
+    Player      winner;
+    bool        draw = false;
 };
 
 struct ReportError
@@ -44,7 +43,7 @@ struct ReportError
 
 struct DataAction
 {
-    int value;
+    int         value;
     std::string data;
 };
 

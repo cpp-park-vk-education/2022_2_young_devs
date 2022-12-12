@@ -30,80 +30,80 @@ void OT_Field::Clear()
 TypeCell OT_Field::At(size_t index)
 {
     assert(index < Size());
-	return _field[index];
+    return _field[index];
 }
 
 void OT_Field::Set(size_t index, TypeCell cell)
 {
     assert(index < Size());
-	_field[index] = cell;
+    _field[index] = cell;
     CommitStep(index, cell);
 }
 
 void OT_Field::Rollback(size_t countSteps, std::vector<StepInfo> &steps)
 {
     for (size_t i = 0; i < countSteps; ++i)
-	{
-		StepInfo currentStep = steps.back();
-		Set(currentStep.index, TypeCell::E);
-		steps.pop_back();
-	}
+    {
+        StepInfo currentStep = steps.back();
+        Set(currentStep.index, TypeCell::E);
+        steps.pop_back();
+    }
     RecalcSums();
 }
 
 void OT_Field::RecalcSums()
 {
     _sums.assign(_dim * 2 + 2, TypeCell::E);
-	for (size_t i = 0; i < Size(); ++i)
-	{
-		CommitStep(i, At(i));
-	}
+    for (size_t i = 0; i < Size(); ++i)
+    {
+        CommitStep(i, At(i));
+    }
 }
 
 void OT_Field::CommitStep(size_t index, TypeCell cell)
 {
-	assert(index < Size());
-	_sums[index / _dim] += cell;
-	_sums[index % _dim + _dim] += cell;
+    assert(index < Size());
+    _sums[index / _dim] += cell;
+    _sums[index % _dim + _dim] += cell;
 
-	if (index % _dim == index / _dim)
-	{
-		_sums[_dim * 2] += cell;
-	}
-	if (index / _dim == (_dim - 1) - index % _dim)
-	{
-		_sums[_dim * 2 + 1] += cell;
-	}
+    if (index % _dim == index / _dim)
+    {
+        _sums[_dim * 2] += cell;
+    }
+    if (index / _dim == (_dim - 1) - index % _dim)
+    {
+        _sums[_dim * 2 + 1] += cell;
+    }
 }
 
 GameResult OT_Field::IsEnd()
 {
-	GameResult result;
-	for (size_t i = 0; i < _sums.size(); ++i)
-	{
-		if (_sums[i] == _dim)
-		{
-			result.isEnd = true;
-			result.winnerCell = TypeCell::X;
-			return result;
-		}
-		if (_sums[i] == -_dim)
-		{
-			result.isEnd = true;
-			result.winnerCell = TypeCell::O;
-			return result;
-		}
-	}
-	auto it = std::find(_field.begin(), _field.end(), TypeCell::E);
-	if (it == _field.end())
-	{
-		result.isEnd = true;
-		result.draw = true;
-		result.winnerCell = TypeCell::E;
-		return result;
-	}
-	result.isEnd = false;
-	return result;
+    GameResult result;
+    for (size_t i = 0; i < _sums.size(); ++i)
+    {
+        if (_sums[i] == _dim)
+        {
+            result.isEnd = true;
+            result.winnerCell = TypeCell::X;
+            return result;
+        }
+        if (_sums[i] == -_dim)
+        {
+            result.isEnd = true;
+            result.winnerCell = TypeCell::O;
+            return result;
+        }
+    }
+    auto it = std::find(_field.begin(), _field.end(), TypeCell::E);
+    if (it == _field.end())
+    {
+        result.isEnd = true;
+        result.draw = true;
+        result.winnerCell = TypeCell::E;
+        return result;
+    }
+    result.isEnd = false;
+    return result;
 }
 
 // ************************************************************************
@@ -125,46 +125,46 @@ size_t ST_Field::Size()
 void ST_Field::Clear()
 {
     std::for_each(_field.begin(), _field.end(), [](OT_Field &field){
-		field.Clear();
-	});
+        field.Clear();
+    });
 }
 
 TypeCell ST_Field::At(size_t index)
 {
     assert(index < Size());
-	return _field[index / _dim].At(index % _dim);
+    return _field[index / _dim].At(index % _dim);
 }
 
 void ST_Field::Set(size_t index, TypeCell cell)
 {
     assert(index < Size());
-	_field[index / _dim].Set(index % _dim, cell);
+    _field[index / _dim].Set(index % _dim, cell);
     CommitStep(index, cell);
 }
 
 void ST_Field::Rollback(size_t countSteps, std::vector<StepInfo> &steps)
 {
     for (size_t i = 0; i < countSteps; ++i)
-	{
-		StepInfo currentStep = steps.back();
-		Set(currentStep.index, TypeCell::E);
-		steps.pop_back();
-	}
+    {
+        StepInfo currentStep = steps.back();
+        Set(currentStep.index, TypeCell::E);
+        steps.pop_back();
+    }
 }
 
 void ST_Field::CommitStep(size_t index, TypeCell cell)
 {
-	assert(index < Size());
-	if (_field[index / _dim].IsEnd().isEnd && _miniature.At(index / _dim) == TypeCell::E)
-	{
-		TypeCell cell = _field[index / _dim].IsEnd().winnerCell;
-		_miniature.Set(index / _dim, cell);
-	}
+    assert(index < Size());
+    if (_field[index / _dim].IsEnd().isEnd && _miniature.At(index / _dim) == TypeCell::E)
+    {
+        TypeCell cell = _field[index / _dim].IsEnd().winnerCell;
+        _miniature.Set(index / _dim, cell);
+    }
 }
 
 GameResult ST_Field::IsEnd()
 {
-	return _miniature.IsEnd();
+    return _miniature.IsEnd();
 }
 
 

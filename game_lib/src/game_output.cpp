@@ -1,4 +1,5 @@
 #include <iomanip>
+#include <iostream>
 
 #include "game_output.h"
 #include "game_field.h"
@@ -14,37 +15,43 @@ void T_StreamOutput::OT_Output(ReportAction report)
     for (size_t i = 0; i < report.field->Size(); ++i)
     {
         std::string strCell = TypeCellStr(report.field->At(i));
-		_out << std::setw(2) << strCell << ' ';
-		if (i % report.field->Dimension() == report.field->Dimension() - 1)
-		{
-			_out << '\n';
-		}
+        _out << std::setw(2) << strCell << ' ';
+        if (i % report.field->Dimension() == report.field->Dimension() - 1)
+        {
+            _out << '\n';
+        }
     }
 }
 
+// ПРИГОДИТСЯ
+
+// size_t convertToContinous(size_t index)
+// {
+//     size_t block_no = index / 9;
+//     size_t inner_block_no = index % 9;
+//     size_t i = (block_no / 3 * 3) + inner_block_no / 3;
+//     size_t j = (block_no % 3 * 3) + inner_block_no % 3;
+//     return i * 9 + j;
+// }
+
 void T_StreamOutput::ST_Output(ReportAction report)
 {
-    std::vector<char> indices =
-    {
-        0,  1,   2,  9,  10, 11, 18, 19, 20,
-        3,  4,   5,  12, 13, 14, 21, 22, 23, 
-        6,  7,   8,  15, 16, 17, 24, 25, 26,
-        27, 28,  29, 36, 37, 38, 45, 46, 47,
-        30, 31,  32, 39, 40, 41, 48, 49, 50,
-        33, 34,  35, 42, 43, 44, 51, 52, 53,
-        54, 55,  56, 63, 64, 65, 72, 73, 74,
-        57, 58,  59, 66, 67, 68, 75, 76, 77,
-        60, 61,  62, 69, 70, 71, 78, 79, 80
+    auto convertToBlocks = [](size_t index){
+        size_t i = index / 9;
+        size_t j = index % 9;
+        size_t start_index_in_block = ((i / 3) * 3 + (j / 3)) * 9;
+        return start_index_in_block + (i % 3) * 3 + (j % 3);
     };
-    for (size_t i = 0; i < indices.size(); ++i)
+
+    for (size_t i = 0; i < report.field->Size(); ++i)
     {
-        size_t index = indices[i];
+        size_t index = convertToBlocks(i);
         std::string strCell = TypeCellStr(report.field->At(index));
-		_out << std::setw(2) << strCell << ' ';
-		if (i % report.field->Dimension() == report.field->Dimension() - 1)
-		{
-			_out << '\n';
-		}
+        _out << std::setw(2) << strCell << ' ';
+        if (i % report.field->Dimension() == report.field->Dimension() - 1)
+        {
+            _out << '\n';
+        }
     }
 }
 
@@ -59,13 +66,30 @@ void T_StreamOutput::Output(ReportAction report)
     {
         ST_Output(report);
     }
-    
-    // Анализ отчета
-    // Вывод поля в консоль
 }
 
-void T_WebToolKitOutput::Output(ReportAction report)
+T_WtOutput::T_WtOutput(std::vector<Wt::WPushButton *> &cellButtons_):
+        cellButtons_(cellButtons_){}
+
+size_t convertToContinous(size_t index)
+{
+     size_t block_no = index / 9;
+     size_t inner_block_no = index % 9;
+     size_t i = (block_no / 3 * 3) + inner_block_no / 3;
+     size_t j = (block_no % 3 * 3) + inner_block_no % 3;
+     return i * 9 + j;
+}
+
+
+void T_WtOutput::Output(ReportAction report)
 {
     // Анализ отчета
     // Обновление поля в браузере
+
+    if (report.isValid) {
+        std::cout << "DATA VALUE " << report.data.value << std::endl;
+        std::cout << "ХОД БОТА " << convertToContinous(report.data.value) << std::endl;
+
+        cellButtons_[convertToContinous(report.data.value)]->setText("1");
+    }
 }

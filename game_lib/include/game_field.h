@@ -7,19 +7,19 @@
 
 
 template <class T>
-class GameField
+class BaseGameField
 {
 private:
 public:
     virtual size_t  Size() = 0;
-    virtual void    Clear() = 0;    
+    virtual void    Clear() = 0;
     virtual T       At(size_t index) = 0;
     virtual void    Set(size_t index, T value) = 0;
     virtual void    Rollback(size_t countSteps, std::vector<StepInfo> &steps) = 0;
 
 };
 
-class T_GameField : public GameField<TypeCell>
+class T_GameField : public BaseGameField<TypeCell>
 {
 protected:
 public:

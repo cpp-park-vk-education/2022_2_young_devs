@@ -1,8 +1,10 @@
 #pragma once
 
-#include <iostream> 
+#include <iostream>
 
 #include "game_logic.h"
+
+#include <Wt/WPushButton.h>
 
 
 class T_Output
@@ -14,16 +16,19 @@ public:
 class T_StreamOutput : public T_Output
 {
 private:
+    std::ostream &_out;
     void OT_Output(ReportAction report);
     void ST_Output(ReportAction report);
-    std::ostream &_out;
 public:
     T_StreamOutput(std::ostream &out = std::cout);
     virtual void Output(ReportAction report) override;
 };
 
-class T_WebToolKitOutput : public T_Output
+class T_WtOutput : public T_Output
 {
 public:
+    T_WtOutput(std::vector<Wt::WPushButton *> &cellButtons_);
     virtual void Output(ReportAction report) override;
+private:
+    std::vector<Wt::WPushButton *> &cellButtons_;
 };

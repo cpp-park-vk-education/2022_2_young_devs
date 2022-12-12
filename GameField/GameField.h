@@ -7,9 +7,12 @@
 #include <Wt/WPushButton.h>
 #include <Wt/WApplication.h>
 
-
-
 #include <iostream>
+
+#include "tasks.h"
+
+#include "game_logic.h"
+#include "game_room.h"
 
 class GameField: public Wt::WCompositeWidget {
  public:
@@ -19,7 +22,14 @@ class GameField: public Wt::WCompositeWidget {
     }
 
     virtual ~GameField();
+
  private:
+    Player player_1;
+
+    Player player_2;
+
+    GameRoom *room;
+
     bool playerOrder_;
 
     Wt::WTable *field_;

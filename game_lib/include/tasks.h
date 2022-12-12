@@ -1,3 +1,5 @@
+#pragma once
+
 #include "game_room.h"
 
 class Task
@@ -29,3 +31,4 @@ public:
     T_RollbackTask(GameRoom *room, Player player, size_t stepsCount);
     virtual void operator()() override;
 };
+
