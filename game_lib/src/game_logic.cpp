@@ -1,7 +1,9 @@
 #include "game_logic.h"
 #include "game_field.h"
+#include "reports_bug.h"
 
 using namespace std::string_literals;
+
 
 ReportAction OT_Logic::MakeStep(ReportAction const &report)
 {
@@ -13,25 +15,15 @@ ReportAction OT_Logic::MakeStep(ReportAction const &report)
 	if (index >= (dim * dim))
 	{
 		// индекс за пределами игрового поля или индекс занятой ячейки
-		return { 
-			.isValid = false, 
-			.error = { 
-				.codeError = 1, 
-				.messageError = "index out of range",
-			}, 
-			.result = field->IsEnd() 
-		};
+		ReportAction report = reportCode1;
+		report.result = field->IsEnd();
+		return report;
 	}
 	if (field->At(index) != TypeCell::E)
 	{
-		return { 
-			.isValid = false, 
-			.error = { 
-				.codeError = 2, 
-				.messageError = "cell is not empty",
-			}, 
-			.result = field->IsEnd() 
-		};
+		ReportAction report = reportCode2;
+		report.result = field->IsEnd();
+		return report;
 	}
 	field->Set(index, cell);
     return { .data = {.value = index }, .isValid = true, .result = field->IsEnd() };
@@ -48,25 +40,15 @@ ReportAction ST_Logic::MakeStep(ReportAction const &report)
 	if ((index / 9) >= (dim))
 	{
 		// индекс за пределами игрового поля или индекс занятой ячейки
-		return { 
-			.isValid = false, 
-			.error = { 
-				.codeError = 1, 
-				.messageError = "index out of range",
-			}, 
-			.result = field->IsEnd() 
-		};
+		ReportAction report = reportCode1;
+		report.result = field->IsEnd();
+		return report;
 	}
 	if (field->At(index) != TypeCell::E)
 	{
-		return { 
-			.isValid = false, 
-			.error = { 
-				.codeError = 2, 
-				.messageError = "cell is not empty",
-			}, 
-			.result = field->IsEnd() 
-		};
+		ReportAction report = reportCode2;
+		report.result = field->IsEnd();
+		return report;
 	}
 	
 	if (report.steps.empty())
@@ -82,14 +64,9 @@ ReportAction ST_Logic::MakeStep(ReportAction const &report)
 		}
 		else
 		{
-			return { 
-				.isValid = false, 
-				.error = { 
-					.codeError = 10, 
-					.messageError = "Your move should have been in the "s + std::to_string(index_before / 9) + "th field 3x3",
-				}, 
-				.result = field->IsEnd() 
-			};
+			ReportAction report = reportCode9;
+			report.result = field->IsEnd();
+			return report;
 		}
 	}
 	return { .data = {.value = index }, .isValid = true, .result = field->IsEnd() };

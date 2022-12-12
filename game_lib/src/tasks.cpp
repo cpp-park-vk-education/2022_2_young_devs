@@ -17,6 +17,10 @@ T_StepTask::T_StepTask(GameRoom *room, Player player, size_t index)
 void T_StepTask::operator()()
 {
     ReportAction report = _room->DoAction(_player, TypeAction::Step, { .value = _index });
+    if (!report.isValid)
+    {
+        return;
+    }
     std::vector<Player> players = _room->GetPlayers();
     // ход бота, если игра с ботом
     if (players[0].id == _player.id && players[1].isBot)

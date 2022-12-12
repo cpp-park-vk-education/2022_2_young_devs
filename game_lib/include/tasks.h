@@ -1,3 +1,5 @@
+#pragma once
+
 #include "game_room.h"
 
 class Task

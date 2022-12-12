@@ -12,7 +12,7 @@
 /*
 	Задачи
 		- декомпозировать 
-		- структурировать отчеты об ошибке
+		+ структурировать отчеты об ошибке
 		- протестить стратегические с ботом
 		- mutex на момент, когда обращаемся к полю и делаем ход
 		- minimax для бота
@@ -21,13 +21,16 @@
 
 int main()
 {
+	// КОММЕНТАРИИ - ИГРА С БОТОМ
 	T_GameField *field 	= new ST_Field;
 	T_GameLogic *logic 	= new ST_Logic;
 	T_Output 	*output = new T_StreamOutput;
 	// T_Bot       *bot 	= new OT_Bot;
+	// T_Bot       *bot 	= new ST_Bot;
 	Player player_1 	= { .id = 0, .isBot = false,  .cell = TypeCell::X };
 	Player player_2 	= { .id = 1, .isBot = false,  .cell = TypeCell::O };
-	// GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot);
+	// Player player_bot 	= {          .isBot = true,   .cell = TypeCell::O };
+	// GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot, TypeGame::ST);
 	GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, nullptr, TypeGame::ST);
 
 	size_t value;
@@ -37,6 +40,7 @@ int main()
 
 	boost::asio::thread_pool pool(4);
 
+	// 	ТЕСТ КЕЙС
 	std::ifstream file("test.txt");
 	while (file >> command >> player_id >> value)
 	{

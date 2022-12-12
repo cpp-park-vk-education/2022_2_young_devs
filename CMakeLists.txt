@@ -29,7 +29,7 @@ if(TEST_OPT)
 endif()
 
 if(DEBUG_OPT)
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -g -fPIC -O0" )
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fPIC -O0" )
 endif()
 
 if(SANITIZE_OPT)

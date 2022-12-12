@@ -1,3 +1,5 @@
+#include <cassert>
+
 #include "helpers_func.h"
 
 
@@ -140,4 +142,12 @@ void LogReport(ReportAction report, std::string message, std::ostream &out)
     }
 
     out << std::string(20, '*' ) << "\n\n";
+}
+
+
+// mt19937 ???
+int get_rand(int start, int stop)
+{
+    assert(stop >= start);
+    return rand() % (stop - start) + start;
 }
