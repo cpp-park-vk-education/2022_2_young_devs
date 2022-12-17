@@ -15,12 +15,11 @@ class DataBase
 {
 private:
     friend class User;
-    friend class Game;
+    friend class GameInf;
     friend class GameProgress;
 
     sql::Driver *driver;
     sql::Connection *con;
-    sql::Statement *stmt;
     sql::ResultSet *res;
     sql::PreparedStatement *prep_stmt;
 

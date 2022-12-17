@@ -29,7 +29,7 @@ DataBase::DataBase(const std::string &ip, const std::string &port, const std::st
 DataBase::~DataBase()
 {
     delete res;
-    delete stmt;
+//    delete stmt;
     delete prep_stmt;
     delete con;
 }

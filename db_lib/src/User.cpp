@@ -6,11 +6,6 @@ User::User(const std::string &ip, const std::string &port, const std::string &us
     database = new DataBase(ip, port, user, password, db_name);
 }
 
-User::~User()
-{
-    database->~DataBase();
-}
-
 void User::addUser(const std::string &username, const std::string &login, const std::string &password)
 {
     database->Insert("INSERT INTO User(username, login, password) VALUES (?, ?, ?)",
@@ -103,15 +98,15 @@ void User::deleteUser(size_t user_id)
 std::vector<std::vector<std::string>> User::getTopUsers(size_t top_num)
 {
     std::vector<std::pair<std::string, size_t>> top_players;
-    auto res = database->Select("SELECT User.id User.username, count(Game.winner_id) AS c "
+    auto res = database->Select("SELECT User.id, User.username, count(Game.winner_id) AS c "
                                 "FROM User JOIN Game ON User.id = Game.winner_id GROUP BY winner_id "
                                 "ORDER BY c DESC LIMIT ?", {"I:" + std::to_string(top_num)});
-    Game game;
+    GameInf game;
     for (auto & re : res)
     {
         auto num_games = game.userWins(std::stoi(re[0]));
         re.push_back(std::to_string(num_games));
-        re.push_back(std::to_string(static_cast<double>(num_games) / std::stoi(re[2])));
+        re.push_back(std::to_string(static_cast<double>(num_games) / std::stoi(re[2]) * 100));
     }
     return res;
 }

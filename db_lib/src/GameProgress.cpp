@@ -7,11 +7,6 @@ GameProgress::GameProgress(const std::string &ip, const std::string &port, const
     database = new DataBase(ip, port, user, password, db_name);
 }
 
-GameProgress::~GameProgress()
-{
-    database->~DataBase();
-}
-
 void GameProgress::addMove(size_t game_id, size_t user_id, size_t cell)
 {
     database->Insert("INSERT INTO GameProgress(game_id, user_id, cell) VALUES (?, ?, ?)",
