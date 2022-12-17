@@ -85,14 +85,15 @@ size_t convertToContinous(size_t index)
 
 void T_WtOutput::Output(ReportAction report)
 {
+    //LogReport(report, "**[ REPORT ]**");
     // Анализ отчета
     // Обновление поля в браузере
 
-    if (report.isValid) 
+    if (report.isValid)
     {
         std::cout << "DATA VALUE    " <<        report.data.value << std::endl;
         std::cout << "ХОД БОТА      " <<        convertToContinous(report.data.value) << std::endl;
 
-        cellButtons_[convertToContinous(report.data.value)]->setText("1");
+        cellButtons_[convertToContinous(report.steps.back().index)]->setText("1");
     }
 }
