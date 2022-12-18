@@ -1,7 +1,8 @@
 #include "Game.h"
 
-Game::Game(): game_(0), scores_(0), rules_(0), pool(4), Wt::WContainerWidget() {
-    setContentAlignment(Wt::AlignmentFlag::Center);
+Game::Game(): game_(0), scores_(0), rules_(0), pool(4),
+              userDB_(new User()), Wt::WContainerWidget() {
+   setContentAlignment(Wt::AlignmentFlag::Center);
     std::unique_ptr<Wt::WText> title(
             std::make_unique<Wt::WText>("<h1>Strategic Tic Tac Toe</h1>"));
 
@@ -57,7 +58,7 @@ void Game::showGame() {
 
 void Game::showScores() {
     if (!scores_) {
-        scores_ = mainStack_->addWidget(std::make_unique<ScoresWidget>());
+        scores_ = mainStack_->addWidget(std::make_unique<ScoresWidget>(userDB_));
     }
 
     mainStack_->setCurrentWidget(scores_);

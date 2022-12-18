@@ -5,10 +5,17 @@
 #include <Wt/WText.h>
 #include <Wt/WTable.h>
 
+#include <vector>
+
+#include "User.h"
+
 class ScoresWidget: public Wt::WContainerWidget {
 public:
-    ScoresWidget();
+    ScoresWidget(User *userDB);
+
 private:
+    User *userDB_;
+
     Wt::WTable *table_;
 };
 

@@ -15,12 +15,17 @@
 #include <boost/asio/thread_pool.hpp>
 #include <boost/asio/post.hpp>
 
+#include "User.h"
+
 class Game: public Wt::WContainerWidget {
  public:
     Game();
 
     void handleInternalPath(const std::string &internalPath);
+
  private:
+    User *userDB_;
+
     boost::asio::thread_pool pool;
 
     Wt::WStackedWidget *mainStack_;

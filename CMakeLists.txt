@@ -13,6 +13,7 @@ add_executable(${PROJECT_NAME} main.cpp
 
 find_package(Threads REQUIRED)
 find_package(Wt REQUIRED)
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 option(TEST_OPT     "build test version"            OFF)
