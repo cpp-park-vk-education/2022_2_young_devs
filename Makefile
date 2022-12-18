@@ -1,5 +1,6 @@
 BUILD_DIR 	= build
 TESTS_DIR 	= tests
+
 LIB_DIR 	= game_lib
 
 # project(xxx) on CMakeLists
@@ -16,14 +17,16 @@ SANITIZE_OPT 	= OFF
 
 # Изменения в CMakeLists требует make build
 # make build = cmake && cmake --build 
+
 build: clean
 	mkdir ${BUILD_DIR}
 	cd ${BUILD_DIR} && cmake .. -DTEST_OPT=${TEST_OPT} -DDEBUG_OPT=${DEBUG_OPT} -DSANITIZE_OPT=${SANITIZE_OPT} && $(MAKE) --no-print-directory
 
-clean: 
-	(rm -r ${BUILD_DIR} 2>/dev/null) || exit 0 
+clean:
+	(rm -r ${BUILD_DIR} 2>/dev/null) || exit 0
 
-# инкрементальная сборка и запуск исполняемого файла 
+# инкрементальная сборка и запуск исполняемого файла
+
 run:
 	cd ${BUILD_DIR} && $(MAKE) --no-print-directory
 	./${BUILD_DIR}/${TARGET_EXE}
@@ -53,3 +56,4 @@ formating:
 
 
 # clang-format -i -style="{BasedOnStyle: Microsoft, IndentWidth: 4, UseTab: Always, AccessModifierOffset: 0}"  main.cpp ${LIB_DIR}/include/*.h ${LIB_DIR}/src/*.cpp ${TESTS_DIR}/*.cpp
+

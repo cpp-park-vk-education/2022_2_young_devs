@@ -4,6 +4,10 @@
 
 #include "Game/Game.h"
 
+#include "User.h"
+#include "GameProgress.h"
+#include "GameInf.h"
+
 std::unique_ptr<Wt::WApplication> createWidget(const Wt::WEnvironment& env) {
     auto app = std::make_unique<Wt::WApplication>(env);
 
@@ -20,7 +24,7 @@ int main(int argc, char **argv) {
 
     server.setServerConfiguration(argc, argv, WTHTTP_CONFIGURATION);
 
-    server.addEntryPoint(Wt::EntryPointType::Application,createWidget);
+    server.addEntryPoint(Wt::EntryPointType::Application, createWidget);
 
     if (server.start()) {
         int sig = Wt::WServer::waitForShutdown();
@@ -28,3 +32,5 @@ int main(int argc, char **argv) {
         server.stop();
     }
 }
+
+

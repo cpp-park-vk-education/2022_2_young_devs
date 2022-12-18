@@ -23,6 +23,7 @@ set(BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 configure_file(config.h.in config.h @ONLY)
 
 add_subdirectory(game_lib)
+add_subdirectory(db_lib)
 
 if(TEST_OPT)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -coverage -lgcov" )
@@ -43,9 +44,18 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${GAME_LIB_INCLUDE_DIRS})
 # для config.h
 set(BUILD_DIR "${PROJECT_BINARY_DIR}")
 target_include_directories(${PROJECT_NAME} PUBLIC "${BUILD_DIR}")
+target_include_directories(${PROJECT_NAME} PUBLIC ${DB_LIB_INCLUDE_DIRS})
 
 # target_link_libraries(${PROJECT_NAME} PRIVATE ${GAME_LIB_LIBRARIES} ${Boost_LIBRARY_DIR})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${GAME_LIB_LIBRARIES} -ldl Wt::Wt Wt::HTTP)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${DB_LIB_LIBRARIES})
+
+
+
+#link_directories("/usr/lib/mysql")
+#include_directories("/usr/include/mysql")
+
+
 
 if (TEST_OPT)
     enable_testing()
