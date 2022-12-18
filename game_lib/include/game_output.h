@@ -1,6 +1,8 @@
 #pragma once
 
-#include <iostream>
+#include <iostream> 
+#include <mutex>
+#include <vector>
 
 #include "game_logic.h"
 
@@ -16,6 +18,7 @@ public:
 class T_StreamOutput : public T_Output
 {
 private:
+    mutable std::mutex _mutex;
     std::ostream &_out;
     void OT_Output(ReportAction report);
     void ST_Output(ReportAction report);

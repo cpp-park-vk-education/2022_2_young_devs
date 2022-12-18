@@ -5,7 +5,7 @@
 using namespace std::string_literals;
 
 
-ReportAction OT_Logic::MakeStep(ReportAction const &report)
+ReportAction OT_Logic::MakeStep(ReportAction const &report) const
 {
     auto field = report.field;
     size_t index = report.data.value;
@@ -30,7 +30,7 @@ ReportAction OT_Logic::MakeStep(ReportAction const &report)
 }
 
 
-ReportAction ST_Logic::MakeStep(ReportAction const &report)
+ReportAction ST_Logic::MakeStep(ReportAction const &report) const
 {
     auto field = report.field;
     size_t index = report.data.value;

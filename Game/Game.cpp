@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game(): game_(0), scores_(0), rules_(0), pool(4),
+Game::Game(): game_(0), scores_(0), rules_(0),
               userDB_(new User()), Wt::WContainerWidget() {
    setContentAlignment(Wt::AlignmentFlag::Center);
     std::unique_ptr<Wt::WText> title(

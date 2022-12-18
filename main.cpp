@@ -2,6 +2,7 @@
 #include <Wt/WServer.h>
 #include <Wt/WApplication.h>
 
+
 #include "Game/Game.h"
 
 #include "User.h"
@@ -32,5 +33,3 @@ int main(int argc, char **argv) {
         server.stop();
     }
 }
-
-

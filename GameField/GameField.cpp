@@ -2,10 +2,10 @@
 
 #include <iostream>
 
+boost::asio::thread_pool pool(4);
+
 GameField::GameField(size_t rows, size_t columns): Wt::WCompositeWidget(),
     playerOrder_(true) {
-
-
 
     field_ = new Wt::WTable();
 
@@ -25,20 +25,19 @@ GameField::GameField(size_t rows, size_t columns): Wt::WCompositeWidget(),
 
         cell->clicked().connect(std::bind(&GameField::processButton, this, cell));
 
-        T_GameField *field 	= new ST_Field;
-        T_GameLogic *logic 	= new ST_Logic;
-        T_Output 	*output = new T_WtOutput(cellButtons_);
-        T_Bot       *bot 	= new ST_Bot;
-        player_1 	= { .id = 0, .isBot = false,    .cell = TypeCell::X };
-        player_2 	= { .isBot = true,              .cell = TypeCell::O };
-        // GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot);
-        room 		        = new T_Room(player_1, player_2, field, logic, output, bot, TypeGame::ST);
-
-
         //connections_.push_back(Wt::WApplication::instance()->globalKeyPressed().connect(
         //        std::bind(&GameField::processButtonPushed, this, std::placeholders::_1, cell)
         //        ));
     }
+
+    T_GameField *field 	= new ST_Field;
+    T_GameLogic *logic 	= new ST_Logic;
+    T_Output 	*output = new T_WtOutput(cellButtons_);
+    T_Bot       *bot 	= new ST_Bot;
+    player_1 	= { .id = 0, .isBot = false,    .cell = TypeCell::X };
+    player_2 	= { .isBot = true,              .cell = TypeCell::O };
+    // GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot);
+    room 		        = new T_Room(777, player_1, player_2, field, logic, output, bot, TypeGame::ST);
 }
 
 GameField::~GameField() {
@@ -75,6 +74,7 @@ void GameField::processButton(Wt::WPushButton *button) {
     std::cout << "НАШ ХОД" << convertToBlocks(numberOfCell) << std::endl;
 
     T_StepTask  task(room, player_1, convertToBlocks(numberOfCell));
+    //boost::asio::post(pool, task);
     task();
 
     //if (playerOrder_) {

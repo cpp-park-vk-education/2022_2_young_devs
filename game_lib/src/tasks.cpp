@@ -21,15 +21,18 @@ void T_StepTask::operator()()
     {
         return;
     }
-    std::vector<Player> players = _room->GetPlayers();
-    // ход бота, если игра с ботом
-    if (players[0].id == _player.id && players[1].isBot)
+    if (!report.result.isEnd)
     {
-        _room->DoAction(players[1], TypeAction::Step);
-    }
-    if (players[1].id == _player.id && players[0].isBot)
-    {
-        _room->DoAction(players[0], TypeAction::Step);
+        std::vector<Player> players = _room->GetPlayers();
+        // ход бота, если игра с ботом
+        if (players[0].id == _player.id && players[1].isBot)
+        {
+            _room->DoAction(players[1], TypeAction::Step);
+        }
+        if (players[1].id == _player.id && players[0].isBot)
+        {
+            _room->DoAction(players[0], TypeAction::Step);
+        }
     }
 }
 

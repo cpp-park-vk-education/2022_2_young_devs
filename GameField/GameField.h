@@ -9,6 +9,9 @@
 
 #include <iostream>
 
+#include <boost/asio/thread_pool.hpp>
+#include <boost/asio/post.hpp>
+
 #include "tasks.h"
 
 #include "game_logic.h"
@@ -41,6 +44,8 @@ class GameField: public Wt::WCompositeWidget {
     Wt::Signal<size_t> cellPressed_;
 
     void processButton(Wt::WPushButton *button);
+
+    Wt::WPushButton *rollbackButton_;
 
     //void processButtonPushed(const Wt::WKeyEvent &e, Wt::WPushButton *button);
 };

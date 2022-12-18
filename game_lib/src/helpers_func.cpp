@@ -94,8 +94,8 @@ void LogReport(ReportAction report, std::string message, std::ostream &out)
     out << "> Room\n";
     out << std::string(n, sym ) << "room_id = " << report.room_id << "\n";
     out << "> Players\n";
-
-    LogPlayer(report.player);
+    
+    LogPlayer(report.player, out);
 
     out << "> DataAction\n";
     if (!report.data.data.empty())
@@ -128,7 +128,7 @@ void LogReport(ReportAction report, std::string message, std::ostream &out)
     {
         out << std::string(n, sym ) << "winner = " << (report.result.winnerCell == TypeCell::X ? "X" : "O") << "\n";
         out << "> Winner\n";
-        LogPlayer(report.result.winner);
+        LogPlayer(report.result.winner, out);
         out << std::string(n, sym ) << "draw? " << report.result.draw << "\n";
     }
 

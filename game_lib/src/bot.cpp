@@ -6,7 +6,7 @@
 
 
 // ходит в первую пустую ячейку
-ReportAction OT_Bot::MakeStep(ReportAction &report)
+ReportAction OT_Bot::MakeStep(ReportAction &report) const
 {
     auto field = report.field;
     TypeCell cell = report.player.cell;
@@ -23,7 +23,7 @@ ReportAction OT_Bot::MakeStep(ReportAction &report)
 }
 
 // ходит в случайную пустую ячейку в нужном поле 3x3
-ReportAction ST_Bot::MakeStep(ReportAction &report)
+ReportAction ST_Bot::MakeStep(ReportAction &report) const
 {
 	auto field = report.field;
 	TypeCell cell = report.player.cell;

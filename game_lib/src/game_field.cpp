@@ -17,31 +17,38 @@ size_t OT_Field::Dimension()
     return _dim;
 }
 
-size_t OT_Field::Size()
+size_t OT_Field::Size() const
 {
     return _dim * _dim;
 }
 
 void OT_Field::Clear()
 {
+	std::lock_guard locker(_mutex);
     std::fill(_field.begin(), _field.end(), TypeCell::E);
 }
 
-TypeCell OT_Field::At(size_t index)
+TypeCell OT_Field::At(size_t index) const
 {
     assert(index < Size());
-    return _field[index];
+
+	std::lock_guard locker(_mutex);
+	return _field[index];
 }
 
 void OT_Field::Set(size_t index, TypeCell cell)
 {
     assert(index < Size());
-    _field[index] = cell;
+
+	std::lock_guard locker(_mutex);
+	_field[index] = cell;
+
     CommitStep(index, cell);
 }
 
 void OT_Field::Rollback(size_t countSteps, std::vector<StepInfo> &steps)
 {
+	std::lock_guard locker(_mutex);
     for (size_t i = 0; i < countSteps; ++i)
     {
         StepInfo currentStep = steps.back();
@@ -78,37 +85,45 @@ void OT_Field::CommitStep(size_t index, TypeCell cell)
 
 GameResult OT_Field::IsEnd()
 {
-    GameResult result;
-    for (size_t i = 0; i < _sums.size(); ++i)
-    {
-        if (_sums[i] == _dim)
-        {
-            result.isEnd = true;
-            result.winnerCell = TypeCell::X;
-            return result;
-        }
-        if (_sums[i] == -_dim)
-        {
-            result.isEnd = true;
-            result.winnerCell = TypeCell::O;
-            return result;
-        }
-    }
-    auto it = std::find(_field.begin(), _field.end(), TypeCell::E);
-    if (it == _field.end())
-    {
-        result.isEnd = true;
-        result.draw = true;
-        result.winnerCell = TypeCell::E;
-        return result;
-    }
-    result.isEnd = false;
-    return result;
+	std::lock_guard locker(_mutex);
+	GameResult result;
+	for (size_t i = 0; i < _sums.size(); ++i)
+	{
+		if (_sums[i] == _dim)
+		{
+			result.isEnd = true;
+			result.winnerCell = TypeCell::X;
+			return result;
+		}
+		if (_sums[i] == -_dim)
+		{
+			result.isEnd = true;
+			result.winnerCell = TypeCell::O;
+			return result;
+		}
+	}
+	auto it = std::find(_field.begin(), _field.end(), TypeCell::E);
+	if (it == _field.end())
+	{
+		result.isEnd = true;
+		result.draw = true;
+		result.winnerCell = TypeCell::E;
+		return result;
+	}
+	result.isEnd = false;
+	return result;
 }
 
 // ************************************************************************
 
-ST_Field::ST_Field() : _dim(9), _dim_fields(3), _field(9, OT_Field(3)), _miniature(3)
+ST_Field::ST_Field() : _dim(9), _dim_fields(3), _miniature(3),
+	_field({
+		OT_Field(3), OT_Field(3), 
+		OT_Field(3), OT_Field(3), 
+		OT_Field(3), OT_Field(3), 
+		OT_Field(3), OT_Field(3), 
+		OT_Field(3)
+	})
 {
 }
 
@@ -117,19 +132,20 @@ size_t ST_Field::Dimension()
     return _dim;
 }
 
-size_t ST_Field::Size()
+size_t ST_Field::Size() const
 {
     return _dim * _dim;
 }
 
 void ST_Field::Clear()
 {
+	std::lock_guard locker(_mutex);
     std::for_each(_field.begin(), _field.end(), [](OT_Field &field){
         field.Clear();
     });
 }
 
-TypeCell ST_Field::At(size_t index)
+TypeCell ST_Field::At(size_t index) const
 {
     assert(index < Size());
     return _field[index / _dim].At(index % _dim);
@@ -138,12 +154,14 @@ TypeCell ST_Field::At(size_t index)
 void ST_Field::Set(size_t index, TypeCell cell)
 {
     assert(index < Size());
-    _field[index / _dim].Set(index % _dim, cell);
+	std::lock_guard locker(_mutex);
+	_field[index / _dim].Set(index % _dim, cell);
     CommitStep(index, cell);
 }
 
 void ST_Field::Rollback(size_t countSteps, std::vector<StepInfo> &steps)
 {
+	std::lock_guard locker(_mutex);
     for (size_t i = 0; i < countSteps; ++i)
     {
         StepInfo currentStep = steps.back();

@@ -12,9 +12,6 @@
 #include "../RulesWidget/RulesWidget.h"
 #include "../ScoresWidget/ScoresWidget.h"
 
-#include <boost/asio/thread_pool.hpp>
-#include <boost/asio/post.hpp>
-
 #include "User.h"
 
 class Game: public Wt::WContainerWidget {
@@ -25,8 +22,6 @@ class Game: public Wt::WContainerWidget {
 
  private:
     User *userDB_;
-
-    boost::asio::thread_pool pool;
 
     Wt::WStackedWidget *mainStack_;
 
