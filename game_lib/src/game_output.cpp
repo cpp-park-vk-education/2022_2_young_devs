@@ -9,6 +9,10 @@ T_StreamOutput::T_StreamOutput(std::ostream &out) : _out(out)
 {
 }
 
+T_StreamOutput::T_StreamOutput(std::string &file_name) : _out(file_name.data())
+{
+}
+
 void T_StreamOutput::OT_Output(ReportAction report)
 {
     for (size_t i = 0; i < report.field->Size(); ++i)
@@ -56,7 +60,8 @@ void T_StreamOutput::ST_Output(ReportAction report)
 
 void T_StreamOutput::Output(ReportAction report)
 {
-    LogReport(report, "**[ REPORT ]**");
+    std::lock_guard locker(_mutex);
+    LogReport(report, "**[ REPORT ]**", _out);
     if (report.typeGame == TypeGame::OT)
     {
         OT_Output(report);
@@ -66,6 +71,11 @@ void T_StreamOutput::Output(ReportAction report)
         ST_Output(report);
     }
 }
+
+// std::vector<size_t> disabled_buttons(ReportAction report)
+// {
+//     report.
+// }
 
 void T_WtOutput::Output(ReportAction report)
 {

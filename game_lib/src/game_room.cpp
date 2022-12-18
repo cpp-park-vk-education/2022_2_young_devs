@@ -1,12 +1,12 @@
+#include <algorithm>
+
 #include "game_room.h"
 #include "helpers_func.h"
 
 #include "reports_bug.h"
 
-GameRoom::GameRoom()
+GameRoom::GameRoom(size_t x_id) : id(x_id) 
 {
-    _room_id = id;
-    id++;
 }
 
 TypeStatus GameRoom::GetStatus()
@@ -22,23 +22,28 @@ void GameRoom::Stop()
     }
 }
 
-
-T_Room::T_Room(Player player_1, Player player_2, T_GameField *field, T_GameLogic *logic, T_Output *output, T_Bot *bot, TypeGame typeGame) 
+T_Room::T_Room(size_t room_id, Player player_1, Player player_2, T_GameField *field, T_GameLogic *logic, T_Output *output, T_Bot *bot, TypeGame typeGame, bool logging) 
     : 
-GameRoom(), _player_1(player_1), _player_2(player_2), _field(field), _logic(logic), _output(output), _bot(bot), _typeGame(typeGame)
+GameRoom(isHas<size_t>(_static_ids, room_id) ? throw std::runtime_error("Room already exists") : room_id), 
+_player_1(player_1), _player_2(player_2), _field(field), _logic(logic), _output(output), _bot(bot), _typeGame(typeGame), _logging(logging)
 {
     _status = TypeStatus::Active;
+    _static_ids.push_back(room_id);
 }
 
 void T_Room::fillReport(ReportAction &report, Player player, TypeAction type, DataAction data)
 {
     report.player       = player; 
     report.typeAction   = type; 
-    report.data         = data;
+    if (!report.player.isBot)
+    {
+        report.data         = data;
+    }
+    // Бот сам определяет нужный индекс внутри метода DoAction
     report.status       = _status; 
     report.field        = _field; 
-    report.typeGame     = _typeGame; 
-    report.room_id      = _room_id; 
+    report.typeGame     =  _typeGame; 
+    report.room_id      = id; 
     report.steps        = _steps;
 };
 
@@ -62,6 +67,7 @@ std::tuple<Player, Player, ReportAction> T_Room::checkPlayer(Player player)
     {
         cur_player.id = player.id;
         report = reportCode2;
+        // isValid = false
     }
     return {cur_player, other_player, report};
 }
@@ -79,11 +85,10 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
     }
 
 
-
     if (_status == TypeStatus::Finished)
     {
-        fillReport(report, cur_player, type, data);
         report = reportCode3;
+        fillReport(report, cur_player, type, data);
         _output->Output(report);
         return report;
     }
@@ -91,8 +96,7 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
     {
         _status = TypeStatus::Active;
     }
-
-
+    
     switch(type)
     {
         case TypeAction::Rollback:
@@ -100,15 +104,15 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
             // Бот не может делать откат
             if (cur_player.isBot)
             {
-                fillReport(report, cur_player, type, data);
                 report = reportCode7;
+                fillReport(report, cur_player, type, data);
             }
             // 1. Откат не может быть больше количества шагов
             // 2. Нельзя откатить один ход бота, только (его ход и свой) * n
             else if ((int)_steps.size() - data.value < 0 || data.value % 2 != 0)
             {
-                fillReport(report, cur_player, type, data);
                 report = reportCode8;
+                fillReport(report, cur_player, type, data);
             }
             else if (other_player.isBot)
             {
@@ -119,8 +123,8 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
             // Нельзя делать откат, если играешь не с ботом
             else
             {
-                fillReport(report, cur_player, type, data);
                 report = reportCode6;
+                fillReport(report, cur_player, type, data);
             }
             break;
         }
@@ -131,8 +135,8 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
             // Ходит другой человек
             if (!_steps.empty() && _steps.back().cell == cell)
             {
-                fillReport(report, cur_player, type, data);
                 report = reportCode5;
+                fillReport(report, cur_player, type, data);
                 _output->Output(report);
                 return report;
             }
@@ -191,3 +195,4 @@ std::vector<Player> T_Room::GetPlayers()
 {
     return { _player_1, _player_2 };
 }
+

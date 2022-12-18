@@ -69,19 +69,19 @@ class T_GameLogic
 {
 private:
 public:
-    virtual ReportAction MakeStep(ReportAction const &report) = 0;
+    virtual ReportAction MakeStep(ReportAction const &report) const = 0;
 };
 
 class OT_Logic : public T_GameLogic
 {
 private:
 public:
-    virtual ReportAction MakeStep(ReportAction const &report) override;
+    virtual ReportAction MakeStep(ReportAction const &report) const override;
 };
 
 class ST_Logic : public T_GameLogic
 {
 private:
 public:
-    virtual ReportAction MakeStep(ReportAction const &report) override;
+    virtual ReportAction MakeStep(ReportAction const &report) const override;
 };
