@@ -10,7 +10,8 @@ class T_GameField;
 enum class TypeStatus   { Active = 0, Stopped, Finished };
 enum class TypeAction   { Step = 0, Rollback };
 enum class TypeGame     { OT = 0, ST };
-enum       TypeCell     { X = 1, E = 0, O = -1 };
+// N - для миниатюры ST_Field
+enum       TypeCell     { X = 1, E = 0, O = -1};
 
 struct StepInfo
 {

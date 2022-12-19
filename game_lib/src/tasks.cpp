@@ -1,8 +1,10 @@
 #include "tasks.h"
 #include "game_logic.h"
 
+#include "cond_var.h"
 
-Task::Task(GameRoom *room) : _room(room)
+
+Task::Task(GameRoom *room) : _room(room), room_id(room->id)
 {
 }
 

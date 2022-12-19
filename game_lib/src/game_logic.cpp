@@ -51,7 +51,20 @@ ReportAction ST_Logic::MakeStep(ReportAction const &report) const
 		return report;
 	}
 	
-	if (report.steps.empty())
+	size_t i_tmp = 0;
+	if (!report.steps.empty())
+	{
+		size_t needed_block = report.steps.back().index % 9;
+		for (; i_tmp < 9; ++i_tmp)
+		{
+			if (field->At(needed_block * 9 + i_tmp) == TypeCell::E)
+			{
+				break;
+			}
+		}
+	}
+
+	if (report.steps.empty() || i_tmp == 9)
 	{
 		field->Set(index, cell);
 	}

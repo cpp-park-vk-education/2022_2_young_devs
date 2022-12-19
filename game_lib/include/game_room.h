@@ -4,6 +4,8 @@
 #include <vector>
 #include <optional>
 #include <tuple>
+#include <atomic>
+#include <condition_variable>
 
 #include "game_field.h"
 #include "game_logic.h"
@@ -47,6 +49,9 @@ private:
     void addStep(size_t player_id, size_t index, TypeCell cell);
     std::tuple<Player, Player, ReportAction> checkPlayer(Player player);
 public:
+    std::atomic<bool>       finish = false;
+    std::atomic<bool>       busy = false;
+    mutable std::mutex      mutex;
     T_Room(size_t room_id, Player player_1, Player player_2, T_GameField *field, T_GameLogic *logic, T_Output *output, T_Bot *bot = nullptr, TypeGame typeGame = TypeGame::OT, bool logging = false);
     virtual ReportAction DoAction(Player player, TypeAction type, DataAction data = {}) override;
     virtual std::vector<Player> GetPlayers() override;

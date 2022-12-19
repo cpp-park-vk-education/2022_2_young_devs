@@ -179,9 +179,25 @@ void ST_Field::CommitStep(size_t index, TypeCell cell)
 
 GameResult ST_Field::IsEnd()
 {
-	return _miniature.IsEnd();
+	GameResult result = _miniature.IsEnd();
+	// оптимизировать
+	if (result.isEnd)
+	{
+		std::cout << "=========== [ END ] ================" << std::endl;
+
+	}
+	for (size_t i = 0; i < Size(); ++i)
+	{
+		if (At(i) == TypeCell::E)
+		{
+			return result;
+		}
+	} 
+	std::cout << "=========== [ END ] ================" << std::endl;
+	return { .isEnd = true, .draw = true };
 }
 
+// *******************************************
 
 // DEBUG
 

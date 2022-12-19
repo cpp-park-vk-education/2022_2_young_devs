@@ -26,6 +26,7 @@ file(GLOB           INCLUDE_DIRS  ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_library(${PROJECT_NAME} ${SOURCES})
 target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PUBLIC "${BUILD_DIR}")
 
 message("SOURCES =          ${SOURCES}")
 message("INCLUDE_DIRS =     ${INCLUDE_DIRS}")

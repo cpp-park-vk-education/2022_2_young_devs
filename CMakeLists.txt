@@ -20,9 +20,14 @@ configure_file(config.h.in config.h @ONLY)
 #     return()
 # endif()
 
-add_subdirectory(game_lib)
+
+# для config.h
+set(BUILD_DIR "${PROJECT_BINARY_DIR}")
+
 
 add_executable(${PROJECT_NAME} main.cpp)
+
+add_subdirectory(game_lib)
 
 if(TEST_OPT)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -coverage -lgcov" )
@@ -40,12 +45,12 @@ endif()
 # target_include_directories(${PROJECT_NAME} PUBLIC ${GAME_LIB_INCLUDE_DIRS} ${Boost_INCLUDE_DIR})
 target_include_directories(${PROJECT_NAME} PUBLIC ${GAME_LIB_INCLUDE_DIRS})
 
-# для config.h
-set(BUILD_DIR "${PROJECT_BINARY_DIR}")
+# ---
 target_include_directories(${PROJECT_NAME} PUBLIC "${BUILD_DIR}")
 
 # target_link_libraries(${PROJECT_NAME} PRIVATE ${GAME_LIB_LIBRARIES} ${Boost_LIBRARY_DIR})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${GAME_LIB_LIBRARIES})
+
 
 if (TEST_OPT)
     enable_testing()

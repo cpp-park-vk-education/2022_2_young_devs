@@ -145,7 +145,7 @@ void LogReport(ReportAction report, std::string message, std::ostream &out)
 }
 
 
-// mt19937 ???
+// mt19937 ?
 int get_rand(int start, int stop)
 {
     assert(stop >= start);

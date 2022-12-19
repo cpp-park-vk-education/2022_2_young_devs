@@ -4,6 +4,11 @@
 #include "helpers_func.h"
 
 #include "reports_bug.h"
+#include "cond_var.h"
+
+std::mutex tmp_mutex_2;
+
+std::condition_variable cond_var;
 
 GameRoom::GameRoom(size_t x_id) : id(x_id) 
 {
@@ -74,6 +79,8 @@ std::tuple<Player, Player, ReportAction> T_Room::checkPlayer(Player player)
 
 ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
 {
+    // atomic
+    busy = true;
 
     auto [cur_player, other_player, report] = checkPlayer(player);
     if (!report.isValid)
@@ -81,15 +88,16 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
         // Игрок не зарегистрирован в этой комнате
         fillReport(report, cur_player, type, data);
         _output->Output(report);
+        busy = false;
         return report;
     }
-
 
     if (_status == TypeStatus::Finished)
     {
         report = reportCode3;
         fillReport(report, cur_player, type, data);
         _output->Output(report);
+        busy = false;
         return report;
     }
     if (_status == TypeStatus::Stopped)
@@ -138,6 +146,7 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
                 report = reportCode5;
                 fillReport(report, cur_player, type, data);
                 _output->Output(report);
+                busy = false;
                 return report;
             }
             fillReport(report, cur_player, type, data);
@@ -163,12 +172,17 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
                 report.result.winner = cur_player;
                 result = report.result;
                 _status = TypeStatus::Finished;
+                tmp_mutex_2.lock();
+                std::cout << "finish_room = " << id << std::endl;
+                tmp_mutex_2.unlock();
+                finish = true;
             }
             fillReport(report, cur_player, type, data);
             break;
         }
     }
     _output->Output(report);
+    busy = false;
     return report;
 }
 

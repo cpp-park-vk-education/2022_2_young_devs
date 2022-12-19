@@ -1,12 +1,14 @@
 #pragma once
 
 #include "game_room.h"
+#include <iostream>
 
 class Task
 {
 protected:
     GameRoom *_room;
 public:
+    const size_t room_id;
     Task(GameRoom *room);
     virtual void operator()() = 0;
 };
