@@ -101,18 +101,13 @@ void T_WtOutput::Output(ReportAction report)
     // Вывод поля в браузер
 }
 
-std::mutex no_output_mutex;
-size_t count = 0;
+std::mutex test_output_mutex;
 
-void T_NoOutput::Output(ReportAction report)
+void T_TestOutput::Output(ReportAction report)
 {
-    std::lock_guard locker(no_output_mutex);
-    std::cout << count++ << std::endl;
-    std::cout << "result room = " << report.room_id << " isEnd = " << report.result.isEnd << " steps = " << report.steps.size() << " index = " << report.data.value << " count = " << count << std::endl;
-    // std::cout << "code = " << report.error.codeError << std::endl;
+    std::lock_guard locker(test_output_mutex);
     if (report.result.isEnd)
     {
         _streamOutput.Output(report);
-        // LogReport(report, "*** ==[ Final Report ]== ***", file);
     }
 }

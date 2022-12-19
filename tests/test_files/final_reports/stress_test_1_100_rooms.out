@@ -1,0 +1,3900 @@
+**[ REPORT ]**
+********************
+> Room
+      room_id = 66
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 17
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 47
+********************
+
+ O  O  O  X  -  O  X  O  - 
+ X  X  X  O  X  -  X  X  - 
+ O  X  -  X  X  X  X  -  X 
+ O  X  X  O  O  O  X  O  - 
+ -  O  -  X  X  O  -  -  - 
+ O  -  -  -  -  -  X  -  - 
+ X  X  O  -  O  -  O  -  O 
+ -  O  O  -  -  -  -  -  - 
+ X  -  O  O  -  -  -  -  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 11
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 22
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 49
+********************
+
+ X  X  X  X  O  -  X  -  O 
+ -  O  O  X  X  X  -  X  O 
+ -  -  O  -  -  X  O  X  X 
+ -  O  O  -  O  O  -  O  X 
+ O  -  -  -  -  -  -  -  - 
+ X  O  -  X  -  -  -  X  O 
+ O  -  O  O  O  X  O  -  - 
+ X  -  -  X  -  X  X  X  - 
+ O  O  X  X  -  -  X  O  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 89
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 52
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 48
+********************
+
+ -  -  X  O  -  -  -  X  O 
+ -  X  -  X  O  X  X  X  O 
+ -  -  O  X  -  X  -  O  - 
+ X  O  -  O  O  O  -  O  O 
+ X  X  -  O  X  O  X  O  X 
+ O  O  O  -  -  X  -  O  - 
+ -  -  -  -  X  X  -  O  X 
+ -  -  X  O  -  -  O  X  X 
+ -  -  O  -  X  O  -  X  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 48
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 2
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 53
+********************
+
+ -  O  X  -  X  -  X  -  X 
+ -  -  X  X  X  X  -  X  O 
+ X  -  X  -  O  O  X  O  - 
+ -  O  -  -  O  X  O  O  O 
+ -  O  -  X  O  X  X  O  - 
+ -  O  O  X  -  O  O  X  X 
+ O  -  O  O  -  O  O  X  O 
+ -  -  X  -  X  X  X  O  O 
+ O  -  X  -  X  -  -  -  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 5
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 49
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 54
+********************
+
+ O  -  X  X  O  X  -  O  - 
+ O  O  X  X  -  -  O  O  O 
+ -  O  O  -  X  X  O  X  - 
+ -  -  -  X  -  X  X  O  X 
+ X  O  X  -  -  X  O  O  O 
+ O  -  X  X  O  O  -  O  - 
+ X  O  -  X  O  X  O  X  O 
+ -  X  -  -  X  X  -  O  X 
+ -  -  X  -  O  X  O  -  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 28
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 76
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 54
+********************
+
+ X  O  -  O  O  O  -  X  - 
+ X  -  X  O  X  X  O  O  O 
+ -  X  X  X  X  O  -  -  O 
+ O  X  X  -  X  -  O  O  X 
+ -  -  X  -  -  -  -  O  - 
+ O  -  X  X  -  O  -  O  X 
+ -  X  X  O  X  X  O  O  - 
+ -  -  O  O  -  -  X  O  X 
+ O  O  O  X  -  -  X  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 18
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 39
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 55
+********************
+
+ X  X  X  O  -  X  O  -  O 
+ O  O  X  O  X  O  O  O  X 
+ -  -  O  X  -  -  O  -  X 
+ O  X  X  X  O  X  O  O  X 
+ -  -  X  X  -  O  O  O  X 
+ -  X  X  X  -  O  -  X  O 
+ -  X  -  -  -  O  X  O  - 
+ O  X  -  -  O  O  X  X  X 
+ -  -  O  -  X  -  O  -  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 50
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 13
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 55
+********************
+
+ O  X  O  -  -  -  -  X  - 
+ O  -  -  X  X  X  -  O  X 
+ X  X  O  O  O  -  O  -  - 
+ X  -  O  X  O  -  O  -  - 
+ X  O  -  X  O  X  O  O  - 
+ X  -  O  X  -  X  O  O  O 
+ O  O  X  X  -  -  X  -  X 
+ O  X  X  -  X  X  -  O  X 
+ X  O  X  O  -  X  O  O  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 73
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 59
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 56
+********************
+
+ X  -  O  O  -  -  O  O  X 
+ O  X  X  X  -  O  O  X  X 
+ X  O  O  -  -  X  O  -  O 
+ X  X  O  O  -  X  X  O  O 
+ X  -  O  -  O  X  X  X  - 
+ X  O  -  -  O  O  -  O  - 
+ O  -  X  X  -  X  -  X  X 
+ O  O  O  O  X  -  -  -  O 
+ -  -  -  X  X  X  X  O  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 96
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 20
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 57
+********************
+
+ O  O  -  O  -  X  X  X  X 
+ X  -  O  X  O  O  O  -  - 
+ X  O  X  -  X  O  -  X  - 
+ -  X  -  -  X  O  X  -  - 
+ O  O  O  -  -  X  -  X  - 
+ X  -  O  X  X  X  O  -  X 
+ O  O  O  X  X  O  X  O  O 
+ X  O  -  -  O  -  X  O  - 
+ X  X  O  O  O  O  X  X  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 34
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 5
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 59
+********************
+
+ O  -  O  X  -  X  -  X  - 
+ X  X  X  O  X  O  O  O  - 
+ -  X  -  O  -  O  -  -  O 
+ O  O  X  X  X  X  O  X  - 
+ O  X  O  O  O  X  X  O  - 
+ X  X  O  O  O  X  -  -  - 
+ -  O  -  -  X  -  O  O  - 
+ X  O  -  X  O  -  X  X  X 
+ X  O  X  X  O  O  O  X  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 83
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 79
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 58
+********************
+
+ -  -  O  O  -  X  X  X  O 
+ -  O  X  O  O  O  -  O  X 
+ X  O  -  O  X  X  O  X  - 
+ -  X  -  -  X  O  X  X  O 
+ X  O  -  O  X  X  -  O  O 
+ -  O  X  -  X  X  O  -  - 
+ X  X  X  O  O  -  -  O  X 
+ X  -  -  -  X  X  O  -  - 
+ O  O  X  X  O  X  O  O  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 95
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 80
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 59
+********************
+
+ O  -  X  O  X  -  X  O  X 
+ X  -  X  X  -  X  X  O  X 
+ X  -  X  X  X  O  -  O  O 
+ O  O  O  -  X  X  O  O  X 
+ O  O  O  X  -  X  X  O  - 
+ X  X  O  X  -  X  -  -  O 
+ -  O  -  O  -  O  -  O  O 
+ O  O  O  X  O  -  X  O  - 
+ -  O  -  -  -  X  X  X  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 6
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 18
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 60
+********************
+
+ -  -  -  O  X  O  O  O  O 
+ X  X  X  -  X  X  O  X  X 
+ -  X  X  X  X  X  X  X  - 
+ -  O  X  O  O  X  O  X  O 
+ X  -  O  X  O  X  -  O  O 
+ -  -  O  -  O  -  X  X  X 
+ -  O  -  O  O  X  O  O  X 
+ O  O  O  -  -  O  -  X  - 
+ X  -  O  O  -  O  X  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 4
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 17
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 61
+********************
+
+ -  X  X  O  X  O  O  O  X 
+ O  O  X  O  -  O  X  O  X 
+ X  -  X  X  X  X  O  X  X 
+ X  O  O  O  X  X  X  X  O 
+ -  X  -  -  -  X  -  O  - 
+ X  X  -  -  X  X  X  -  O 
+ O  O  O  O  -  O  -  -  X 
+ X  O  -  O  O  O  O  -  O 
+ O  X  -  X  O  -  -  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 53
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 69
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 61
+********************
+
+ X  O  X  X  -  X  O  X  O 
+ X  O  X  X  -  X  O  X  O 
+ -  O  O  -  -  O  O  O  O 
+ X  O  X  O  O  X  O  O  X 
+ O  O  -  X  -  X  O  -  - 
+ O  X  X  O  -  -  O  O  - 
+ -  -  X  O  -  X  X  -  O 
+ O  X  X  -  X  -  X  O  X 
+ -  -  X  X  O  X  X  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 26
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 26
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 62
+********************
+
+ X  X  O  X  O  X  X  O  O 
+ X  O  -  O  -  X  -  X  X 
+ -  O  X  O  X  X  O  O  O 
+ O  O  -  -  O  O  O  O  X 
+ -  X  X  O  X  O  X  O  X 
+ -  -  X  -  X  X  O  O  X 
+ -  X  X  O  -  X  O  X  X 
+ -  -  O  -  X  X  O  O  O 
+ X  -  X  -  -  O  O  -  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 90
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 53
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 61
+********************
+
+ -  O  O  O  O  O  O  X  X 
+ O  X  X  X  X  X  O  X  X 
+ X  X  O  -  -  O  -  X  X 
+ X  X  X  -  X  O  X  O  O 
+ X  -  O  -  O  O  O  X  O 
+ O  X  O  -  -  O  O  X  X 
+ X  -  -  O  -  O  X  X  O 
+ O  -  X  O  -  X  X  -  O 
+ -  -  O  -  O  -  X  -  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 97
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 48
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 62
+********************
+
+ O  X  X  O  O  -  O  X  - 
+ X  X  X  O  O  -  O  -  O 
+ -  O  X  X  -  -  O  X  O 
+ X  -  X  X  X  O  O  X  O 
+ X  O  X  O  O  X  O  X  O 
+ X  -  O  X  -  -  O  O  X 
+ O  -  X  -  -  X  O  -  X 
+ O  O  X  -  -  X  O  X  X 
+ X  O  O  X  O  X  O  -  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 8
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 62
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 63
+********************
+
+ X  X  O  X  -  -  -  O  O 
+ O  X  -  X  X  O  X  X  X 
+ X  X  O  -  O  -  O  X  - 
+ X  X  O  O  O  O  O  -  X 
+ O  X  X  X  O  -  -  X  O 
+ O  X  -  O  O  X  O  O  O 
+ O  -  X  O  O  X  O  -  - 
+ O  -  X  O  O  X  -  X  X 
+ X  X  X  O  -  X  -  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 14
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 37
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 63
+********************
+
+ X  O  O  X  O  X  -  X  X 
+ O  X  -  X  -  X  X  O  O 
+ -  O  -  X  X  -  O  O  O 
+ -  O  O  X  X  -  O  -  X 
+ O  O  -  O  X  O  -  X  X 
+ X  X  X  O  X  -  X  O  X 
+ -  -  O  O  O  X  X  O  X 
+ X  O  O  X  O  O  -  -  O 
+ -  X  O  X  O  X  -  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 43
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 54
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 63
+********************
+
+ -  X  X  X  -  -  X  O  O 
+ O  O  -  -  X  -  X  -  - 
+ O  X  O  O  X  O  X  O  O 
+ X  -  O  O  -  X  O  -  - 
+ X  O  X  O  X  O  X  O  - 
+ O  O  -  X  O  O  -  O  O 
+ X  O  O  X  O  X  O  X  X 
+ -  X  X  X  X  X  O  X  X 
+ O  -  X  -  O  O  X  X  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 49
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 4
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 63
+********************
+
+ X  O  X  O  O  O  O  O  X 
+ O  X  O  X  X  X  O  -  - 
+ -  X  X  X  X  O  X  X  X 
+ X  X  -  -  O  O  X  O  O 
+ X  O  X  O  X  X  -  O  - 
+ X  O  O  O  O  -  X  -  X 
+ O  X  -  O  X  X  O  X  - 
+ O  X  O  O  X  O  X  X  - 
+ -  -  O  -  -  -  O  O  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 27
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 76
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 64
+********************
+
+ X  O  X  -  -  -  -  O  - 
+ X  X  -  X  O  O  X  O  X 
+ X  X  -  O  X  X  X  -  O 
+ O  O  O  O  X  O  O  -  X 
+ O  O  O  X  -  X  O  X  O 
+ X  X  X  X  -  X  -  X  X 
+ O  -  O  O  X  -  O  X  X 
+ X  O  O  X  O  -  O  O  X 
+ X  O  O  O  -  O  X  -  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 58
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 57
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 64
+********************
+
+ -  X  O  -  -  X  O  X  O 
+ X  X  -  X  O  -  X  X  X 
+ X  -  X  O  X  X  O  X  O 
+ X  O  X  O  -  O  -  -  X 
+ O  O  O  O  X  O  X  X  O 
+ X  -  -  X  O  O  X  O  X 
+ O  O  X  O  O  O  O  O  O 
+ O  X  O  -  -  X  O  X  - 
+ O  X  X  X  -  -  O  -  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 23
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 0
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 64
+********************
+
+ O  X  X  O  X  X  O  X  - 
+ X  O  O  O  O  O  O  X  X 
+ -  O  O  X  O  X  O  O  - 
+ X  O  X  X  O  -  X  O  O 
+ -  O  -  X  X  X  X  -  - 
+ O  X  O  O  -  -  -  X  - 
+ X  O  X  X  X  O  O  X  O 
+ X  -  -  O  -  O  -  O  - 
+ O  X  X  X  O  X  O  X  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 33
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 20
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 64
+********************
+
+ O  O  X  X  O  -  X  -  O 
+ O  X  X  X  O  O  -  O  - 
+ O  O  X  O  X  X  O  X  O 
+ X  O  O  X  X  X  O  X  X 
+ -  O  -  O  X  X  O  O  O 
+ O  X  X  O  -  O  -  -  - 
+ X  X  O  O  X  -  O  -  X 
+ X  -  X  X  X  -  X  O  X 
+ X  -  X  O  O  -  -  O  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 60
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 24
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 65
+********************
+
+ O  X  O  X  X  O  X  O  O 
+ -  O  O  X  O  O  -  O  X 
+ X  O  -  O  X  -  X  X  X 
+ -  X  O  X  O  O  X  X  - 
+ X  X  O  X  X  X  O  O  - 
+ O  X  -  O  -  X  O  X  O 
+ -  -  X  O  O  X  X  O  X 
+ O  X  X  O  O  X  O  -  - 
+ -  X  X  O  X  O  -  O  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 41
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 22
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 66
+********************
+
+ -  X  X  X  O  O  O  X  X 
+ X  O  O  -  X  X  -  O  X 
+ -  O  X  O  -  O  X  O  O 
+ -  -  O  O  O  -  O  X  X 
+ X  X  O  O  X  O  O  O  X 
+ -  O  X  O  X  -  O  X  X 
+ -  X  O  X  -  O  X  O  X 
+ X  -  O  O  X  O  -  X  X 
+ -  X  X  X  X  O  O  O  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 87
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 4
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 66
+********************
+
+ X  O  X  X  O  X  -  O  O 
+ O  O  O  -  X  -  X  X  O 
+ X  -  O  O  O  X  X  X  O 
+ X  X  -  O  X  O  O  X  X 
+ O  X  -  O  X  O  O  X  X 
+ X  X  O  O  -  O  -  -  - 
+ X  O  O  X  -  O  O  -  X 
+ X  X  X  -  O  -  O  O  O 
+ O  O  X  O  -  X  X  X  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 61
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 61
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 67
+********************
+
+ X  O  O  O  -  -  X  X  O 
+ O  O  X  O  O  X  O  -  X 
+ X  X  X  X  X  O  O  X  X 
+ X  -  X  O  X  X  X  O  O 
+ O  X  O  -  O  X  O  -  - 
+ X  X  X  O  X  -  -  O  - 
+ O  X  O  O  O  O  O  X  X 
+ X  X  -  X  O  -  O  X  - 
+ O  X  X  O  X  O  O  O  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 51
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 6
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 67
+********************
+
+ -  O  X  O  X  X  X  O  O 
+ O  X  X  O  X  X  X  O  X 
+ X  X  -  X  X  X  X  O  O 
+ O  O  -  O  O  X  O  O  X 
+ -  X  -  O  -  O  -  O  - 
+ X  X  X  -  X  O  O  O  X 
+ X  X  O  O  O  O  -  O  X 
+ -  X  O  X  -  X  O  X  X 
+ -  -  O  O  O  X  O  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 84
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 74
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 67
+********************
+
+ O  X  -  X  O  X  O  X  - 
+ X  X  X  X  O  O  -  X  O 
+ O  X  X  X  -  O  -  -  O 
+ O  O  -  X  O  X  O  X  X 
+ O  X  X  O  O  X  O  X  O 
+ X  X  -  O  O  X  X  X  X 
+ O  O  O  -  -  O  O  X  X 
+ X  O  O  -  O  O  O  X  O 
+ X  -  X  O  X  -  X  -  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 10
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 22
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 68
+********************
+
+ X  -  X  -  -  X  -  O  O 
+ O  X  -  O  X  X  X  O  - 
+ X  O  O  -  X  O  X  O  X 
+ O  X  X  O  O  O  -  -  - 
+ O  X  X  O  X  -  O  O  O 
+ X  O  X  O  X  O  O  X  X 
+ O  O  -  X  O  O  X  X  X 
+ X  O  X  X  X  X  O  X  O 
+ X  O  O  O  X  O  X  O  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 38
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 56
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 69
+********************
+
+ O  X  O  X  X  O  O  O  X 
+ O  O  O  O  O  X  -  -  X 
+ O  X  X  -  O  X  X  X  X 
+ X  O  X  X  -  -  X  O  O 
+ O  O  X  X  X  -  O  O  X 
+ X  O  -  O  O  X  X  X  O 
+ X  X  X  X  O  O  O  X  O 
+ X  -  O  X  X  X  X  -  O 
+ -  O  O  O  -  X  O  O  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 2
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 80
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 70
+********************
+
+ -  X  O  O  O  X  X  O  X 
+ O  O  O  X  O  -  O  X  X 
+ X  -  O  O  O  X  X  O  X 
+ X  X  O  O  X  O  X  X  X 
+ X  X  O  O  -  -  O  -  O 
+ O  X  X  O  X  X  -  X  X 
+ -  X  O  X  -  O  X  O  O 
+ X  O  X  O  X  O  O  X  O 
+ X  O  X  O  X  -  O  -  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 55
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 2
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 70
+********************
+
+ -  O  O  X  -  O  X  X  X 
+ O  X  O  O  X  O  X  O  O 
+ X  O  O  X  -  X  -  X  X 
+ O  X  O  O  O  O  X  O  O 
+ X  X  O  O  X  X  X  O  X 
+ X  O  O  O  O  X  -  X  O 
+ X  O  O  X  -  O  X  X  X 
+ X  O  -  X  X  X  O  X  X 
+ -  O  -  X  -  O  O  -  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 77
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 44
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 69
+********************
+
+ O  X  O  X  X  X  X  X  X 
+ O  X  -  O  O  X  X  X  - 
+ X  O  X  O  X  X  O  O  X 
+ X  O  O  O  -  O  -  O  O 
+ O  -  X  X  O  O  -  O  X 
+ X  X  X  X  X  X  O  O  - 
+ X  O  O  O  O  -  O  O  O 
+ X  X  X  O  X  X  O  O  - 
+ O  O  X  X  -  X  O  -  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 91
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 59
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 70
+********************
+
+ -  X  O  O  O  -  X  O  X 
+ X  X  X  X  -  X  X  O  O 
+ O  O  O  X  O  O  X  -  X 
+ O  X  O  O  -  X  X  O  O 
+ O  O  O  X  -  O  X  O  X 
+ O  O  O  O  X  -  O  O  - 
+ O  X  O  X  -  X  X  X  - 
+ X  X  O  X  X  X  X  -  X 
+ X  O  O  X  O  X  X  O  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 99
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 73
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 70
+********************
+
+ X  X  O  -  O  O  X  X  O 
+ O  X  X  O  -  X  X  O  X 
+ X  O  O  X  O  X  X  -  X 
+ X  X  O  O  X  O  O  O  X 
+ X  O  O  -  X  X  O  -  - 
+ O  X  -  O  -  O  O  X  X 
+ X  O  X  O  -  -  O  O  O 
+ X  X  O  O  O  O  X  X  - 
+ O  O  O  X  X  X  X  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 31
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 37
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 70
+********************
+
+ O  O  O  X  O  X  X  X  O 
+ X  X  O  O  X  -  O  X  X 
+ X  X  -  X  X  -  O  X  X 
+ X  X  O  -  O  X  O  O  O 
+ X  X  X  X  O  -  O  -  O 
+ O  O  X  O  O  X  -  X  X 
+ X  -  X  O  O  O  O  O  O 
+ O  O  X  O  O  X  -  -  X 
+ X  X  O  O  X  O  O  X  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 88
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 34
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 70
+********************
+
+ X  X  O  O  O  X  O  X  - 
+ X  O  -  O  O  X  O  X  X 
+ O  O  X  X  X  O  O  X  O 
+ X  O  X  X  X  O  -  O  O 
+ X  O  O  O  X  X  O  X  X 
+ O  O  X  X  O  O  -  O  - 
+ O  X  O  O  X  X  X  O  X 
+ X  O  O  X  X  -  X  O  - 
+ X  -  O  X  O  -  X  -  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 29
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 68
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 71
+********************
+
+ X  O  O  X  O  -  X  X  X 
+ O  X  O  X  X  O  O  O  O 
+ O  O  O  O  X  O  -  O  - 
+ X  X  X  X  O  X  O  X  - 
+ O  O  -  O  O  X  O  -  X 
+ X  O  X  O  -  X  X  O  O 
+ X  O  O  O  -  X  X  X  O 
+ X  X  X  X  O  X  -  X  X 
+ X  -  O  O  X  X  O  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 65
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 65
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 71
+********************
+
+ O  O  O  O  O  O  X  X  X 
+ X  X  O  -  X  X  X  O  X 
+ O  O  X  X  X  O  O  -  X 
+ X  O  X  X  O  O  X  X  O 
+ -  X  -  O  O  O  O  X  O 
+ -  O  O  X  O  O  -  -  O 
+ X  X  O  X  -  X  O  X  O 
+ X  X  -  -  X  X  O  X  X 
+ O  O  X  X  O  O  O  X  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 12
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 20
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 72
+********************
+
+ -  X  X  O  X  X  O  X  O 
+ X  X  O  O  X  X  X  O  - 
+ O  -  O  X  O  O  O  -  X 
+ X  X  O  O  O  O  -  O  X 
+ -  X  O  X  O  O  O  X  X 
+ O  X  X  X  O  X  X  X  O 
+ O  O  X  X  O  -  X  X  O 
+ O  X  O  O  O  -  O  X  O 
+ O  X  X  X  -  X  X  O  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 63
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 62
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 71
+********************
+
+ X  X  O  -  X  O  X  O  X 
+ O  O  -  X  O  X  O  X  - 
+ -  X  O  X  O  O  O  O  X 
+ -  X  O  X  O  O  O  -  X 
+ O  O  X  X  X  O  X  X  - 
+ X  O  X  O  X  O  O  O  - 
+ O  O  -  X  O  X  O  X  X 
+ X  O  O  O  X  O  -  X  X 
+ X  X  X  X  X  O  O  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 70
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 63
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 71
+********************
+
+ X  X  O  X  -  X  O  -  X 
+ X  -  O  O  O  X  -  X  O 
+ O  O  O  X  O  X  O  X  X 
+ X  O  -  O  O  -  X  O  O 
+ O  -  X  -  X  X  X  O  O 
+ O  O  O  O  O  X  O  O  X 
+ X  O  O  X  X  X  O  X  O 
+ X  X  X  X  O  X  X  X  X 
+ X  X  O  X  O  -  O  -  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 59
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 80
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 72
+********************
+
+ X  -  -  O  X  O  -  X  O 
+ O  X  O  O  X  X  X  X  O 
+ O  O  X  O  O  O  X  X  X 
+ O  O  O  O  X  X  X  O  X 
+ X  X  X  O  O  X  X  O  O 
+ O  O  -  X  O  O  X  X  X 
+ -  X  O  X  X  O  X  X  O 
+ X  O  O  X  X  O  -  O  O 
+ O  X  X  X  O  -  -  -  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 42
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 2
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 72
+********************
+
+ X  X  O  O  O  X  O  O  X 
+ O  X  O  -  O  X  O  X  - 
+ X  O  O  O  O  O  O  -  O 
+ X  X  X  X  X  -  O  X  O 
+ O  -  X  O  X  O  X  -  X 
+ X  O  X  O  O  X  X  -  O 
+ X  X  X  O  -  X  X  X  O 
+ O  O  O  X  O  -  O  X  O 
+ X  O  O  X  X  X  O  X  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 69
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 25
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 72
+********************
+
+ X  O  O  X  X  X  O  -  X 
+ O  X  O  O  X  X  X  X  O 
+ X  O  X  X  X  O  O  O  O 
+ O  X  -  O  O  O  X  O  X 
+ O  X  X  O  -  O  O  X  O 
+ X  X  X  X  -  O  X  X  X 
+ O  O  O  X  O  X  X  O  X 
+ -  X  X  O  -  O  X  O  O 
+ -  O  O  -  -  X  O  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 9
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 7
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 73
+********************
+
+ O  X  O  -  X  X  O  O  X 
+ X  X  O  O  O  O  O  O  X 
+ X  X  X  O  O  X  -  O  X 
+ O  X  X  O  -  O  X  X  X 
+ X  X  X  O  -  X  O  O  O 
+ O  O  O  X  O  X  O  X  O 
+ X  O  X  O  X  -  X  O  O 
+ X  X  X  X  X  X  O  -  O 
+ O  -  X  O  X  -  O  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 46
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 5
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 72
+********************
+
+ O  X  O  O  X  X  X  O  X 
+ X  X  O  O  -  -  O  X  X 
+ X  O  O  O  X  O  X  O  X 
+ X  X  X  X  O  O  O  -  O 
+ O  O  X  X  X  X  -  X  O 
+ O  -  X  X  O  O  -  O  O 
+ O  O  O  X  -  O  X  X  O 
+ O  O  -  O  O  X  X  O  X 
+ -  X  X  X  X  X  X  O  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 80
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 38
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 72
+********************
+
+ X  X  O  O  O  X  O  X  O 
+ O  -  -  X  O  O  -  X  X 
+ X  O  X  O  O  X  -  X  X 
+ -  X  O  O  X  O  X  O  X 
+ O  O  X  X  -  O  O  X  O 
+ O  X  X  -  X  O  X  X  X 
+ -  X  -  O  X  O  X  O  O 
+ X  X  X  O  X  O  X  O  O 
+ O  X  O  O  X  O  O  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 40
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 54
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 73
+********************
+
+ O  -  X  X  -  O  -  O  X 
+ O  O  O  -  X  -  X  O  O 
+ X  O  -  O  X  O  O  O  O 
+ X  O  -  X  X  O  O  X  X 
+ O  O  X  X  X  O  O  X  X 
+ O  X  X  O  X  O  X  O  O 
+ X  X  X  X  O  X  X  -  X 
+ X  O  X  X  X  O  O  O  X 
+ X  O  O  O  O  X  O  X  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 45
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 15
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 73
+********************
+
+ X  X  X  O  X  O  O  O  O 
+ O  O  X  O  O  -  X  X  X 
+ X  X  O  X  X  X  X  O  O 
+ X  O  X  O  -  O  O  O  O 
+ X  X  X  O  -  X  X  X  O 
+ O  O  O  X  O  X  X  X  O 
+ O  O  X  X  X  X  O  X  X 
+ O  O  X  O  -  O  X  X  O 
+ O  -  -  -  O  X  X  -  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 35
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 73
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 74
+********************
+
+ O  O  O  X  X  O  X  O  X 
+ O  X  O  X  O  X  O  -  X 
+ O  X  O  X  O  O  O  X  O 
+ X  O  O  X  X  -  X  X  X 
+ X  X  O  O  O  O  O  X  O 
+ X  X  -  -  X  X  O  X  X 
+ X  X  X  O  O  O  X  O  X 
+ O  -  O  X  O  O  -  O  X 
+ O  X  X  O  X  O  X  O  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 36
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 8
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 74
+********************
+
+ O  X  X  X  X  O  X  X  O 
+ X  O  X  O  O  O  X  X  X 
+ X  O  O  O  O  O  X  O  O 
+ O  X  O  O  X  O  X  X  O 
+ O  X  -  -  O  O  O  -  O 
+ O  O  X  X  X  -  O  X  X 
+ O  X  O  X  O  X  -  O  X 
+ X  X  O  X  X  X  X  -  X 
+ X  O  O  X  O  X  O  O  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 78
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 39
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 74
+********************
+
+ O  O  X  O  X  O  O  O  X 
+ O  X  X  X  X  O  X  O  O 
+ O  X  X  -  X  O  X  X  O 
+ X  O  X  X  X  O  X  X  O 
+ O  X  X  O  O  O  O  X  O 
+ X  -  X  X  O  -  O  O  X 
+ X  X  -  O  -  X  O  O  X 
+ O  O  X  O  X  X  O  -  X 
+ O  O  O  X  O  X  X  O  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 68
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 76
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 74
+********************
+
+ X  O  O  -  O  X  X  X  O 
+ O  X  X  X  O  X  X  O  O 
+ O  O  -  O  X  X  O  X  X 
+ O  O  X  O  X  X  O  -  X 
+ X  O  O  O  -  -  X  X  - 
+ O  X  O  X  X  O  O  O  O 
+ X  O  O  X  O  O  X  X  O 
+ X  X  X  X  O  O  -  O  X 
+ X  X  X  O  X  O  O  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 52
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 18
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 74
+********************
+
+ -  -  O  X  O  X  O  O  O 
+ O  X  X  X  O  -  O  X  X 
+ X  -  X  X  X  X  X  O  X 
+ O  O  X  O  O  O  O  X  X 
+ X  O  X  X  X  O  O  -  X 
+ O  O  X  X  O  O  O  O  O 
+ X  O  X  -  X  O  O  O  X 
+ O  X  O  X  X  X  X  X  O 
+ O  O  O  X  -  X  X  O  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 86
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 43
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 74
+********************
+
+ -  X  O  X  O  X  O  O  X 
+ X  O  X  X  X  X  X  O  - 
+ X  O  O  X  X  O  X  O  X 
+ O  X  O  X  -  X  O  O  O 
+ O  O  O  X  X  O  O  X  X 
+ O  X  O  O  O  O  O  O  - 
+ X  O  O  X  O  -  O  O  X 
+ X  O  X  X  -  X  X  X  X 
+ O  O  X  X  O  X  X  -  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 15
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 45
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 75
+********************
+
+ X  X  O  O  O  X  O  X  O 
+ O  O  X  X  O  X  X  X  X 
+ -  X  O  O  X  X  X  X  O 
+ O  O  X  O  O  X  X  O  O 
+ -  O  O  X  X  O  X  X  O 
+ O  -  X  X  X  O  O  O  X 
+ X  X  O  X  O  O  X  X  O 
+ -  O  X  X  O  X  O  X  O 
+ X  O  O  -  -  O  X  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 56
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 12
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 74
+********************
+
+ O  -  X  X  -  X  O  X  O 
+ O  O  O  O  O  O  X  X  O 
+ X  X  O  O  -  X  O  O  O 
+ X  -  X  -  O  O  X  X  X 
+ X  X  O  O  -  X  O  X  X 
+ X  O  X  O  X  X  O  X  X 
+ O  X  X  X  X  X  X  O  O 
+ O  X  O  O  -  O  O  O  O 
+ X  O  X  X  O  X  O  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 93
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 40
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 74
+********************
+
+ O  X  O  X  -  X  O  -  X 
+ X  O  X  X  -  X  X  O  O 
+ O  O  X  O  X  O  X  O  X 
+ X  O  O  X  O  O  X  O  - 
+ O  X  O  O  O  -  X  X  - 
+ O  O  O  O  -  X  O  O  X 
+ O  X  X  X  O  X  O  O  O 
+ X  X  X  X  X  O  X  X  O 
+ X  O  O  X  X  X  O  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 72
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 6
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 75
+********************
+
+ X  -  X  O  -  O  O  X  O 
+ O  X  O  X  O  O  X  X  O 
+ X  O  O  O  O  -  X  X  X 
+ O  X  O  O  X  O  X  O  X 
+ X  O  O  X  -  O  X  X  X 
+ X  O  O  O  X  O  X  X  X 
+ X  X  O  X  X  O  -  X  X 
+ -  X  O  X  X  O  O  O  O 
+ O  O  O  X  O  X  X  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 81
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 47
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 75
+********************
+
+ X  X  O  O  -  X  -  O  X 
+ O  O  X  O  O  O  O  X  X 
+ X  O  X  X  X  X  -  X  O 
+ X  X  X  O  X  O  O  X  X 
+ X  X  X  O  -  X  O  X  O 
+ X  O  X  X  X  X  X  O  X 
+ X  O  O  O  O  O  X  O  - 
+ O  O  O  O  O  O  O  O  O 
+ O  X  -  X  X  X  O  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 76
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 79
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 75
+********************
+
+ -  O  O  X  O  -  X  O  X 
+ O  X  -  X  X  O  O  O  X 
+ O  O  O  O  X  X  -  O  O 
+ X  O  X  X  O  O  O  -  X 
+ O  X  X  X  X  O  O  O  X 
+ O  O  X  O  O  O  O  O  O 
+ X  X  X  -  X  X  X  X  O 
+ X  X  X  X  O  X  O  X  X 
+ O  X  X  X  O  X  O  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 37
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 54
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 76
+********************
+
+ O  -  X  X  -  X  O  X  O 
+ O  O  X  O  X  O  X  O  O 
+ O  O  O  O  X  O  X  O  O 
+ X  X  X  X  O  X  X  O  X 
+ O  X  O  O  X  O  O  X  O 
+ X  X  X  O  O  O  X  O  X 
+ O  X  O  X  O  X  X  O  O 
+ O  X  X  O  X  X  X  X  X 
+ O  -  X  -  -  O  X  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 57
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 75
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 76
+********************
+
+ O  O  X  X  O  O  X  X  O 
+ X  O  X  -  O  O  O  X  O 
+ O  O  X  O  X  O  X  X  X 
+ X  -  O  X  X  O  X  X  X 
+ -  X  X  O  O  O  O  O  X 
+ X  O  X  X  X  O  O  O  O 
+ O  X  X  X  X  O  O  X  O 
+ O  X  X  O  X  O  O  X  X 
+ O  X  X  O  -  X  O  O  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 62
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 70
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 77
+********************
+
+ O  X  X  X  X  O  X  O  - 
+ O  X  O  X  O  X  X  O  X 
+ X  X  O  O  O  O  -  X  O 
+ O  X  X  O  X  O  X  X  O 
+ O  O  O  X  -  O  X  O  X 
+ O  O  O  X  O  X  X  O  O 
+ X  O  O  O  O  -  O  O  X 
+ X  X  O  X  X  O  X  X  X 
+ O  X  X  X  X  X  O  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 39
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 45
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 77
+********************
+
+ -  O  O  X  O  O  O  O  O 
+ O  X  -  X  X  X  X  O  X 
+ X  X  -  X  O  O  X  X  X 
+ X  X  O  O  O  X  X  X  X 
+ O  X  O  X  X  O  X  O  O 
+ O  X  X  X  O  X  X  O  O 
+ O  X  O  X  O  X  -  X  X 
+ O  O  O  O  O  X  O  O  X 
+ X  O  O  X  X  O  O  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 94
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 38
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 76
+********************
+
+ O  X  O  O  X  O  X  X  X 
+ O  X  O  O  X  O  O  X  - 
+ X  O  X  O  X  O  O  O  X 
+ O  X  X  X  O  O  X  X  O 
+ O  X  O  X  O  X  X  O  X 
+ X  X  X  O  X  -  -  X  O 
+ X  O  X  X  O  O  O  X  - 
+ X  -  X  O  O  O  O  O  O 
+ O  X  X  O  X  O  O  X  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 19
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 71
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 76
+********************
+
+ X  O  X  O  X  X  X  O  X 
+ X  O  O  O  O  X  O  O  O 
+ O  O  -  O  O  X  O  O  O 
+ X  X  X  O  O  X  -  O  X 
+ X  X  O  X  X  X  O  O  O 
+ O  X  O  X  X  O  X  X  X 
+ X  X  O  O  X  O  X  X  X 
+ O  X  X  O  O  X  O  O  - 
+ O  X  X  X  -  O  X  -  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 24
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 44
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 78
+********************
+
+ O  X  X  X  O  X  O  O  O 
+ O  X  O  O  X  X  O  O  X 
+ X  O  X  O  O  X  X  O  X 
+ X  O  O  O  X  X  O  X  X 
+ X  O  X  X  O  X  O  O  X 
+ X  O  O  X  O  O  O  O  O 
+ X  X  O  X  X  X  O  O  X 
+ X  O  O  X  X  O  X  -  X 
+ O  X  O  X  -  X  O  O  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 54
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 60
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 78
+********************
+
+ O  O  X  X  X  X  O  O  O 
+ X  O  O  O  X  X  O  X  O 
+ X  O  X  X  O  X  X  O  X 
+ O  X  O  X  -  X  X  O  O 
+ X  -  X  O  O  O  O  X  X 
+ O  X  X  X  X  O  X  X  O 
+ X  O  X  O  O  X  X  O  X 
+ -  X  O  O  O  X  X  O  O 
+ O  O  O  O  X  X  O  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 74
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 59
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 79
+********************
+
+ X  O  X  X  X  X  O  O  O 
+ O  O  X  X  X  X  X  X  O 
+ X  O  O  O  O  X  X  -  O 
+ X  O  O  X  O  X  O  O  - 
+ O  O  X  X  X  X  O  X  O 
+ O  X  O  O  O  O  O  X  O 
+ O  X  X  O  O  O  X  O  X 
+ X  O  X  X  O  X  X  O  X 
+ O  X  X  O  X  X  X  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 1
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 22
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 79
+********************
+
+ O  O  X  O  X  O  X  O  O 
+ X  X  O  X  O  O  X  X  X 
+ O  X  O  X  O  O  O  X  X 
+ O  X  O  X  X  O  X  X  X 
+ X  X  O  X  O  O  X  O  O 
+ O  O  O  -  O  O  X  X  O 
+ O  -  O  X  X  O  X  X  X 
+ O  X  X  O  X  O  O  X  X 
+ X  O  O  X  O  X  X  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 16
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 37
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 79
+********************
+
+ O  O  X  X  O  X  O  O  X 
+ X  O  X  X  X  O  X  O  O 
+ O  X  X  X  X  O  X  X  O 
+ O  O  X  X  X  X  X  X  O 
+ O  O  O  X  O  O  X  X  - 
+ X  O  O  O  X  X  X  X  X 
+ O  O  O  O  X  O  X  X  O 
+ O  X  O  X  O  O  X  O  O 
+ X  O  O  X  -  O  X  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 25
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 53
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = X
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 79
+********************
+
+ X  O  X  O  X  O  O  X  X 
+ O  O  X  O  O  X  X  X  O 
+ X  X  O  X  X  O  X  O  X 
+ X  X  O  O  O  O  X  X  O 
+ O  X  -  X  X  X  O  X  O 
+ O  X  X  O  X  X  O  O  X 
+ X  X  O  O  O  X  O  O  O 
+ O  O  X  X  O  O  -  O  X 
+ X  O  X  O  X  X  O  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 47
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 64
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 1
+      cell = O
+      isBot? 0
+      draw? 0
+> Steps
+      steps_count = 80
+********************
+
+ -  O  X  X  O  X  X  X  X 
+ O  O  X  X  X  O  O  X  O 
+ O  X  O  X  O  X  X  O  O 
+ O  X  O  X  O  O  X  O  X 
+ X  O  O  O  X  O  X  O  X 
+ X  X  X  X  O  O  X  X  X 
+ X  X  O  O  O  O  O  O  O 
+ O  X  O  X  X  O  O  X  O 
+ O  O  O  O  X  X  X  X  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 79
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 65
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 79
+********************
+
+ X  X  O  O  X  O  X  X  X 
+ X  O  X  O  O  O  O  X  X 
+ O  X  X  X  -  O  O  O  X 
+ O  X  X  O  X  X  O  O  O 
+ O  X  O  O  X  O  X  O  X 
+ X  X  X  X  X  X  X  O  X 
+ O  O  O  X  -  X  O  X  O 
+ X  O  X  O  O  X  O  O  O 
+ X  O  O  X  O  X  O  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 0
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 54
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ X  O  O  X  X  X  O  O  X 
+ O  O  O  O  O  X  X  X  X 
+ O  X  X  O  X  X  O  X  O 
+ X  O  O  X  O  O  O  O  X 
+ X  O  X  X  X  X  O  O  O 
+ X  X  X  X  O  O  O  O  X 
+ X  O  O  O  X  X  X  X  O 
+ O  X  X  O  O  X  O  X  X 
+ X  O  O  X  O  O  X  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 3
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 40
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ O  O  X  X  O  X  O  X  O 
+ X  X  X  X  O  X  X  O  O 
+ X  O  O  O  X  O  X  X  O 
+ O  X  O  X  O  O  O  X  X 
+ X  X  O  O  X  O  X  O  O 
+ O  X  O  X  O  X  O  X  O 
+ X  O  X  X  O  O  O  X  X 
+ O  X  X  O  X  X  O  X  X 
+ O  O  O  X  O  O  X  X  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 21
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 44
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ X  X  O  O  X  O  O  X  X 
+ O  O  X  X  O  O  O  X  O 
+ X  X  X  X  X  O  O  O  X 
+ O  O  X  O  X  X  X  O  X 
+ X  O  O  X  O  X  X  O  O 
+ O  X  X  O  X  X  X  X  O 
+ O  X  O  O  O  X  X  X  O 
+ O  X  X  X  X  O  O  O  X 
+ X  O  X  O  O  O  O  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 22
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 54
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ O  X  X  O  X  O  O  X  X 
+ O  O  O  O  X  O  X  O  O 
+ X  X  X  O  O  O  O  X  X 
+ X  O  X  X  X  O  X  O  O 
+ O  O  O  X  O  X  X  X  O 
+ X  O  O  O  O  X  O  X  X 
+ X  X  O  X  X  X  O  X  O 
+ X  X  X  X  O  X  X  X  X 
+ O  O  X  X  O  O  O  O  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 71
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 10
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ X  O  X  O  X  O  X  X  X 
+ X  O  O  X  X  X  O  O  O 
+ X  O  X  O  X  O  X  X  O 
+ O  X  O  O  X  O  X  X  X 
+ X  O  X  O  X  O  O  X  O 
+ O  X  X  X  O  X  X  O  O 
+ O  O  O  X  O  O  O  O  X 
+ O  O  X  O  X  X  X  X  O 
+ X  O  O  X  O  X  X  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 92
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 63
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ O  X  O  O  X  O  O  X  O 
+ O  X  X  O  O  O  X  O  X 
+ X  O  X  X  O  O  O  X  X 
+ X  X  X  X  X  X  O  X  X 
+ O  O  O  X  O  X  O  O  X 
+ X  X  O  X  X  O  O  O  O 
+ X  O  O  X  X  O  O  O  X 
+ O  O  O  X  O  X  X  X  X 
+ X  X  X  O  O  X  O  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 7
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 40
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ O  X  O  O  X  O  X  X  O 
+ X  O  O  O  O  X  X  X  X 
+ X  O  O  X  O  O  O  O  X 
+ X  O  X  X  X  O  X  O  X 
+ O  O  X  X  X  X  O  O  O 
+ O  X  O  X  X  X  O  X  X 
+ X  O  O  O  X  O  X  X  X 
+ X  O  O  X  O  O  O  O  X 
+ X  X  O  O  X  O  X  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 30
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 30
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ X  X  O  X  O  O  O  X  X 
+ O  O  X  O  X  X  O  O  O 
+ O  X  O  X  O  X  X  X  O 
+ O  X  X  X  O  X  X  O  O 
+ X  O  O  X  O  O  X  X  X 
+ X  X  X  O  X  X  O  O  O 
+ X  O  O  O  X  X  O  O  X 
+ O  X  X  O  X  X  X  X  O 
+ O  O  X  O  O  X  X  O  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 64
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 60
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ O  O  O  X  X  X  O  O  X 
+ X  O  X  X  X  X  O  O  O 
+ X  X  O  O  O  O  O  X  X 
+ X  X  X  X  O  X  O  X  O 
+ O  X  X  O  O  X  O  X  X 
+ O  X  O  X  X  O  X  O  O 
+ X  O  X  X  O  O  O  O  X 
+ O  O  O  O  O  O  X  X  O 
+ X  X  X  X  O  X  O  X  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 44
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 66
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ X  O  X  X  X  O  O  X  X 
+ X  O  O  O  O  X  O  O  X 
+ X  O  O  X  X  O  X  O  O 
+ O  X  O  O  O  X  X  O  X 
+ O  O  X  X  X  X  O  O  X 
+ X  X  X  O  X  X  O  O  O 
+ X  X  O  O  O  X  X  O  O 
+ O  O  O  X  X  O  X  X  X 
+ X  X  O  X  O  X  O  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 32
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 4
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ X  O  O  X  O  O  O  X  O 
+ O  X  X  O  X  X  X  X  O 
+ O  X  X  O  X  O  O  X  X 
+ O  X  X  O  O  O  O  O  X 
+ O  X  X  X  O  X  O  X  O 
+ X  O  X  O  X  O  O  X  O 
+ O  X  X  X  X  O  X  X  X 
+ O  X  X  O  O  O  X  O  X 
+ X  O  X  O  X  O  X  O  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 85
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 37
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ X  X  O  O  X  O  X  X  X 
+ O  X  O  O  O  X  X  O  X 
+ X  O  O  O  O  X  O  X  X 
+ O  X  O  O  X  X  X  X  O 
+ O  X  X  X  X  O  O  X  O 
+ O  X  X  X  O  O  X  O  O 
+ O  X  O  X  O  O  X  O  O 
+ X  O  O  X  O  X  O  O  X 
+ X  O  X  O  X  X  X  X  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 98
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 10
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ X  O  X  O  X  X  O  O  O 
+ O  X  X  O  X  O  O  O  O 
+ X  O  O  X  X  O  X  X  O 
+ X  O  X  O  X  X  X  X  X 
+ X  X  O  O  X  O  X  O  X 
+ X  O  O  O  O  X  X  O  X 
+ O  O  X  O  X  O  X  X  X 
+ X  O  O  X  X  O  O  O  O 
+ O  X  X  O  X  O  O  X  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 13
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 30
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ X  X  O  O  O  O  X  X  O 
+ X  O  O  O  O  X  X  X  X 
+ X  X  X  O  O  X  O  X  O 
+ O  O  O  O  X  X  O  X  O 
+ X  X  O  X  O  O  X  O  X 
+ X  O  O  X  O  X  X  X  O 
+ O  X  O  X  X  X  O  X  X 
+ X  O  O  X  X  X  O  X  O 
+ X  O  X  O  O  O  O  O  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 82
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 22
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ X  O  O  X  O  O  O  O  X 
+ O  X  O  O  O  X  O  X  X 
+ X  O  X  X  X  O  O  O  X 
+ X  X  X  X  X  O  O  X  X 
+ X  O  O  O  O  X  O  O  X 
+ O  O  X  X  O  X  O  X  O 
+ O  X  X  X  X  O  O  O  X 
+ X  O  O  X  X  X  X  X  O 
+ O  X  X  X  O  O  X  O  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 20
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 42
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ O  X  X  X  O  O  O  O  O 
+ X  O  X  X  X  O  X  X  X 
+ X  O  X  O  X  X  O  O  X 
+ O  O  O  O  O  X  O  X  X 
+ O  O  O  X  O  X  X  O  O 
+ O  O  X  X  X  X  O  X  X 
+ X  X  X  X  X  X  O  O  O 
+ X  X  O  X  O  X  X  O  O 
+ O  X  X  O  O  O  X  O  O 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 75
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 80
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ O  X  X  O  X  O  O  X  X 
+ X  X  X  O  O  O  O  X  O 
+ O  O  X  X  O  O  O  O  X 
+ O  X  X  O  X  O  X  O  X 
+ X  O  O  X  O  X  X  X  X 
+ O  X  X  X  X  X  O  X  O 
+ X  X  X  X  X  X  O  O  O 
+ O  O  O  O  O  O  O  O  O 
+ X  O  O  X  O  X  X  X  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 17
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 50
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ X  O  X  O  X  X  O  O  X 
+ O  X  O  O  X  X  O  O  X 
+ O  X  O  O  X  O  O  X  O 
+ X  O  O  O  X  X  X  O  X 
+ X  O  X  X  O  X  O  O  X 
+ O  X  X  O  O  X  O  X  O 
+ X  X  X  O  O  O  X  X  O 
+ X  X  X  X  O  O  O  X  O 
+ X  X  O  O  O  X  O  X  X 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 67
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 50
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Finished
+> Valid
+      is valid? 1
+> GameResult
+      is end? 1
+      winner = O
+> Winner
+      id = 0
+      cell = X
+      isBot? 0
+      draw? 1
+> Steps
+      steps_count = 81
+********************
+
+ O  X  X  O  X  X  O  O  X 
+ X  X  O  X  O  O  O  X  X 
+ X  O  X  X  X  X  O  O  O 
+ O  O  X  X  O  O  X  X  O 
+ X  X  X  O  O  O  X  O  X 
+ O  X  O  X  O  X  X  X  X 
+ X  O  X  O  O  X  O  O  O 
+ X  X  O  O  X  O  O  O  O 
+ O  X  O  O  X  X  O  X  X 

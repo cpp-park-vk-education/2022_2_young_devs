@@ -27,10 +27,11 @@ void GameRoom::Stop()
     }
 }
 
+// GameRoom(isHas<size_t>(_static_ids, room_id) ? throw std::runtime_error("Room already exists") : room_id)
+
 T_Room::T_Room(size_t room_id, Player player_1, Player player_2, T_GameField *field, T_GameLogic *logic, T_Output *output, T_Bot *bot, TypeGame typeGame, bool logging) 
     : 
-GameRoom(isHas<size_t>(_static_ids, room_id) ? throw std::runtime_error("Room already exists") : room_id), 
-_player_1(player_1), _player_2(player_2), _field(field), _logic(logic), _output(output), _bot(bot), _typeGame(typeGame), _logging(logging)
+GameRoom(room_id), _player_1(player_1), _player_2(player_2), _field(field), _logic(logic), _output(output), _bot(bot), _typeGame(typeGame), _logging(logging)
 {
     _status = TypeStatus::Active;
     _static_ids.push_back(room_id);
@@ -172,9 +173,6 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
                 report.result.winner = cur_player;
                 result = report.result;
                 _status = TypeStatus::Finished;
-                tmp_mutex_2.lock();
-                std::cout << "finish_room = " << id << std::endl;
-                tmp_mutex_2.unlock();
                 finish = true;
             }
             fillReport(report, cur_player, type, data);

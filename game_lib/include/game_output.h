@@ -7,6 +7,8 @@
 #include "game_logic.h"
 #include "config.h"
 
+using namespace std::string_literals;
+
 
 class T_Output
 {
@@ -33,12 +35,17 @@ public:
     virtual void Output(ReportAction report) override;
 };
 
-class T_NoOutput : public T_Output
+class T_TestOutput : public T_Output
 {
 private:
     T_StreamOutput _streamOutput;
-    inline static std::ofstream _file{BASE_DIR + std::string("/tests/test_files/results.out")};
+    inline static std::ofstream _file{BASE_DIR + std::string("/tests/test_files/final_reports/results.out")};
 public:
-    T_NoOutput() : _streamOutput(_file) {}
+    static void SetName(std::string const &filename)
+    {
+        _file.close();
+        _file.open(BASE_DIR + std::string("/tests/test_files/final_reports/"s + filename));
+    }
+    T_TestOutput() : _streamOutput(_file) {}
     virtual void Output(ReportAction report) override;
 };

@@ -6,6 +6,8 @@
 constexpr size_t n = 6;
 constexpr char sym = ' ';
 
+const bool OUTPUT_WITH_ALL_STEPS = true;
+
 std::string TypeCellStr(TypeCell cell)
 {
     std::string strCell;
@@ -133,15 +135,22 @@ void LogReport(ReportAction report, std::string message, std::ostream &out)
     }
     
     out << "> Steps\n";
-    for (size_t i = 0; i < report.steps.size(); ++i)
-    {
-        out << std::string(n * 2, sym ) << "player_id = " << report.steps[i].player_id << "\n";
-        out << std::string(n * 2, sym ) << "index     = " << report.steps[i].index << "\n";
-        out << std::string(n * 2, sym ) << "cell      = " << (report.steps[i].cell == X ? "X" : "O") << "\n";
-        out << std::string(n * 2, sym ) << std::string(n * 2, '-' ) << "\n";
-    }
+    out << std::string(n, sym ) << "steps_count = " << report.steps.size() << "\n";
 
-    out << std::string(20, '*' ) << "\n\n";
+
+    // Для стресс-тестов, слишком большой вывод...
+    if (OUTPUT_WITH_ALL_STEPS)
+    {
+        for (size_t i = 0; i < report.steps.size(); ++i)
+        {
+            out << std::string(n * 2, sym ) << "player_id = " << report.steps[i].player_id << "\n";
+            out << std::string(n * 2, sym ) << "index     = " << report.steps[i].index << "\n";
+            out << std::string(n * 2, sym ) << "cell      = " << (report.steps[i].cell == X ? "X" : "O") << "\n";
+            out << std::string(n * 2, sym ) << std::string(n * 2, '-' ) << "\n";
+        }
+
+        out << std::string(20, '*' ) << "\n\n";
+    }
 }
 
 

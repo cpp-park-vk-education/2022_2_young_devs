@@ -1,0 +1,276 @@
+**[ REPORT ]**
+********************
+> Room
+      room_id = 10
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 23
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Active
+> Valid
+      is valid? 1
+> GameResult
+      is end? 0
+> Steps
+            player_id = 0
+            index     = 23
+            cell      = X
+            ------------
+********************
+
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  X 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 10
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 53
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Active
+> Valid
+      is valid? 1
+> GameResult
+      is end? 0
+> Steps
+            player_id = 0
+            index     = 23
+            cell      = X
+            ------------
+            player_id = 1
+            index     = 53
+            cell      = O
+            ------------
+********************
+
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  X 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  O 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 10
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 78
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Active
+> Valid
+      is valid? 1
+> GameResult
+      is end? 0
+> Steps
+            player_id = 0
+            index     = 23
+            cell      = X
+            ------------
+            player_id = 1
+            index     = 53
+            cell      = O
+            ------------
+            player_id = 0
+            index     = 78
+            cell      = X
+            ------------
+********************
+
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  X 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  O 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  X  -  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 10
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 54
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Active
+> Valid
+      is valid? 1
+> GameResult
+      is end? 0
+> Steps
+            player_id = 0
+            index     = 23
+            cell      = X
+            ------------
+            player_id = 1
+            index     = 53
+            cell      = O
+            ------------
+            player_id = 0
+            index     = 78
+            cell      = X
+            ------------
+            player_id = 1
+            index     = 54
+            cell      = O
+            ------------
+********************
+
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  X 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  O 
+ O  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  X  -  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 10
+> Players
+      id = 0
+      cell = X
+      isBot? 0
+> DataAction
+      value = 0
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Active
+> Valid
+      is valid? 1
+> GameResult
+      is end? 0
+> Steps
+            player_id = 0
+            index     = 23
+            cell      = X
+            ------------
+            player_id = 1
+            index     = 53
+            cell      = O
+            ------------
+            player_id = 0
+            index     = 78
+            cell      = X
+            ------------
+            player_id = 1
+            index     = 54
+            cell      = O
+            ------------
+            player_id = 0
+            index     = 0
+            cell      = X
+            ------------
+********************
+
+ X  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  X 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  O 
+ O  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  X  -  - 
+**[ REPORT ]**
+********************
+> Room
+      room_id = 10
+> Players
+      id = 1
+      cell = O
+      isBot? 0
+> DataAction
+      value = 1
+> TypeGame
+      ST
+> TypeAction
+      Step
+> TypeStatus
+      Active
+> Valid
+      is valid? 1
+> GameResult
+      is end? 0
+> Steps
+            player_id = 0
+            index     = 23
+            cell      = X
+            ------------
+            player_id = 1
+            index     = 53
+            cell      = O
+            ------------
+            player_id = 0
+            index     = 78
+            cell      = X
+            ------------
+            player_id = 1
+            index     = 54
+            cell      = O
+            ------------
+            player_id = 0
+            index     = 0
+            cell      = X
+            ------------
+            player_id = 1
+            index     = 1
+            cell      = O
+            ------------
+********************
+
+ X  O  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  X 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  O 
+ O  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  -  -  - 
+ -  -  -  -  -  -  X  -  - 

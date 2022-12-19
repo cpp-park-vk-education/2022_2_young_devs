@@ -181,11 +181,6 @@ GameResult ST_Field::IsEnd()
 {
 	GameResult result = _miniature.IsEnd();
 	// оптимизировать
-	if (result.isEnd)
-	{
-		std::cout << "=========== [ END ] ================" << std::endl;
-
-	}
 	for (size_t i = 0; i < Size(); ++i)
 	{
 		if (At(i) == TypeCell::E)
@@ -193,7 +188,6 @@ GameResult ST_Field::IsEnd()
 			return result;
 		}
 	} 
-	std::cout << "=========== [ END ] ================" << std::endl;
 	return { .isEnd = true, .draw = true };
 }
 

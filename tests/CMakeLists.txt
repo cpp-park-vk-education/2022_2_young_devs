@@ -12,7 +12,9 @@ file(GLOB SOURCES *.cpp)
 find_package(GTest REQUIRED)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
-target_include_directories(${PROJECT_NAME} PUBLIC ${GAME_LIB_INCLUDE_DIRS})
+
+
+target_include_directories(${PROJECT_NAME} PUBLIC ${GAME_LIB_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR})
 # переменная от родительского CMake
 target_include_directories(${PROJECT_NAME} PUBLIC "${BUILD_DIR}")
 
