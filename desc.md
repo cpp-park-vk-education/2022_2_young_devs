@@ -5,6 +5,7 @@
         - `size_t MakeStep(size_t indexPlayer)`
         - `bool EndOfGame()`
         - `void PrintWinner()`
+    - может владеть классом IGameProgress, о  
 
 2. `TicTacToeLoop`
     - наследник IGameLoop

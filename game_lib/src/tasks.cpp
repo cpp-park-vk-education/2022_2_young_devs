@@ -36,6 +36,7 @@ void T_StepTask::operator()()
             _room->DoAction(players[0], TypeAction::Step);
         }
     }
+    cond_var.notify_one();
 }
 
 T_RollbackTask::T_RollbackTask(GameRoom *room, Player player, size_t stepsCount) 

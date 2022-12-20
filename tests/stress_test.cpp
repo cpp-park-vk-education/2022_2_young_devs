@@ -174,31 +174,23 @@ void ThreadRoutine(size_t room_id)
 		T_Room *room = dynamic_cast<T_Room *>(*optional_room);
 		while (!room->finish)
 		{
-			std::unique_lock<std::mutex> locker(room->mutex);
-			cond_var.wait(locker, [room, room_id]()
+			if (vecRoomsTasks[room_id].tasks.empty())
 			{
-				return (
-						!room->busy && 
-						!vecRoomsTasks[room_id].tasks.empty()
-					) 
-						|| room->finish;
-			});
-			
-
-			if (!room->finish)
-			{
-				Task *task = nullptr;
-				vecRoomsTasks[room_id].tasks.try_pop(task);
-				// assert(task);
-                if (!task)
-                {
-                    continue;
-                }
-				(*task)();
-				delete task;
+				std::unique_lock<std::mutex> locker(room->mutex);
+				cond_var.wait(locker, [room, room_id]()
+				{
+					return  !vecRoomsTasks[room_id].tasks.empty();
+				});
 			}
+			Task *task = nullptr;
+			vecRoomsTasks[room_id].tasks.try_pop(task);
+			if (!task)
+			{
+				continue;
+			}
+			(*task)();
+			delete task;
 		}
-		// else поток выходит из функции и завершает выполнение
         /*
             {
                 std::lock_guard locker(tmp_mutex);
@@ -278,21 +270,36 @@ TEST(TestStress, DISABLED_TestGenerateStressCases)
     GenerateStressTest(4, 1000);
 }
 
-TEST(TestStress, TestStress_15)
+TEST(TestStress, DISABLED_TestStress_15)
 {
     // <test_case_number> <filename>
-	StressTest(2, "stress_test_1_15_rooms.out");
+	auto start = std::chrono::steady_clock::now();
+
+	StressTest(2, "stress_test_15_rooms.out");
+
+	showTime(start, "TestStress_15");
+
 	EXPECT_TRUE(true);
 }
 
 TEST(TestStress, TestStress_100)
 {
-	StressTest(3, "stress_test_1_100_rooms.out");
+	auto start = std::chrono::steady_clock::now();
+
+	StressTest(3, "stress_test_100_rooms.out");
+
+	showTime(start, "TestStress_100");
+
 	EXPECT_TRUE(true);
 }
 
-TEST(TestStress, TestStress_1000)
+TEST(TestStress, DISABLED_TestStress_1000)
 {
-	StressTest(4, "stress_test_1_1000_rooms.out");
+	auto start = std::chrono::steady_clock::now();
+
+	StressTest(4, "stress_test_1000_rooms.out");
+
+	showTime(start, "TestStress_1000");
+
 	EXPECT_TRUE(true);
 }

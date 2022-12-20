@@ -175,7 +175,7 @@ int main()
 	// Игра с ботом
 	GameRoom *room 		= new T_Room(room_id, player_1, player_2, field, logic, output, bot, typeGame);
 
-	GameLoop_Bot(room);
+	// GameLoop_Bot(room);
 	return 0;
 }
 

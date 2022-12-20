@@ -20,6 +20,7 @@ private:
 protected:
     TypeStatus  _status; 
 public:
+    std::atomic<bool>       busy = false;
     const size_t      id;
     GameRoom(size_t x_id);
     virtual ~GameRoom() = default;
@@ -50,7 +51,6 @@ private:
     std::tuple<Player, Player, ReportAction> checkPlayer(Player player);
 public:
     std::atomic<bool>       finish = false;
-    std::atomic<bool>       busy = false;
     mutable std::mutex      mutex;
     T_Room(size_t room_id, Player player_1, Player player_2, T_GameField *field, T_GameLogic *logic, T_Output *output, T_Bot *bot = nullptr, TypeGame typeGame = TypeGame::OT, bool logging = false);
     virtual ReportAction DoAction(Player player, TypeAction type, DataAction data = {}) override;

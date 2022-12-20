@@ -54,7 +54,8 @@ void T_StreamOutput::ST_Output(ReportAction report)
 void T_StreamOutput::Output(ReportAction report)
 {
     std::lock_guard locker(_mutex);
-    LogReport(report, "**[ REPORT ]**", _out);
+    // LogReport(report, "**[ REPORT ]**", _out);
+    _out << "==========[ " <<  report.room_id << " ]==========\n";
     if (report.typeGame == TypeGame::OT)
     {
         OT_Output(report);
@@ -63,6 +64,7 @@ void T_StreamOutput::Output(ReportAction report)
     {
         ST_Output(report);
     }
+    _out << "==========================\n\n\n";
 }
 
 /*

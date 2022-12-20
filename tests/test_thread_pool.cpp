@@ -6,6 +6,7 @@
 #include <optional>
 #include <type_traits>
 #include <cstdlib>
+#include <chrono>
 #include <queue>
 #include <condition_variable>
 
@@ -25,7 +26,7 @@
 using namespace std::string_literals;
 
 
-std::vector<GameRoom *> rooms;
+static std::vector<GameRoom *> rooms;
 
 
 std::optional<GameRoom *> _findRoomById(std::vector<GameRoom *> &items, size_t id)
@@ -70,8 +71,14 @@ void ThreadPoolTest(size_t case_number, std::string const &filename, bool sleep 
 
 	// std::istream &file = std::cin;
 	std::ifstream file((BASE_DIR / "tests/test_files/test_case_"s + std::to_string(case_number) + ".test"s).data());
+
+	size_t n = 0;
 	while (file >> room_id >> command >> player_id >> value)
 	{
+		if (n++ % 100 == 0)
+		{
+			std::cout << n << "\n";
+		}
 		auto optional_room 	= _findRoomById(rooms, room_id);
 		GameRoom *room;
 		if (!optional_room)
@@ -105,36 +112,62 @@ void ThreadPoolTest(size_t case_number, std::string const &filename, bool sleep 
 		if (sleep)
 		{
 			// для синхронизации, чтобы "игроки" не опережали друг друга
-			std::this_thread::sleep_for(std::chrono::microseconds(10));
+			std::this_thread::sleep_for(std::chrono::microseconds(500));
 		}
 	}
 }
 
-TEST(TestThreadPool, TestThreadPool_Synchronization)
+// 500 - 100
+// 300 - 96
+// 100 - 93
+// 10 - 91
+
+TEST(TestThreadPool, DISABLED_TestThreadPool_Synchronization)
 {
 	// <test_case>, <filename out>, <sync / no sync>
 	ThreadPoolTest(1, "1_thread_pool_rooms_2_sync.out", true);
 	EXPECT_TRUE(true);
 }
 
-TEST(TestThreadPool, TestThreadPool_NoSynchronization)
+TEST(TestThreadPool, DISABLED_TestThreadPool_NoSynchronization)
 {
 	ThreadPoolTest(1, "2_thread_pool_rooms_2_no_sync.out", false);
 	EXPECT_TRUE(true);
 }
 
-TEST(TestThreadPool, TestThreadPool_ManyRooms_Synchronization)
+TEST(TestThreadPool, DISABLED_TestThreadPool_ManyRooms_Synchronization)
 {
-	ThreadPoolTest(3, "3_thread_pool_rooms_15_sync.out", true);
+	ThreadPoolTest(3, "3_thread_pool_rooms_100_sync.out", true);
 	EXPECT_TRUE(true);
 }
 
-TEST(TestThreadPool, TestThreadPool_ManyRooms_NoSynchronization)
+TEST(TestThreadPool, DISABLED_TestThreadPool_ManyRooms_NoSynchronization)
 {
-	ThreadPoolTest(3, "4_thread_pool_rooms_15_no_sync.out", false);
+	ThreadPoolTest(3, "4_thread_pool_rooms_100_no_sync.out", false);
 	EXPECT_TRUE(true);
 }
 
+TEST(TestThreadPool, TestThreadPool_Stress_100)
+{
+	auto start = std::chrono::steady_clock::now();
+
+	ThreadPoolTest(3, "thread_pool_100_rooms_no_sync.out", false);
+
+	showTime(start, "TestThreadPool_Stress_100");
+
+	EXPECT_TRUE(true);
+}
+
+TEST(TestThreadPool, DISABLED_TestThreadPool_Stress_1000)
+{
+	auto start = std::chrono::steady_clock::now();
+
+	ThreadPoolTest(4, "thread_pool_1000_rooms_no_sync.out", false);
+
+	showTime(start, "TestThreadPool_Stress_1000");
+
+	EXPECT_TRUE(true);
+}
 
 
 // для полный отчетов

@@ -27,7 +27,9 @@ jobs:
       - uses: actions/checkout@v2 
       - run: make build TEST_OPT=ON
       - run: make run
-      - run: make test
+      - run: ./build/tests/test_game --gtest_filter=TestThreadPool*
+      - run: ./build/tests/test_game --gtest_filter=TestStress* 
+      - run: ./build/tests/test_game --gtest_filter=TestConsistent* 
       - name: GO TEST COVERAGE
         run: make coverage
       - name: Upload artifacts (COVERAGE REPORT) 
