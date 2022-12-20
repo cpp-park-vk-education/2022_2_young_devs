@@ -7,6 +7,7 @@
 #include "game_logic.h"
 
 #include <Wt/WPushButton.h>
+#include <Wt/WText.h>
 
 
 class T_Output
@@ -30,8 +31,14 @@ public:
 class T_WtOutput : public T_Output
 {
 public:
-    T_WtOutput(std::vector<Wt::WPushButton *> &cellButtons_);
+    T_WtOutput(std::vector<Wt::WPushButton *> &cellButtons,
+               Wt::WPushButton *rollbackButton, Wt::WText *status);
     virtual void Output(ReportAction report) override;
+
 private:
     std::vector<Wt::WPushButton *> &cellButtons_;
+
+    Wt::WPushButton *rollbackButton_;
+
+    Wt::WText *status_;
 };

@@ -70,9 +70,10 @@ void T_StreamOutput::Output(ReportAction report)
 }
 
 
-T_WtOutput::T_WtOutput(std::vector<Wt::WPushButton *> &cellButtons_):
-        cellButtons_(cellButtons_){}
-
+T_WtOutput::T_WtOutput(std::vector<Wt::WPushButton *> &cellButtons,
+                       Wt::WPushButton *rollbackButton, Wt::WText *status):
+        cellButtons_(cellButtons), rollbackButton_(rollbackButton), status_(status) {}
+/*
 std::vector<char> GetCurrentField(ReportAction report)
 {
     std::vector<char> vecField(81);
@@ -100,6 +101,7 @@ std::vector<char> GetCurrentField(ReportAction report)
 
     return vecField;
 }
+ */
 
 size_t convertToContinous(size_t index)
 {
@@ -110,34 +112,45 @@ size_t convertToContinous(size_t index)
      return i * 9 + j;
 }
 
-std::vector<bool> GetDisabledButtons(ReportAction report)
-{
+
+std::vector<bool> GetDisabledButtons(ReportAction report) {
     size_t index = report.data.value;
     size_t block = index % 9;
     std::vector<bool> indices(81);
-    for (size_t i = 0; i < 81; ++i)
-    {
-        if (i / 9 != block)
-        {
+    for (size_t i = 0; i < 81; ++i) {
+        if (i / 9 != block) {
             indices[convertToContinous(i)] = false;
         }
-        else
-        {
+        else {
             indices[convertToContinous(i)] = true;
         }
     }
     return indices;
 }
+
 void T_WtOutput::Output(ReportAction report)
 {
     //LogReport(report, "**[ REPORT ]**");
     // Анализ отчета
     // Обновление поля в браузере
 
+    LogReport(report, "**[ REPORT ]**", std::cout);
+
     if (report.isValid)
     {
         if (report.result.isEnd) {
-            // DODELAT
+            if (report.result.draw) {
+                status_->setText("Draw!");
+            } else if (report.result.winner.isBot) {
+                status_->setText("Bot won!");
+            } else {
+                status_->setText("You won!");
+            }
+
+            for (size_t i = 0; i < cellButtons_.size(); i++) {
+                cellButtons_[i]->disable();
+                std::cout << i << std::endl;
+            }
         }
 
         if (report.player.cell == TypeCell::X) {

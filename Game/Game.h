@@ -2,6 +2,7 @@
 #define INC_2022_2_YOUNG_DEVS_GAME_H_
 
 #include <Wt/WContainerWidget.h>
+#include <Wt/WComboBox.h>
 #include <Wt/WText.h>
 #include <Wt/WStackedWidget.h>
 #include <Wt/WAnchor.h>
@@ -24,6 +25,10 @@ class Game: public Wt::WContainerWidget {
     User *userDB_;
 
     Wt::WStackedWidget *mainStack_;
+
+    Wt::WComboBox *gameType_;
+
+    Wt::WComboBox *enemyType_;
 
     GameWidget *game_;
 

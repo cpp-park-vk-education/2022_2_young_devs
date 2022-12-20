@@ -6,6 +6,7 @@
 #include <Wt/WTable.h>
 #include <Wt/WPushButton.h>
 #include <Wt/WApplication.h>
+#include <Wt/WStackedWidget.h>
 
 #include <iostream>
 
@@ -17,9 +18,9 @@
 #include "game_logic.h"
 #include "game_room.h"
 
-class GameField: public Wt::WCompositeWidget {
+class GameField: public Wt::WContainerWidget {
  public:
-    GameField(size_t rows = 3, size_t columns = 3);
+    GameField(size_t rows, size_t columns, bool isEnemyBot);
     Wt::Signal<size_t> &cellPushed() {
         return cellPressed_;
     }
@@ -35,7 +36,11 @@ class GameField: public Wt::WCompositeWidget {
 
     bool playerOrder_;
 
-    Wt::WTable *field_;
+    Wt::WStackedWidget *field_;
+
+    Wt::WText *gameStatus_;
+
+    Wt::WTable *table_;
 
     std::vector<Wt::WPushButton *> cellButtons_;
 
@@ -43,7 +48,9 @@ class GameField: public Wt::WCompositeWidget {
 
     Wt::Signal<size_t> cellPressed_;
 
-    void processButton(Wt::WPushButton *button);
+    void processRollbackButton();
+
+    void processTableButton(Wt::WPushButton *button);
 
     Wt::WPushButton *rollbackButton_;
 
