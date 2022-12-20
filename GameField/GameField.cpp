@@ -35,14 +35,29 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot): Wt::WContain
         rollbackButton_->clicked().connect(std::bind(&GameField::processRollbackButton, this));
     }
 
-    T_GameField *field 	= new ST_Field;
-    T_GameLogic *logic 	= new ST_Logic;
-    T_Output 	*output = new T_WtOutput(cellButtons_, rollbackButton_, gameStatus_);
-    T_Bot       *bot 	= new ST_Bot;
-    player_1 	= { .id = 0, .isBot = false,    .cell = TypeCell::X };
-    player_2 	= { .isBot = true,              .cell = TypeCell::O };
-    // GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot);
-    room 		        = new T_Room(777, player_1, player_2, field, logic, output, bot, TypeGame::ST);
+    if (rows == 9) {
+        T_GameField *field = new ST_Field;
+        T_GameLogic *logic = new ST_Logic;
+        T_Output *output = new T_WtOutput(cellButtons_, rollbackButton_,
+                                          gameStatus_);
+        T_Bot *bot = new ST_Bot;
+        player_1 = {.id = 0, .isBot = false, .cell = TypeCell::X};
+        player_2 = {.id = 1, .isBot = false, .cell = TypeCell::O};
+        // GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot);
+        room = new T_Room(777, player_1, player_2, field, logic, output,
+                          nullptr, TypeGame::ST);
+    } else {
+        T_GameField *field = new OT_Field;
+        T_GameLogic *logic = new OT_Logic;
+        T_Output *output = new T_WtOutput(cellButtons_, rollbackButton_,
+                                          gameStatus_);
+        T_Bot *bot = new OT_Bot;
+        player_1 = {.id = 0, .isBot = false, .cell = TypeCell::X};
+        player_2 = {.id = 1, .isBot = false, .cell = TypeCell::O};
+        // GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot);
+        room = new T_Room(777, player_1, player_2, field, logic, output,
+                          nullptr, TypeGame::OT);
+    }
 }
 
 GameField::~GameField() {
@@ -68,13 +83,33 @@ void GameField::processTableButton(Wt::WPushButton *button) {
         }
     }
 
-    T_StepTask  task(room, player_1, convertToBlocks(numberOfCell));
+
+    // DODELAT
+    if (cellButtons_.size() == 81) {
+        if (playerOrder_) {
+            T_StepTask task(room, player_1, convertToBlocks(numberOfCell));
+            task();
+        } else {
+            T_StepTask task(room, player_2, convertToBlocks(numberOfCell));
+            task();
+        }
+    } else {
+        if (playerOrder_) {
+            T_StepTask task(room, player_1, numberOfCell);
+            task();
+        } else {
+            T_StepTask task(room, player_2, numberOfCell);
+            task();
+        }
+    }
+
+    playerOrder_ = !playerOrder_;
     //boost::asio::post(pool, task);
-    task();
+    //task();
 }
 
 void GameField::processRollbackButton() {
-    T_RollbackTask  task(room, player_1, convertToBlocks(numberOfCell));
+    T_RollbackTask task(room, player_1, 2);
     //boost::asio::post(pool, task);
     task();
 }

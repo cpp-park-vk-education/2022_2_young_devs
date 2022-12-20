@@ -73,7 +73,16 @@ void T_StreamOutput::Output(ReportAction report)
 T_WtOutput::T_WtOutput(std::vector<Wt::WPushButton *> &cellButtons,
                        Wt::WPushButton *rollbackButton, Wt::WText *status):
         cellButtons_(cellButtons), rollbackButton_(rollbackButton), status_(status) {}
-/*
+
+size_t convertToContinous(size_t index)
+{
+    size_t block_no = index / 9;
+    size_t inner_block_no = index % 9;
+    size_t i = (block_no / 3 * 3) + inner_block_no / 3;
+    size_t j = (block_no % 3 * 3) + inner_block_no % 3;
+    return i * 9 + j;
+}
+
 std::vector<char> GetCurrentField(ReportAction report)
 {
     std::vector<char> vecField(81);
@@ -83,17 +92,17 @@ std::vector<char> GetCurrentField(ReportAction report)
         {
             case TypeCell::X:
             {
-                vecField[convertToContinous] = 'X';
+                vecField[convertToContinous(i)] = 'X';
                 break;
             }
             case TypeCell::O:
             {
-                vecField[convertToContinous] = 'O';
+                vecField[convertToContinous(i)] = 'O';
                 break;
             }
             case TypeCell::E:
             {
-                vecField[convertToContinous] = '\0';
+                vecField[convertToContinous(i)] = '\0';
                 break;
             }
         }
@@ -101,20 +110,12 @@ std::vector<char> GetCurrentField(ReportAction report)
 
     return vecField;
 }
- */
-
-size_t convertToContinous(size_t index)
-{
-     size_t block_no = index / 9;
-     size_t inner_block_no = index % 9;
-     size_t i = (block_no / 3 * 3) + inner_block_no / 3;
-     size_t j = (block_no % 3 * 3) + inner_block_no % 3;
-     return i * 9 + j;
-}
-
 
 std::vector<bool> GetDisabledButtons(ReportAction report) {
-    size_t index = report.data.value;
+    if (report.steps.empty()) {
+        return std::vector<bool>(81, true);
+    }
+    size_t index = report.steps.back().index;
     size_t block = index % 9;
     std::vector<bool> indices(81);
     for (size_t i = 0; i < 81; ++i) {
@@ -136,38 +137,63 @@ void T_WtOutput::Output(ReportAction report)
 
     LogReport(report, "**[ REPORT ]**", std::cout);
 
-    if (report.isValid)
-    {
-        if (report.result.isEnd) {
-            if (report.result.draw) {
-                status_->setText("Draw!");
-            } else if (report.result.winner.isBot) {
-                status_->setText("Bot won!");
+    if (report.typeGame == TypeGame::ST) {
+        if (report.isValid) {
+            if (report.typeAction == TypeAction::Rollback) {
+                std::vector<char> stateTable = GetCurrentField(report);
+                for (size_t i = 0; i < cellButtons_.size(); i++) {
+                    cellButtons_[i]->setText(std::string(1, stateTable[i]));
+                }
+
+
+                // DO FUNCTION
+                size_t i = 0;
+                std::vector<bool> indices = GetDisabledButtons(report);
+                for (const auto &index: indices) {
+                    if (index) {
+                        cellButtons_[i]->enable();
+                    } else {
+                        cellButtons_[i]->disable();
+                    }
+                    i++;
+                }
+
+                return;
+            }
+
+
+            if (report.result.isEnd) {
+                if (report.result.draw) {
+                    status_->setText("Draw!");
+                } else if (report.result.winner.isBot) {
+                    status_->setText("Bot won!");
+                } else {
+                    status_->setText("You won!");
+                }
+
+                // SAVE TO BD
+            }
+
+            if (report.player.cell == TypeCell::X) {
+                cellButtons_[convertToContinous(report.data.value)]->setText(
+                        "X");
             } else {
-                status_->setText("You won!");
+                cellButtons_[convertToContinous(report.data.value)]->setText(
+                        "O");
             }
 
-            for (size_t i = 0; i < cellButtons_.size(); i++) {
-                cellButtons_[i]->disable();
-                std::cout << i << std::endl;
+            size_t i = 0;
+            std::vector<bool> indices = GetDisabledButtons(report);
+            for (const auto &index: indices) {
+                if (index) {
+                    cellButtons_[i]->enable();
+                } else {
+                    cellButtons_[i]->disable();
+                }
+                i++;
             }
         }
-
-        if (report.player.cell == TypeCell::X) {
-            cellButtons_[convertToContinous(report.data.value)]->setText("X");
-        } else {
-            cellButtons_[convertToContinous(report.data.value)]->setText("O");
-        }
-
-        size_t i = 0;
-        std::vector<bool> indices = GetDisabledButtons(report);
-        for (const auto &index: indices) {
-            if (index) {
-                cellButtons_[i]->enable();
-            } else {
-                cellButtons_[i]->disable();
-            }
-            i++;
-        }
+    } else {
+        std::cout << "PUTS" << std::endl;
     }
 }

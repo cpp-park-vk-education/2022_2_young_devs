@@ -2,7 +2,7 @@
 #include <Wt/WServer.h>
 #include <Wt/WApplication.h>
 
-
+// SDELAT STATIC
 #include "Game/Game.h"
 
 #include "User.h"
