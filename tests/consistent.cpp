@@ -95,7 +95,7 @@ void showTime(auto start, std::string &&message)
 }
 
 
-TEST(TestConsistent, DISABLED_TestConsistent_15)
+TEST(TestConsistent, TestConsistent_15)
 {
     // <test_case_number> <filename>
     auto start = std::chrono::steady_clock::now();

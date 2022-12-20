@@ -72,13 +72,8 @@ void ThreadPoolTest(size_t case_number, std::string const &filename, bool sleep 
 	// std::istream &file = std::cin;
 	std::ifstream file((BASE_DIR / "tests/test_files/test_case_"s + std::to_string(case_number) + ".test"s).data());
 
-	size_t n = 0;
 	while (file >> room_id >> command >> player_id >> value)
 	{
-		if (n++ % 100 == 0)
-		{
-			std::cout << n << "\n";
-		}
 		auto optional_room 	= _findRoomById(rooms, room_id);
 		GameRoom *room;
 		if (!optional_room)
@@ -158,7 +153,7 @@ TEST(TestThreadPool, TestThreadPool_Stress_100)
 	EXPECT_TRUE(true);
 }
 
-TEST(TestThreadPool, DISABLED_TestThreadPool_Stress_1000)
+TEST(TestThreadPool, TestThreadPool_Stress_1000)
 {
 	auto start = std::chrono::steady_clock::now();
 

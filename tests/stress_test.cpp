@@ -270,7 +270,7 @@ TEST(TestStress, DISABLED_TestGenerateStressCases)
     GenerateStressTest(4, 1000);
 }
 
-TEST(TestStress, DISABLED_TestStress_15)
+TEST(TestStress, TestStress_15)
 {
     // <test_case_number> <filename>
 	auto start = std::chrono::steady_clock::now();
@@ -293,7 +293,7 @@ TEST(TestStress, TestStress_100)
 	EXPECT_TRUE(true);
 }
 
-TEST(TestStress, DISABLED_TestStress_1000)
+TEST(TestStress, TestStress_1000)
 {
 	auto start = std::chrono::steady_clock::now();
 
