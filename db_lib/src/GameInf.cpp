@@ -91,3 +91,14 @@ std::string GameInf::getGameType(size_t game_id)
                                 {"I:" + std::to_string(game_id)});
     return res[0][0];
 }
+
+bool GameInf::stoppedGameExist(size_t user_id)
+{
+    auto res = database->Select("SELECT id FROM Game WHERE status='stopped' AND (user1_id=? OR user2_id=?)",
+                                {"I:" + std::to_string(user_id), "I:" + std::to_string(user_id)});
+    if (res.empty())
+    {
+        return false;
+    }
+    return true;
+}

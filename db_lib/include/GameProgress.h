@@ -24,6 +24,7 @@ public:
 
     void addMoves(size_t game_id, const std::vector<StepInfo>& steps);
     getSteps getMoves(size_t game_id);
+    std::vector<size_t> getPlayerMoves(size_t game_id, size_t user_id, size_t num = 0);
     void deleteMove(size_t id);
     void deleteLastMoves(size_t game_id, size_t user_id = 0, size_t num = 0);
 };

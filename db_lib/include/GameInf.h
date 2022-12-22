@@ -40,6 +40,7 @@ public:
     void deleteGame(size_t game_id);
     GameTable getGameInfo(size_t game_id);
     std::vector<GameTable> getUserGames(size_t user_id);
+    bool stoppedGameExist(size_t user_id);
     size_t userGames(size_t user_id);
     size_t userWins(size_t user_id);
     std::pair<size_t, size_t> getPlayers(size_t game_id);
