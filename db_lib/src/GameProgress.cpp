@@ -7,58 +7,52 @@ GameProgress::GameProgress(const std::string &ip, const std::string &port, const
     database = new DataBase(ip, port, user, password, db_name);
 }
 
-void GameProgress::addMove(size_t game_id, size_t user_id, size_t cell)
+void GameProgress::addMoves(size_t game_id, const std::vector<StepInfo>& steps)
 {
-    database->Insert("INSERT INTO GameProgress(game_id, user_id, cell) VALUES (?, ?, ?)",
-                     {{"I:" + std::to_string(game_id), "I:" + std::to_string(user_id),
-                      "I:" + std::to_string(cell)}});
+    std::vector<std::vector<std::string>> moves;
+    for (const auto &step: steps)
+    {
+        if (step.cell == 1)
+        {
+            moves.push_back({"I:" + std::to_string(game_id), "S:X", "I:" + std::to_string(step.index)});
+        }
+        else if (step.cell == -1)
+        {
+            moves.push_back({"I:" + std::to_string(game_id), "S:0", "I:" + std::to_string(step.index)});
+        }
+    }
+    database->Insert("INSERT INTO GameProgress(game_id, sign, cell) VALUES (?, ?, ?)", moves);
 }
 
-std::vector<std::pair<size_t, size_t>> GameProgress::getMoves(size_t game_id, size_t num)
+getSteps GameProgress::getMoves(size_t game_id)
 {
-    std::vector<std::pair<size_t, size_t>> moves;
-    std::vector<std::vector<std::string>> res;
-    if (num == 0)
+    auto res = database->Select("SELECT sign, cell FROM GameProgress WHERE game_id=?",
+                                {"I:" + std::to_string(game_id)});
+    getSteps moves;
+    std::vector<StepInfo> steps;
+    for (const auto &step: res)
     {
-        res = database->Select("SELECT user_id, cell FROM GameProgress WHERE game_id=?",
-                                    {"I:" + std::to_string(game_id)});
+        if (step[0] == "X")
+        {
+            steps.push_back(StepInfo{0, std::stoul(step[1]), X});
+        }
+        else
+        {
+            steps.push_back(StepInfo{1, std::stoul(step[1]), O});
+        }
+    }
+    moves.steps = steps;
+    GameInf game;
+    auto players = game.getPlayers(game_id);
+    if (players.first == 1 || players.second == 1)
+    {
+        moves.game_with_bot = true;
     }
     else
     {
-        res = database->Select("SELECT user_id, cell FROM "
-                                    "(SELECT user_id, cell FROM GameProgress WHERE game_id=? ORDER BY id DESC LIMIT ?)"
-                                    "ORDER BY id",
-                                    {"I:" + std::to_string(game_id), "I:" + std::to_string(num)});
+        moves.game_with_bot = false;
     }
-    for (auto & re : res)
-    {
-        moves.emplace_back(std::stoi(re[0]), std::stoi(re[1]));
-    }
-    return moves;
-}
-
-std::vector<size_t> GameProgress::getPlayerMoves(size_t game_id, size_t user_id, size_t num)
-{
-    std::vector<size_t> moves;
-    std::vector<std::vector<std::string>> res;
-    if (num == 0)
-    {
-        res = database->Select("SELECT user_id, cell FROM GameProgress "
-                                    "WHERE game_id=? AND user_id=?",
-                                    {"I:" + std::to_string(game_id), "I:" + std::to_string(user_id)});
-    }
-    else
-    {
-        res = database->Select("SELECT user_id, cell FROM "
-                                    "(SELECT user_id, cell FROM GameProgress WHERE game_id=? AND user_id=?"
-                                    "ORDER BY id DESC LIMIT ?) ORDER BY id",
-                                    {"I:" + std::to_string(game_id), "I:" + std::to_string(user_id),
-                                     "I:" + std::to_string(num)});
-    }
-    for (auto & re : res)
-    {
-        moves.emplace_back(std::stoi(re[0]));
-    }
+    moves.type = game.getGameType(game_id);
     return moves;
 }
 

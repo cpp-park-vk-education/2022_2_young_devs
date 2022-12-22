@@ -7,57 +7,77 @@ GameInf::GameInf(const std::string &ip, const std::string &port, const std::stri
     database = new DataBase(ip, port, user, password, db_name);
 }
 
-void GameInf::addGame(size_t user1_id, size_t user2_id)
+void GameInf::addGame(size_t user1_id, size_t user2_id, TypeGame type, int game_id)
 {
     if (user1_id == user2_id)
     {
         return;
     }
-    database->Insert("INSERT INTO Game(user1_id, user2_id) VALUES (?, ?)",
-                     {{"I:" + std::to_string(user1_id), "I:" + std::to_string(user2_id)}});
+    std::string t;
+    if (type == TypeGame::OT)
+    {
+        t = "OT";
+    }
+    else if (type == TypeGame::ST)
+    {
+        t = "ST";
+    }
+    if (game_id == -1)
+    {
+        database->Insert("INSERT INTO Game(user1_id, user2_id, type) VALUES (?, ?, ?)",
+                         {{"I:" + std::to_string(user1_id), "I:" + std::to_string(user2_id),
+                           "S:" + t}});
+    }
+    else
+    {
+        database->Insert("INSERT INTO Game(id, user1_id, user2_id, status, type) VALUES (?, ?, ?, ?)",
+                         {{"I:" + std::to_string(game_id), "I:" + std::to_string(user1_id),
+                           "I:" + std::to_string(user2_id), "S:" + t}});
+    }
 }
 
-void GameInf::updateGameStatus(size_t GameInf_id, const std::string &new_status)
+void GameInf::updateGameStatus(size_t game_id, const std::string &new_status)
 {
     database->Update("UPDATE Game SET status=? WHERE id=?",
-                     {"S:" + new_status, "I:" + std::to_string(GameInf_id)});
+                     {"S:" + new_status, "I:" + std::to_string(game_id)});
 }
 
-void GameInf::updateGameWinner(size_t GameInf_id, size_t winner_id)
+void GameInf::updateGameWinner(size_t game_id, size_t winner_id)
 {
+    updateGameStatus(game_id, "finished");
     database->Update("UPDATE Game SET winner_id=? WHERE id=?",
-               {"I:" + std::to_string(winner_id), "I:" + std::to_string(GameInf_id)});
+               {"I:" + std::to_string(winner_id), "I:" + std::to_string(game_id)});
 }
 
-void GameInf::deleteGame(size_t GameInf_id)
+void GameInf::deleteGame(size_t game_id)
 {
-    database->Delete("DELETE FROM Game WHERE id=?", {"I:" + std::to_string(GameInf_id)});
+    database->Delete("DELETE FROM Game WHERE id=?", {"I:" + std::to_string(game_id)});
 }
 
-GameTable GameInf::getGameInfo(size_t GameInf_id)
+GameTable GameInf::getGameInfo(size_t game_id)
 {
     auto res = database->Select("SELECT * FROM Game WHERE id=?",
-                                {"I:" + std::to_string(GameInf_id)});
+                                {"I:" + std::to_string(game_id)});
     return GameTable(res[0]);
 }
 
 std::vector<GameTable> GameInf::getUserGames(size_t user_id)
 {
-    std::vector<GameTable> GameInfs;
+    std::vector<GameTable> games;
     auto res = database->Select("SELECT * FROM Game WHERE user1_id=? OR user2_id=?",
                                 {"I:" + std::to_string(user_id), "I:" + std::to_string(user_id)});
     for (auto & re : res)
     {
-        GameInfs.emplace_back(re);
+        games.emplace_back(re);
     }
-    return GameInfs;
+    return games;
 }
 
 size_t GameInf::userGames(size_t user_id)
 {
-    auto num_GameInfs =  database->Select("SELECT count(*) FROM Game WHERE user1_id=? OR user2_id=?",
+    auto num_Games =  database->Select("SELECT count(*) FROM Game WHERE user1_id=? OR user2_id=?",
                             {"I:" + std::to_string(user_id), "I:" + std::to_string(user_id)});
-    return std::stoi(num_GameInfs[0][0]);
+    return std::stoi(num_Games[0][0]);
 }
 
 size_t GameInf::userWins(size_t user_id)
@@ -67,9 +87,27 @@ size_t GameInf::userWins(size_t user_id)
     return std::stoi(num_wins[0][0]);
 }
 
-std::pair<size_t, size_t> GameInf::getPlayers(size_t GameInf_id)
+std::pair<size_t, size_t> GameInf::getPlayers(size_t game_id)
 {
     auto players = database->Select("SELECT user1_id, user2_id FROM Game WHERE id=?",
-                                    {"I:" + std::to_string(GameInf_id)});
+                                    {"I:" + std::to_string(game_id)});
     return {std::stoi(players[0][0]), std::stoi(players[0][1])};
+}
+
+std::string GameInf::getGameType(size_t game_id)
+{
+    auto res = database->Select("SELECT type FROM Game WHERE id=?",
+                                {"I:" + std::to_string(game_id)});
+    return res[0][0];
+}
+
+bool GameInf::stoppedGameExist(size_t user_id)
+{
+    auto res = database->Select("SELECT id FROM Game WHERE status='stopped' AND (user1_id=? OR user2_id=?)",
+                                {"I:" + std::to_string(user_id), "I:" + std::to_string(user_id)});
+    if (res.empty())
+    {
+        return false;
+    }
+    return true;
 }
