@@ -34,7 +34,7 @@ public:
                   const std::string &user = "root", const std::string &password = "dimasdr2002",
                   const std::string &db_name = "cpp_project_db");
 
-    void addGame(size_t user1_id, size_t user2_id);
+    void addGame(size_t user1_id, size_t user2_id, const std::string& status, const std::string& type, int game_id = -1);
     void updateGameStatus(size_t game_id, const std::string &new_status);
     void updateGameWinner(size_t game_id, size_t winner_id);
     void deleteGame(size_t game_id);

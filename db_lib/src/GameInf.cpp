@@ -7,14 +7,24 @@ GameInf::GameInf(const std::string &ip, const std::string &port, const std::stri
     database = new DataBase(ip, port, user, password, db_name);
 }
 
-void GameInf::addGame(size_t user1_id, size_t user2_id)
+void GameInf::addGame(size_t user1_id, size_t user2_id, const std::string& status, const std::string& type, int game_id)
 {
     if (user1_id == user2_id)
     {
         return;
     }
-    database->Insert("INSERT INTO Game(user1_id, user2_id) VALUES (?, ?)",
-                     {{"I:" + std::to_string(user1_id), "I:" + std::to_string(user2_id)}});
+    if (game_id == -1)
+    {
+        database->Insert("INSERT INTO Game(user1_id, user2_id, status, type) VALUES (?, ?, ?, ?)",
+                         {{"I:" + std::to_string(user1_id), "I:" + std::to_string(user2_id),
+                           "S:" + status, "S:" + type}});
+    }
+    else
+    {
+        database->Insert("INSERT INTO Game(id, user1_id, user2_id, status, type) VALUES (?, ?, ?, ?, ?)",
+                         {{"I:" + std::to_string(game_id), "I:" + std::to_string(user1_id),
+                           "I:" + std::to_string(user2_id), "S:" + status, "S:" + type}});
+    }
 }
 
 void GameInf::updateGameStatus(size_t game_id, const std::string &new_status)
