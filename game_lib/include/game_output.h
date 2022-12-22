@@ -4,11 +4,11 @@
 #include <mutex>
 #include <vector>
 
-#include "game_logic.h"
-
 #include <Wt/WPushButton.h>
 #include <Wt/WText.h>
 
+#include "game_logic.h"
+#include "../../db_lib/include/GameInf.h"
 
 class T_Output
 {
@@ -31,16 +31,20 @@ public:
 class T_WtOutput : public T_Output
 {
 public:
-    T_WtOutput(std::vector<Wt::WPushButton *> &cellButtons,
-               Wt::WPushButton *rollbackButton, Wt::WText *status);
+    T_WtOutput(std::vector<Wt::WPushButton *> &cellButtons, Wt::WPushButton *rollbackButton,
+               Wt::WText *status, Wt::WPushButton *newGameButton);
     virtual void Output(ReportAction report) override;
 
 private:
     std::vector<Wt::WPushButton *> &cellButtons_;
 
+    GameInf gameInf_;
+
     Wt::WPushButton *rollbackButton_;
 
     Wt::WText *status_;
+
+    Wt::WPushButton *newGameButton_;
 
     void isEnd(const ReportAction &report);
 

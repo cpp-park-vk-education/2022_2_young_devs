@@ -70,9 +70,10 @@ void T_StreamOutput::Output(ReportAction report)
 }
 
 
-T_WtOutput::T_WtOutput(std::vector<Wt::WPushButton *> &cellButtons,
-                       Wt::WPushButton *rollbackButton, Wt::WText *status):
-        cellButtons_(cellButtons), rollbackButton_(rollbackButton), status_(status) {}
+T_WtOutput::T_WtOutput(std::vector<Wt::WPushButton *> &cellButtons, Wt::WPushButton *rollbackButton,
+                       Wt::WText *status, Wt::WPushButton *newGameButton):
+        cellButtons_(cellButtons), rollbackButton_(rollbackButton), status_(status),
+        gameInf_(GameInf()), newGameButton_(newGameButton) {}
 
 size_t convertToContinous(size_t index)
 {
@@ -144,6 +145,8 @@ void T_WtOutput::isEnd(const ReportAction &report) {
         }
 
         // SAVE TO BD
+
+        newGameButton_->show();
     }
 }
 

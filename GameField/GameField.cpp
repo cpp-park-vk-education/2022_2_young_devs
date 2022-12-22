@@ -11,6 +11,18 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
 
     gameStatus_ = addWidget(std::make_unique<Wt::WText>());
 
+    addWidget(std::make_unique<Wt::WBreak>());
+
+    newGameButton_ = addWidget(std::make_unique<Wt::WPushButton>("new game"));
+    newGameButton_->clicked().connect(std::bind(&GameField::processNewGameButton, this));
+    newGameButton_->hide();
+
+    //TODO
+    if (true) {
+        restoreButton_ = addWidget(std::make_unique<Wt::WPushButton>("restore"));
+        restoreButton_->clicked().connect(std::bind(&GameField::processRestoreButton, this));
+    }
+
     table_ = addWidget(std::make_unique<Wt::WTable>());
     table_->resize(rows, columns);
 
@@ -34,13 +46,18 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
     if (isEnemyBot) {
         rollbackButton_ = addWidget(std::make_unique<Wt::WPushButton>("rollback"));
         rollbackButton_->clicked().connect(std::bind(&GameField::processRollbackButton, this));
+
+        addWidget(std::make_unique<Wt::WBreak>());
+
+        saveButton_ = addWidget(std::make_unique<Wt::WPushButton>("save"));
+        saveButton_->clicked().connect(std::bind(&GameField::processSaveButton, this));
     }
 
     if (rows == 9) {
         T_GameField *field = new ST_Field;
         T_GameLogic *logic = new ST_Logic;
         T_Output *output = new T_WtOutput(cellButtons_, rollbackButton_,
-                                          gameStatus_);
+                                          gameStatus_, newGameButton_);
         T_Bot *bot = new ST_Bot;
         player_1 = {.id = 0, .isBot = false, .cell = TypeCell::X};
         player_2 = {.id = 1, .isBot = false, .cell = TypeCell::O};
@@ -51,7 +68,7 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
         T_GameField *field = new OT_Field;
         T_GameLogic *logic = new OT_Logic;
         T_Output *output = new T_WtOutput(cellButtons_, rollbackButton_,
-                                          gameStatus_);
+                                          gameStatus_, newGameButton_);
         T_Bot *bot = new OT_Bot;
         player_1 = {.id = 0, .isBot = false, .cell = TypeCell::X};
         player_2 = {.id = 1, .isBot = false, .cell = TypeCell::O};
@@ -109,11 +126,32 @@ void GameField::processTableButton(Wt::WPushButton *button) {
     //task();
 }
 
+// TODO
+void GameField::processNewGameButton() {
+
+}
+
+// TODO
+void GameField::processRestoreButton() {
+   restoreButton_->hide();
+
+}
+
 void GameField::processRollbackButton() {
     T_RollbackTask task(room, player_1, 2);
     //boost::asio::post(pool, task);
     task();
 }
+
+
+// TODO
+void GameField::processSaveButton() {
+
+}
+
+
+
+
 
 //void GameField::processButtonPushed(const Wt::WKeyEvent &e,
 //                                    Wt::WPushButton *button) {

@@ -48,11 +48,23 @@ class GameField: public Wt::WContainerWidget {
 
     Wt::Signal<size_t> cellPressed_;
 
+    void processNewGameButton();
+
+    void processRestoreButton();
+
     void processRollbackButton();
+
+    void processSaveButton();
 
     void processTableButton(Wt::WPushButton *button);
 
+    Wt::WPushButton *newGameButton_;
+
+    Wt::WPushButton *restoreButton_;
+
     Wt::WPushButton *rollbackButton_;
+
+    Wt::WPushButton *saveButton_;
 
     //void processButtonPushed(const Wt::WKeyEvent &e, Wt::WPushButton *button);
 };
