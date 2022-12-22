@@ -47,6 +47,7 @@ private:
     void addStep(size_t player_id, size_t index, TypeCell cell);
     std::tuple<Player, Player, ReportAction> checkPlayer(Player player);
 public:
+    void Initialize(std::vector<StepInfo> const &steps);
     T_Room(size_t room_id, Player player_1, Player player_2, T_GameField *field, T_GameLogic *logic, T_Output *output, T_Bot *bot = nullptr, TypeGame typeGame = TypeGame::OT, bool logging = false);
     virtual ReportAction DoAction(Player player, TypeAction type, DataAction data = {}) override;
     virtual std::vector<Player> GetPlayers() override;

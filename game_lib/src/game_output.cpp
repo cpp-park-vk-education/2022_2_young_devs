@@ -71,9 +71,9 @@ void T_StreamOutput::Output(ReportAction report)
 
 
 T_WtOutput::T_WtOutput(std::vector<Wt::WPushButton *> &cellButtons, Wt::WPushButton *rollbackButton,
-                       Wt::WText *status, Wt::WPushButton *newGameButton):
+                       Wt::WText *status, Wt::WPushButton *newGameButton, GameInf &gameInf):
         cellButtons_(cellButtons), rollbackButton_(rollbackButton), status_(status),
-        gameInf_(GameInf()), newGameButton_(newGameButton) {}
+        gameInf_(gameInf), newGameButton_(newGameButton) {}
 
 size_t convertToContinous(size_t index)
 {

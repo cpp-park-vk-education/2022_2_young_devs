@@ -4,8 +4,10 @@
 
 boost::asio::thread_pool pool(4);
 
+static size_t IdRoom = 152;
+
 GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID)
-    : Wt::WContainerWidget(),
+    : gameInf_(GameInf()), gameProgress_(GameProgress()), Wt::WContainerWidget(),
     playerOrder_(true) {
     setContentAlignment(Wt::AlignmentFlag::Center);
 
@@ -17,8 +19,9 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
     newGameButton_->clicked().connect(std::bind(&GameField::processNewGameButton, this));
     newGameButton_->hide();
 
+
     //TODO
-    if (true) {
+    if (gameInf_.stoppedGameExist(9)) {
         restoreButton_ = addWidget(std::make_unique<Wt::WPushButton>("restore"));
         restoreButton_->clicked().connect(std::bind(&GameField::processRestoreButton, this));
     }
@@ -57,25 +60,27 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
         T_GameField *field = new ST_Field;
         T_GameLogic *logic = new ST_Logic;
         T_Output *output = new T_WtOutput(cellButtons_, rollbackButton_,
-                                          gameStatus_, newGameButton_);
+                                          gameStatus_, newGameButton_, gameInf_);
         T_Bot *bot = new ST_Bot;
         player_1 = {.id = 0, .isBot = false, .cell = TypeCell::X};
         player_2 = {.id = 1, .isBot = false, .cell = TypeCell::O};
         // GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot);
-        room = new T_Room(roomID, player_1, player_2, field, logic, output,
+        room = new T_Room(IdRoom++, player_1, player_2, field, logic, output,
                           nullptr, TypeGame::ST);
     } else {
         T_GameField *field = new OT_Field;
         T_GameLogic *logic = new OT_Logic;
         T_Output *output = new T_WtOutput(cellButtons_, rollbackButton_,
-                                          gameStatus_, newGameButton_);
+                                          gameStatus_, newGameButton_, gameInf_);
         T_Bot *bot = new OT_Bot;
         player_1 = {.id = 0, .isBot = false, .cell = TypeCell::X};
         player_2 = {.id = 1, .isBot = false, .cell = TypeCell::O};
         // GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot);
-        room = new T_Room(roomID, player_1, player_2, field, logic, output,
+        room = new T_Room(IdRoom++, player_1, player_2, field, logic, output,
                           nullptr, TypeGame::OT);
     }
+
+    //gameInf_.addGame(player_1.id, player_2.id, "active", typegame);
 }
 
 GameField::~GameField() {
@@ -133,8 +138,17 @@ void GameField::processNewGameButton() {
 
 // TODO
 void GameField::processRestoreButton() {
-   restoreButton_->hide();
+    restoreButton_->hide();
 
+    std::vector<StepInfo> stepsFromDB = gameProgress_.getMoves(12).steps;
+
+    room->Initialize(stepsFromDB);
+
+    std::string cellValue(1, '\0');
+    for (auto &step: stepsFromDB) {
+        cellValue = (step.cell == 1 ? "X" : "O");
+        cellButtons_[step.index]->setText(cellValue);
+    }
 }
 
 void GameField::processRollbackButton() {
@@ -146,7 +160,7 @@ void GameField::processRollbackButton() {
 
 // TODO
 void GameField::processSaveButton() {
-
+    //gameProgress_.addMoves(id_game, vectorSteps);
 }
 
 

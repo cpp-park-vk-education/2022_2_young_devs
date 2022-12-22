@@ -17,6 +17,8 @@
 
 #include "game_logic.h"
 #include "game_room.h"
+#include "GameInf.h"
+#include "GameProgress.h"
 
 class GameField: public Wt::WContainerWidget {
  public:
@@ -28,11 +30,15 @@ class GameField: public Wt::WContainerWidget {
     virtual ~GameField();
 
  private:
+    GameInf gameInf_;
+
+    GameProgress gameProgress_;
+
     Player player_1;
 
     Player player_2;
 
-    GameRoom *room;
+    T_Room *room;
 
     bool playerOrder_;
 

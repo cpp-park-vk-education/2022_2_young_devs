@@ -32,7 +32,7 @@ class T_WtOutput : public T_Output
 {
 public:
     T_WtOutput(std::vector<Wt::WPushButton *> &cellButtons, Wt::WPushButton *rollbackButton,
-               Wt::WText *status, Wt::WPushButton *newGameButton);
+               Wt::WText *status, Wt::WPushButton *newGameButton, GameInf &gameInf);
     virtual void Output(ReportAction report) override;
 
 private:
