@@ -41,4 +41,8 @@ private:
     Wt::WPushButton *rollbackButton_;
 
     Wt::WText *status_;
+
+    void isEnd(const ReportAction &report);
+
+    void disableButtons(const ReportAction &report);
 };

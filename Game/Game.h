@@ -17,11 +17,13 @@
 
 class Game: public Wt::WContainerWidget {
  public:
-    Game();
+    Game(size_t roomID);
 
     void handleInternalPath(const std::string &internalPath);
 
  private:
+    size_t roomID_;
+
     User *userDB_;
 
     Wt::WStackedWidget *mainStack_;

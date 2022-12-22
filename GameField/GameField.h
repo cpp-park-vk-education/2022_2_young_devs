@@ -20,7 +20,7 @@
 
 class GameField: public Wt::WContainerWidget {
  public:
-    GameField(size_t rows, size_t columns, bool isEnemyBot);
+    GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID);
     Wt::Signal<size_t> &cellPushed() {
         return cellPressed_;
     }

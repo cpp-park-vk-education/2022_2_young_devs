@@ -4,7 +4,8 @@
 
 boost::asio::thread_pool pool(4);
 
-GameField::GameField(size_t rows, size_t columns, bool isEnemyBot): Wt::WContainerWidget(),
+GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID)
+    : Wt::WContainerWidget(),
     playerOrder_(true) {
     setContentAlignment(Wt::AlignmentFlag::Center);
 
@@ -44,7 +45,7 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot): Wt::WContain
         player_1 = {.id = 0, .isBot = false, .cell = TypeCell::X};
         player_2 = {.id = 1, .isBot = false, .cell = TypeCell::O};
         // GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot);
-        room = new T_Room(777, player_1, player_2, field, logic, output,
+        room = new T_Room(roomID, player_1, player_2, field, logic, output,
                           nullptr, TypeGame::ST);
     } else {
         T_GameField *field = new OT_Field;
@@ -55,7 +56,7 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot): Wt::WContain
         player_1 = {.id = 0, .isBot = false, .cell = TypeCell::X};
         player_2 = {.id = 1, .isBot = false, .cell = TypeCell::O};
         // GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot);
-        room = new T_Room(777, player_1, player_2, field, logic, output,
+        room = new T_Room(roomID, player_1, player_2, field, logic, output,
                           nullptr, TypeGame::OT);
     }
 }

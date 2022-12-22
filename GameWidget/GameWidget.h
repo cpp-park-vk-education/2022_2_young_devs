@@ -9,7 +9,7 @@
 
 class GameWidget: public Wt::WContainerWidget {
  public:
-    GameWidget(size_t rows, size_t columns, bool isEnemyBot);
+    GameWidget(size_t rows, size_t columns, bool isEnemyBot, size_t roomID);
 
  private:
     Wt::WText *title_;

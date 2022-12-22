@@ -1,8 +1,9 @@
 #include "Game.h"
 
-Game::Game(): game_(0), scores_(0), rules_(0),
+Game::Game(size_t roomID): game_(0), scores_(0), rules_(0), roomID_(roomID),
               userDB_(new User()), Wt::WContainerWidget() {
     setContentAlignment(Wt::AlignmentFlag::Center);
+
     std::unique_ptr<Wt::WText> title(
             std::make_unique<Wt::WText>("<h1>Strategic Tic Tac Toe</h1>"));
 
@@ -64,9 +65,10 @@ void Game::handleInternalPath(const std::string &internalPath) {
 
 void Game::showGame() {
     if (!game_) {
-        bool isEnemyBot = (enemyType_->currentIndex() == 0 ? true : false);
+        bool isEnemyBot = enemyType_->currentIndex() == 0;
         size_t tableSize = (gameType_->currentIndex() == 0 ? 9 : 3);
-        game_ = mainStack_->addWidget(std::make_unique<GameWidget>(tableSize, tableSize, isEnemyBot));
+        game_ = mainStack_->addWidget(std::make_unique<GameWidget>(tableSize,tableSize,
+                                                                          isEnemyBot, roomID_));
     }
 
     mainStack_->setCurrentWidget(game_);

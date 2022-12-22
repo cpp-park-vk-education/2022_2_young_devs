@@ -2,12 +2,13 @@
 #include <Wt/WServer.h>
 #include <Wt/WApplication.h>
 
-// SDELAT STATIC
 #include "Game/Game.h"
 
 #include "User.h"
 #include "GameProgress.h"
 #include "GameInf.h"
+
+static size_t roomID = 1;
 
 std::unique_ptr<Wt::WApplication> createWidget(const Wt::WEnvironment& env) {
     auto app = std::make_unique<Wt::WApplication>(env);
@@ -16,7 +17,9 @@ std::unique_ptr<Wt::WApplication> createWidget(const Wt::WEnvironment& env) {
 
     app->messageResourceBundle().use(app->appRoot() + "strings");
 
-    app->root()->addWidget(std::make_unique<Game>());
+    app->useStyleSheet("css/tic-tac-toe.css");
+
+    app->root()->addWidget(std::make_unique<Game>(roomID++));
     return app;
 }
 

@@ -129,71 +129,73 @@ std::vector<bool> GetDisabledButtons(ReportAction report) {
     return indices;
 }
 
+void T_WtOutput::isEnd(const ReportAction &report) {
+    if (report.result.isEnd) {
+        if (report.result.draw) {
+            status_->setText("Draw!");
+        } else if (report.result.winner.isBot) {
+            status_->setText("Bot won!");
+        } else {
+            status_->setText("You won!");
+        }
+
+        for (auto &cell: cellButtons_) {
+            cell->disable();
+        }
+
+        // SAVE TO BD
+    }
+}
+
+void T_WtOutput::disableButtons(const ReportAction &report) {
+    size_t i = 0;
+    std::vector<bool> indices = GetDisabledButtons(report);
+    for (const auto &index: indices) {
+        if (index) {
+            cellButtons_[i]->enable();
+        } else {
+            cellButtons_[i]->disable();
+        }
+        i++;
+    }
+}
+
 void T_WtOutput::Output(ReportAction report)
 {
     //LogReport(report, "**[ REPORT ]**");
     // Анализ отчета
     // Обновление поля в браузере
 
-    LogReport(report, "**[ REPORT ]**", std::cout);
+    if (report.isValid) {
+        if (report.typeGame == TypeGame::ST) {
 
-    if (report.typeGame == TypeGame::ST) {
-        if (report.isValid) {
             if (report.typeAction == TypeAction::Rollback) {
                 std::vector<char> stateTable = GetCurrentField(report);
                 for (size_t i = 0; i < cellButtons_.size(); i++) {
                     cellButtons_[i]->setText(std::string(1, stateTable[i]));
                 }
 
-
-                // DO FUNCTION
-                size_t i = 0;
-                std::vector<bool> indices = GetDisabledButtons(report);
-                for (const auto &index: indices) {
-                    if (index) {
-                        cellButtons_[i]->enable();
-                    } else {
-                        cellButtons_[i]->disable();
-                    }
-                    i++;
-                }
-
+                disableButtons(report);
                 return;
             }
 
-
-            if (report.result.isEnd) {
-                if (report.result.draw) {
-                    status_->setText("Draw!");
-                } else if (report.result.winner.isBot) {
-                    status_->setText("Bot won!");
-                } else {
-                    status_->setText("You won!");
-                }
-
-                // SAVE TO BD
-            }
-
             if (report.player.cell == TypeCell::X) {
-                cellButtons_[convertToContinous(report.data.value)]->setText(
-                        "X");
+                cellButtons_[convertToContinous(
+                        report.data.value)]->setText("X");
             } else {
-                cellButtons_[convertToContinous(report.data.value)]->setText(
-                        "O");
+                cellButtons_[convertToContinous(
+                        report.data.value)]->setText("O");
             }
 
-            size_t i = 0;
-            std::vector<bool> indices = GetDisabledButtons(report);
-            for (const auto &index: indices) {
-                if (index) {
-                    cellButtons_[i]->enable();
-                } else {
-                    cellButtons_[i]->disable();
-                }
-                i++;
+            disableButtons(report);
+        } else {
+            if (report.player.cell == TypeCell::X) {
+                cellButtons_[report.data.value]->setText("X");
+            } else {
+                cellButtons_[report.data.value]->setText("O");
             }
         }
-    } else {
-        std::cout << "PUTS" << std::endl;
+
+        isEnd(report);
     }
 }
