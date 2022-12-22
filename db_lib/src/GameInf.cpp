@@ -7,23 +7,32 @@ GameInf::GameInf(const std::string &ip, const std::string &port, const std::stri
     database = new DataBase(ip, port, user, password, db_name);
 }
 
-void GameInf::addGame(size_t user1_id, size_t user2_id, const std::string& status, const std::string& type, int game_id)
+void GameInf::addGame(size_t user1_id, size_t user2_id, TypeGame type, int game_id)
 {
     if (user1_id == user2_id)
     {
         return;
     }
+    std::string t;
+    if (type == TypeGame::OT)
+    {
+        t = "OT";
+    }
+    else if (type == TypeGame::ST)
+    {
+        t = "ST";
+    }
     if (game_id == -1)
     {
-        database->Insert("INSERT INTO Game(user1_id, user2_id, status, type) VALUES (?, ?, ?, ?)",
+        database->Insert("INSERT INTO Game(user1_id, user2_id, type) VALUES (?, ?, ?)",
                          {{"I:" + std::to_string(user1_id), "I:" + std::to_string(user2_id),
-                           "S:" + status, "S:" + type}});
+                           "S:" + t}});
     }
     else
     {
-        database->Insert("INSERT INTO Game(id, user1_id, user2_id, status, type) VALUES (?, ?, ?, ?, ?)",
+        database->Insert("INSERT INTO Game(id, user1_id, user2_id, status, type) VALUES (?, ?, ?, ?)",
                          {{"I:" + std::to_string(game_id), "I:" + std::to_string(user1_id),
-                           "I:" + std::to_string(user2_id), "S:" + status, "S:" + type}});
+                           "I:" + std::to_string(user2_id), "S:" + t}});
     }
 }
 
