@@ -3,7 +3,14 @@
 #include "DataBase.h"
 #include "GameInf.h"
 
-#include "../../game_lib/include/game_logic.h"
+enum TypeCell { X = 1, E = 0, O = -1};
+
+struct StepInfo
+{
+    size_t id_player;
+    size_t index;
+    TypeCell cell;
+};
 
 struct getSteps
 {
@@ -19,7 +26,7 @@ private:
 
 public:
     explicit GameProgress(const std::string &ip = "localhost", const std::string &port = "3306",
-                 const std::string &user = "root", const std::string &password = "dimasdr2002",
+                 const std::string &user = "cpp_dev", const std::string &password = "123",
                  const std::string &db_name = "cpp_project_db");
 
     void addMoves(size_t game_id, const std::vector<StepInfo>& steps);

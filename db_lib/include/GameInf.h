@@ -24,6 +24,8 @@ struct GameTable
     std::string start;
 };
 
+enum class TypeGame {ST = 0, OT};
+
 class GameInf
 {
 private:
@@ -31,7 +33,7 @@ private:
 
 public:
     explicit GameInf(const std::string &ip = "localhost", const std::string &port = "3306",
-                  const std::string &user = "root", const std::string &password = "dimasdr2002",
+                  const std::string &user = "cpp_dev", const std::string &password = "123",
                   const std::string &db_name = "cpp_project_db");
 
     void addGame(size_t user1_id, size_t user2_id, TypeGame type, int game_id = -1);
