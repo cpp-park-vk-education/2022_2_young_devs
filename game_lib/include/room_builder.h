@@ -3,7 +3,7 @@
 class GameRoomBuilder
 {
 public:
-	GameRoom *build();
+	T_Room *build();
 
     GameRoomBuilder &withRoomId(size_t room_id);
 

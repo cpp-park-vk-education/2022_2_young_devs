@@ -158,22 +158,35 @@ void GameLoop_OtherPlayer(GameRoom *room)
 }
 
 
+void func(GameRoom *room)
+{
+	std::cout << "hello" << std::endl;
+}
+
 
 int main()
 {
 	size_t room_id = 0;
 	TypeGame typeGame = TypeGame::ST;
 
-	T_GameField *field 	= new ST_Field;
-	T_GameLogic *logic  = new ST_Logic;
-	T_Bot       *bot  	= new ST_Bot;
+	T_Room *room = GameRoomBuilder()\
+				.withRoomId(room_id)\
+				.withGame(typeGame)\
+				.withPlayers(0)\
+				.withOutput(new T_StreamOutput)\
+				.build();
 
-	T_Output 	*output = new T_StreamOutput;
-	Player player_1 	= { .id = 0, .isBot = false,  .cell = TypeCell::X };
-	Player player_2 	= { /* -1 */ .isBot = true,   .cell = TypeCell::O };
+	// std::vector<StepInfo> steps = {
+	// 	{ .player_id = 0, .index = 1, .cell = TypeCell::X},
+	// 	{ .player_id = 1, .index = 5, .cell = TypeCell::O},
+	// 	{ .player_id = 0, .index = 50, .cell = TypeCell::X},
+	// 	{ .player_id = 1, .index = 2, .cell = TypeCell::O},
+	// };
 
-	// Игра с ботом
-	GameRoom *room 		= new T_Room(room_id, player_1, player_2, field, logic, output, bot, typeGame);
+	// room->Initialize(steps);
+	
+
+	GameLoop_Bot(room);
 
 	// GameLoop_Bot(room);
 	return 0;

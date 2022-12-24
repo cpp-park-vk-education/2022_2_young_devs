@@ -208,3 +208,12 @@ std::vector<Player> T_Room::GetPlayers()
     return { _player_1, _player_2 };
 }
 
+void T_Room::Initialize(std::vector<StepInfo> const &steps)
+{
+    _steps = steps;
+    _field->Clear();
+    for (auto &&step : steps)
+    {
+        _field->Set(step.index, step.cell);
+    }
+}

@@ -1,6 +1,6 @@
 #include "room_builder.h"
 
-GameRoom *GameRoomBuilder::build()
+T_Room *GameRoomBuilder::build()
 {
     T_GameField *field;
     T_GameLogic *logic;

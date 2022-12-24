@@ -52,6 +52,7 @@ private:
 public:
     std::atomic<bool>       finish = false;
     mutable std::mutex      mutex;
+    void Initialize(std::vector<StepInfo> const &steps);
     T_Room(size_t room_id, Player player_1, Player player_2, T_GameField *field, T_GameLogic *logic, T_Output *output, T_Bot *bot = nullptr, TypeGame typeGame = TypeGame::OT, bool logging = false);
     virtual ReportAction DoAction(Player player, TypeAction type, DataAction data = {}) override;
     virtual std::vector<Player> GetPlayers() override;
