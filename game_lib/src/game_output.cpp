@@ -1,4 +1,5 @@
 #include <iomanip>
+#include <nlohmann/json.hpp>
 
 #include "game_output.h"
 #include "game_field.h"
@@ -54,7 +55,14 @@ void T_StreamOutput::ST_Output(ReportAction report)
 void T_StreamOutput::Output(ReportAction report)
 {
     std::lock_guard locker(_mutex);
-    LogReport(report, "**[ REPORT ]**", _out);
+    std::string strJs = strJson(report);
+    _out << strJs << std::endl;
+    nlohmann::json j = nlohmann::json::parse(strJs);
+    _out << j["room_id"] << std::endl;
+    _out << j["message_error"] << std::endl;
+    _out << j["field"][0] << std::endl;
+    // _out << j["steps"][0]["index"] << std::endl;
+    // LogReport(report, "**[ REPORT ]**", _out);
     // _out << "==========[ " <<  report.room_id << " ]==========\n";
     if (report.typeGame == TypeGame::OT)
     {

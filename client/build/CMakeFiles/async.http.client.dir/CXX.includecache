@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/МГТУ/_Технопарк/try_2/Cpp/2022_2_young_devs/client/async.http.client.cpp
+iostream
+-
+istream
+-
+ostream
+-
+sstream
+-
+string
+-
+boost/asio.hpp
+-
+boost/bind/bind.hpp
+-
+response.h
+/mnt/c/МГТУ/_Технопарк/try_2/Cpp/2022_2_young_devs/client/response.h
+request.h
+/mnt/c/МГТУ/_Технопарк/try_2/Cpp/2022_2_young_devs/client/request.h
+
+/mnt/c/МГТУ/_Технопарк/try_2/Cpp/2022_2_young_devs/client/request.h
+
+/mnt/c/МГТУ/_Технопарк/try_2/Cpp/2022_2_young_devs/client/response.h
+

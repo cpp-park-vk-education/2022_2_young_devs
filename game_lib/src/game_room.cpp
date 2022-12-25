@@ -88,7 +88,7 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
     {
         // Игрок не зарегистрирован в этой комнате
         fillReport(report, cur_player, type, data);
-        _output->Output(report);
+        // _output->Output(report);
         busy = false;
         return report;
     }
@@ -97,7 +97,7 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
     {
         report = reportCode3;
         fillReport(report, cur_player, type, data);
-        _output->Output(report);
+        // _output->Output(report);
         busy = false;
         return report;
     }
@@ -146,7 +146,7 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
             {
                 report = reportCode5;
                 fillReport(report, cur_player, type, data);
-                _output->Output(report);
+                // _output->Output(report);
                 busy = false;
                 return report;
             }
@@ -179,7 +179,7 @@ ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
             break;
         }
     }
-    _output->Output(report);
+    // _output->Output(report);
     busy = false;
     return report;
 }

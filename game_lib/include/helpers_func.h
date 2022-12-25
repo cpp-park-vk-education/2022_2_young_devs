@@ -9,3 +9,7 @@ void LogReport(ReportAction report, std::string message = {}, std::ostream &out 
 std::string TypeCellStr(TypeCell cell);
 
 int get_rand(int start, int stop);
+
+
+
+std::string strJson(ReportAction report);

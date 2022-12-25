@@ -1,0 +1,3 @@
+/mnt/c/МГТУ/_Технопарк/try_2/Cpp/2022_2_young_devs/client/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/МГТУ/_Технопарк/try_2/Cpp/2022_2_young_devs/client/build/CMakeFiles/edit_cache.dir
+/mnt/c/МГТУ/_Технопарк/try_2/Cpp/2022_2_young_devs/client/build/CMakeFiles/async.http.client.dir

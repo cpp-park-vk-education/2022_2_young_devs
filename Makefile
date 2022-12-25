@@ -2,9 +2,12 @@ BUILD_DIR 	= build
 TESTS_DIR 	= tests
 LIB_DIR 	= game_lib
 
+
+ARGS 	= 127.0.0.1 2000 4
+
 # project(xxx) on CMakeLists
 TESTS_EXE 	= test_game
-TARGET_EXE 	= game
+TARGET_EXE 	= server
 
 PATH_LINTERS_SCRIPT = linters/run.sh
 
@@ -26,7 +29,7 @@ clean:
 # инкрементальная сборка и запуск исполняемого файла 
 run:
 	cd ${BUILD_DIR} && $(MAKE) --no-print-directory
-	./${BUILD_DIR}/${TARGET_EXE}
+	./${BUILD_DIR}/${TARGET_EXE} ${ARGS}
 
 # запуск исполняемого файла с тестированием
 test:

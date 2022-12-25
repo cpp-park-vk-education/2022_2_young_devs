@@ -35,6 +35,18 @@ public:
     virtual void Output(ReportAction report) override;
 };
 
+class T_ServerOutput : public T_Output
+{
+private:
+public:
+
+    T_ServerOutput() = default;
+    virtual void Output(ReportAction report) override
+    {
+
+    }
+};
+
 class T_TestOutput : public T_Output
 {
 private:

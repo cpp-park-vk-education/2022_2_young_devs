@@ -1,10 +1,14 @@
 #include <cassert>
+#include <sstream>
 
 #include "helpers_func.h"
+#include "game_field.h"
 
 
 constexpr size_t n = 6;
 constexpr char sym = ' ';
+
+using namespace std::string_literals;
 
 const bool OUTPUT_WITH_ALL_STEPS = true;
 
@@ -31,6 +35,30 @@ std::string TypeCellStr(TypeCell cell)
         }
     }
     return strCell;
+}
+
+int TypeCellNum(TypeCell cell)
+{
+    int numCell = 0;
+    switch (cell)
+    {
+        case X: {
+            numCell = 1;
+            break;
+        }
+        case O: {
+            numCell = -1;
+            break;
+        }
+        case E: {
+            numCell = 0;
+            break;
+        }
+        default: {
+            numCell = 4;
+        }
+    }
+    return numCell;
 }
 
 std::string TypeActionStr(TypeAction action)
@@ -151,6 +179,53 @@ void LogReport(ReportAction report, std::string message, std::ostream &out)
 
         out << std::string(20, '*' ) << "\n\n";
     }
+}
+
+std::string strJson(ReportAction report)
+{
+    std::stringstream json;
+    json << "{" << "\"room_id\":" << report.room_id\
+        << "," << "\"player_id\":" << report.player.id\
+        << "," << "\"player_cell\":" << TypeCellNum(report.player.cell)\
+        << "," << "\"id_valid\":" << report.isValid\
+        // если id_valid = false
+        << "," << "\"message_error\":" << "\""s << report.error.messageError << "\""s\
+        << "," << "\"is_end\":" << report.result.isEnd\
+        // если is_end = true
+        << "," << "\"draw\":" << report.result.draw\
+        << "," << "\"winner\":" << report.result.winner.id\
+        << "," << "\"winner_cell\":"  << TypeCellNum(report.result.winner.cell)\
+        << "," << "\"field\":[";
+        for (size_t i = 0; i < report.field->Size(); ++i)
+        {
+            if (i == report.field->Size() - 1)
+            {
+                json << TypeCellNum(report.field->At(i)) << "]";
+            }
+            else
+            {
+                json << TypeCellNum(report.field->At(i))  << ",";
+            }
+        }
+        json << "," << "\"steps\":[";
+        for (size_t i = 0; i < report.steps.size(); ++i)
+        {
+            json << "{"\
+            << "\"player_id\":" <<  report.steps[i].player_id << ","\
+            << "\"index\":" <<  report.steps[i].index << ","\
+            << "\"cell\":" << TypeCellNum(report.steps[i].cell) << "}";
+
+            if (i == report.steps.size() - 1)
+            {
+                json << "]";
+            }
+            else
+            {
+                json << ",";
+            }
+        }
+        json << "}";
+        return json.str();
 }
 
 
