@@ -12,11 +12,11 @@ size_t convertToContinous_(size_t index)
     return i * 9 + j;
 }
 
-std::vector<bool> GetDisabledButtons_(ReportAction report) {
-    if (report.steps.empty()) {
-        return std::vector<bool>(81, true);
-    }
-    size_t index = report.steps.back().index;
+std::vector<bool> GetDisabledButtons_(size_t i) {
+    // (report.steps.empty()) {
+    //    return std::vector<bool>(81, true);
+    //}
+    size_t index = i;
     size_t block = index % 9;
     std::vector<bool> indices(81);
     for (size_t i = 0; i < 81; ++i) {
@@ -136,13 +136,13 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
 
     client_->setMaxRedirects(10);
     client_->done().connect(this, &GameField::requestDone);
-    //std::thread t(&GameField::poll, this);
-    //t.join();
+
+    t_ = std::thread(&GameField::poll, this);
 }
 
 void GameField::poll() {
     while (true) {
-        client_->get("127.0.0.1/pull?room_id=" + std::to_string(roomID_) +
+        client_->get("http://127.0.0.1/pull?room_id=" + std::to_string(roomID_) +
         "&player_id=" + std::to_string(playerID_));
     }
 }
@@ -174,12 +174,14 @@ void GameField::processTableButton(Wt::WPushButton *button) {
     if (isEnemyBot_) {
         std::string message = "{\"player_id\": " + std::to_string(playerID_) + ","
                                "\"command\": \"s\","
-                               "\"value\": " + std::to_string(numberOfCell) + "}";
+                               "\"value\": " + std::to_string(convertToBlocks(numberOfCell)) + "}";
 
         Wt::Http::Message postMessage;
         postMessage.addBodyText(message);
-        client_->post("127.0.0.1:2000/bot/room/" + std::to_string(roomID_),
+        client_->post("http://127.0.0.1:2000/bot/room/" + std::to_string(roomID_),
                       postMessage);
+
+        Wt::WApplication::instance()->enableUpdates(true);
     } else {
 
     }
@@ -275,12 +277,57 @@ void GameField::processSaveButton() {
     //    processButton(button);
 //}
 
-void requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Message &msg) {
+void GameField::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Message &msg) {
     nlohmann::json bodyJSON = nlohmann::json::parse(msg.body());
 
-    if (bodyJSON["is_valid"]) {
-        for (size_t i = 0; i < 10; i++) {
-            std::cout << bodyJSON["room_id"] << std::endl;
+    puts(msg.body().data());
+
+    size_t isValid = bodyJSON["is_valid"];
+    size_t isEnd = bodyJSON["is_end"];
+    size_t draw = bodyJSON["draw"];
+    int winnerID = bodyJSON["winner"];
+
+    std::vector<int> cells = bodyJSON["field"];
+    size_t lastIndex = bodyJSON["steps"].back()["index"];
+
+    std::vector<bool> disabledCells = GetDisabledButtons_(lastIndex);
+
+    std::string value('\0', 1);
+    if (isValid) {
+        for (auto &cell: cellButtons_) {
+            cell->enable();
+        }
+
+        if (isEnd) {
+            if (draw) {
+                gameStatus_->setText("Draw!");
+            } else if (winnerID == playerID_) {
+                gameStatus_->setText("You won!");
+            } else {
+                gameStatus_->setText("You lost!");
+            }
+            for (auto &cell: cellButtons_) {
+                cell->disable();
+            }
+        } else {
+            for (size_t i = 0; i < cells.size(); i++) {
+                if (cells[i] == -1) {
+                    value = "O";
+                } else if (cells[i] == 1) {
+                    value = "X";
+                } else {
+                    value = "\0";
+                }
+
+                Wt::WApplication::instance()->triggerUpdate();
+                cellButtons_[convertToContinous_(i)]->setText(value);
+            }
+            for (size_t j = 0; j < cellButtons_.size(); j++) {
+                if (!disabledCells[j]) {
+                    cellButtons_[j]->disable();
+                }
+            }
+
         }
     }
 }

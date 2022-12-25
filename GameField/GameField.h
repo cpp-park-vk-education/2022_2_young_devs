@@ -41,6 +41,8 @@ class GameField: public Wt::WContainerWidget {
 
     size_t playerID_;
 
+    std::thread t_;
+
     void poll();
 
     /*
@@ -89,6 +91,10 @@ class GameField: public Wt::WContainerWidget {
     Wt::WPushButton *saveButton_;
 
     //void processButtonPushed(const Wt::WKeyEvent &e, Wt::WPushButton *button);
+
+    ~GameField() {
+        t_.join();
+    }
 };
 
 

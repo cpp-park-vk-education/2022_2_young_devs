@@ -8,6 +8,7 @@
 #include <Wt/WAnchor.h>
 #include <Wt/WApplication.h>
 #include <Wt/WImage.h>
+#include <Wt/WLineEdit.h>
 
 #include <Wt/Http/Client.h>
 #include <Wt/Http/Message.h>
@@ -28,6 +29,8 @@ class Game: public Wt::WContainerWidget {
     void handleInternalPath(const std::string &internalPath);
 
  private:
+    Wt::WLineEdit *joinLink_;
+
     size_t roomID_;
 
     User *userDB_;

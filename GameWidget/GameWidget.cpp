@@ -6,7 +6,7 @@ GameWidget::GameWidget(size_t rows, size_t columns, bool isEnemyBot, size_t room
 
     statusText_ = addWidget(std::make_unique<Wt::WText>());
 
-    field_ = addWidget(std::make_unique<GameField>(rows, columns, isEnemyBot, roomID));
+    field_ = addWidget(std::make_unique<GameField>(rows, columns, isEnemyBot, roomID, playerID));
     field_->cellPushed().connect(this, &GameWidget::registerCell);
 
     addWidget(std::make_unique<Wt::WBreak>());
