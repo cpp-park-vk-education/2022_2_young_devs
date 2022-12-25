@@ -134,15 +134,26 @@ T_Room *CreateRoomWithBot(size_t room_id, size_t player_id)
 	return room;
 }
 
+T_Room *CreateRoomMultiplayer(size_t room_id, size_t player_id_1, size_t player_id_2)
+{
+	T_Room *room = GameRoomBuilder()\
+		.withRoomId(room_id)\
+		.withGame(TypeGame::ST)\
+		.withPlayers(player_id_1, player_id_2)\
+		.withOutput(new T_ServerOutput)\
+		.build();
+	return room;
+}
+
 size_t CreateEmptyRoom()
 {
-    rooms.push_back({ .id = ++ID});
-    return ID;
+    
+    rooms.push_back({ .id = ID});
+    return ID++;
 }
 
 struct StepRequest
 {
-    // size_t room_id;
     char command;
     size_t player_id;
     int value;
@@ -173,20 +184,16 @@ http::response<http::string_body> handlerSetStepBot(http::request<http::string_b
 
     StepRequest stepReq = parsePostBody(request.body());
 
-    // auto optional_room 	= findRoomById(rooms, stepReq.room_id);
     auto optional_room 	= findRoomById(rooms, room_id);
 
-    puts("2");
     
     if (!optional_room)
     {
         res.body() = "{ \"is_valid\" : false, \"code_error\": 20, \"message_error\" : \"Game room does not exist\"}";
         return res;
     }
-    puts("3");
     T_Room *room = *optional_room;
 
-    puts("4");
     Player player = { .id = stepReq.player_id, .cell = TypeCell::X };
 
     std::cout << "command = " << stepReq.command << std::endl;
@@ -194,37 +201,36 @@ http::response<http::string_body> handlerSetStepBot(http::request<http::string_b
 
     TypeAction typeAction = stepReq.command == 's' ? TypeAction::Step : TypeAction::Rollback;  
 
-    puts("5");
     ReportAction report = room->DoAction(player, typeAction, { .value = stepReq.value });
 
-    puts("6");
     if (report.isValid)
     {
         if (!report.result.isEnd)
         {
-            puts("6.5");
             report = room->DoAction({ .isBot = true, .cell = TypeCell::O}, TypeAction::Step);
         }
     }
-    puts("7");
 
     std::string body = strJson(report);
 
-    puts("8");
     res.body() = body;
     return res;
 }
 
 http::response<http::string_body> handlerSetStepMulti(http::request<http::string_body> const &request)
 {
+    puts("2");
     size_t room_id = getRoomIdFromURL(std::string(request.target()));
 
+    puts("3");
     http::response<http::string_body> res = getRespOk(request);
 
+    puts("4");
     StepRequest stepReq = parsePostBody(request.body());
 
     // auto optional_room_struct = findRoomStructById(rooms, room_id); 
 
+    puts("5");
     Room &roomStruct = GetRoomStructById(rooms, room_id);
 
     // if (!optional_room_struct)
@@ -237,8 +243,28 @@ http::response<http::string_body> handlerSetStepMulti(http::request<http::string
     // Room roomStruct = *optional_room_struct;
     // T_Room *room = roomStruct.room;
     T_Room *room = roomStruct.room;
+    if (!room)
+    {
+        res.body() = "{ \"is_valid\" : false, \"code_error\": 20, \"message_error\" : \"Game room does not exist\"}";
+        return res;
+    }
 
-    Player player = { .id = stepReq.player_id, .cell = TypeCell::X };
+    // Player player = { .id = stepReq.player_id, .cell = TypeCell::X };
+    puts("6");
+    Player player;
+    if (stepReq.player_id  == (*roomStruct.player_1).id)
+    {
+        player = *roomStruct.player_1;
+    }
+    else if (stepReq.player_id  == (*roomStruct.player_2).id)
+    {
+        player = *roomStruct.player_2;   
+    }
+    else
+    {
+        res.body() = "{ \"is_valid\" : false, \"code_error\": 30, \"message_error\" : \"Player does not exist in this room\"}";
+        return res;
+    }
 
     TypeAction typeAction = stepReq.command == 's' ? TypeAction::Step : TypeAction::Rollback;  
 
@@ -271,38 +297,47 @@ std::string getParam(std::string const &query)
 
 http::response<http::string_body> handlerPull(http::request<http::string_body> const &request)
 {
+    std::cout << "pull" << std::endl;
+    std::cout << request.target() << std::endl;
+    
+    auto check = [](Room const &roomStruct, size_t player_id) -> bool
+    {
+        Player player;
+        if (player_id  == (*roomStruct.player_1).id)
+        {
+            player = *roomStruct.player_1;
+        }
+        else if (player_id  == (*roomStruct.player_2).id)
+        {
+            player = *roomStruct.player_2;   
+        }
+        else
+        {
+            return false;
+        }
+
+        return roomStruct.room 
+            && !roomStruct.notify 
+            && !roomStruct.lastReport.steps.empty()
+            && roomStruct.lastReport.steps.back().player_id != player.id;
+    };
+
     http::response<http::string_body> res = getRespOk(request);
     
     std::vector<std::string> elems = getVecParams(std::string(request.target()));
 
-    // std::string params(request.target().begin() + request.target().find('?') + 1, request.target().end());
-
-    // std::stringstream ss(params);
-    // std::string item;
-    // std::vector<std::string> elems;
-    // while (std::getline(ss, item, '&')) 
-    // {
-    //     elems.push_back(item);
-    // }
-
     size_t room_id      = std::stoul(getParam(elems[0]));
     size_t player_id    = std::stoul(getParam(elems[1]));
 
-    auto optional_room_struct = findRoomStructById(rooms, room_id);
+    Room &roomStruct = GetRoomStructById(rooms, room_id);
 
-    if (!optional_room_struct)
-    {
-        res.body() = "{ \"good\" : false, \"code_error\": 30, \"message_error\" : \"Game room structure does not exist\"}";
-        return res;
-    }
-
-    Room roomStruct = *optional_room_struct;
-    if (roomStruct.room && !roomStruct.notify && (roomStruct.player_1->id == player_id || roomStruct.player_2->id == player_id))
+    if (check(roomStruct, player_id))
     {
         res.body() = strJson(roomStruct.lastReport);
+        roomStruct.notify = true; 
         return res;
     }
-
+    res.body() = "{ \"good\" : false }";
     return res;
 }
 
@@ -317,7 +352,6 @@ http::response<http::string_body> handlerGetRoom(http::request<http::string_body
     
     std::vector<std::string> elems = getVecParams(std::string(request.target()));
 
-    // std::cout << " elems[0] === " << elems[0] << std::endl;
     bool withBot = (getParam(elems[0]) == "true" ? true : false);
 
     size_t room_id = CreateEmptyRoom();
@@ -326,12 +360,38 @@ http::response<http::string_body> handlerGetRoom(http::request<http::string_body
     
     if (withBot)
     {
-        puts("withBot");
         roomStruct.room = CreateRoomWithBot(room_id, roomStruct.player_1->id);
         roomStruct.player_2 = std::optional<Player>({ .isBot = true });
     }
 
     res.body() = "{ \"room_id\" : " + std::to_string(room_id) + ", player_id : " + std::to_string(roomStruct.player_1->id) + "}";
+    return res;
+}
+
+
+http::response<http::string_body> handlerJoin(http::request<http::string_body> const &request)
+{
+    std::cout << "join" << std::endl;
+    std::cout << request.target() << std::endl;
+
+    http::response<http::string_body> res = getRespOk(request);
+
+    size_t room_id = getRoomIdFromURL(std::string(request.target()));
+    
+    Room &roomStruct = GetRoomStructById(rooms, room_id);
+
+    if (!roomStruct.player_2)
+    {
+        roomStruct.player_2 = std::optional<Player>({ .id = PLAYER_ID++ });
+        roomStruct.room = CreateRoomMultiplayer(room_id, roomStruct.player_1->id, roomStruct.player_2->id);
+    }
+    else
+    {
+        res.body() = "{ \"good\" : false, \"code_error\": 30, \"message_error\" : \"2 players already exist\"}";
+        return res;
+    }
+
+    res.body() = "{ \"good\" : true, \"player_id\":" + std::to_string(roomStruct.player_2->id) + "}";
     return res;
 }
 
@@ -341,10 +401,10 @@ namespace server3 {
                 : stream_(std::move(socket))
         {
             requestRouter_.addHandler("/bot/room", handlerSetStepBot);
-            requestRouter_.addHandler("/bot/multiplayer", handlerSetStepMulti);
+            requestRouter_.addHandler("/multiplayer/room", handlerSetStepMulti);
             requestRouter_.addHandler("/pull", handlerPull);
             requestRouter_.addHandler("/get_room", handlerGetRoom);
-            requestRouter_.addHandler("/join", handlerGetRoom);
+            requestRouter_.addHandler("/join/room", handlerJoin);
         }
 
 

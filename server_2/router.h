@@ -10,7 +10,11 @@ using tcp = boost::asio::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
 inline std::string getPath(std::string const &pathParams)
 {
     std::string path = pathParams;
-    if (pathParams.find("bot/room") != std::string::npos || pathParams.find("multiplayer/room") != std::string::npos)
+    if (
+        pathParams.find("bot/room") != std::string::npos 
+        || pathParams.find("multiplayer/room") != std::string::npos
+        || pathParams.find("join/room") != std::string::npos
+        )
     {
         path = std::string(pathParams.begin(), pathParams.begin() + pathParams.rfind('/'));
     }
