@@ -9,6 +9,12 @@
 #include <Wt/WApplication.h>
 #include <Wt/WImage.h>
 
+#include <Wt/Http/Client.h>
+#include <Wt/Http/Message.h>
+#include "Wt/AsioWrapper/asio.hpp"
+
+#include <nlohmann/json.hpp>
+
 #include "../GameWidget/GameWidget.h"
 #include "../RulesWidget/RulesWidget.h"
 #include "../ScoresWidget/ScoresWidget.h"
@@ -46,9 +52,17 @@ class Game: public Wt::WContainerWidget {
 
     Wt::WContainerWidget *links_;
 
+    Wt::Http::Client *client_;
+
     void showGame();
 
+    void requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Message &msg);
+
     void showScores();
+
+    void doNothing() {
+
+    }
 
     void showRules();
 };

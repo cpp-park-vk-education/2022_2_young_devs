@@ -1,6 +1,6 @@
 #include "GameWidget.h"
 
-GameWidget::GameWidget(size_t rows, size_t columns, bool isEnemyBot, size_t roomID)
+GameWidget::GameWidget(size_t rows, size_t columns, bool isEnemyBot, size_t roomID, size_t playerID)
     : Wt::WContainerWidget() {
     setContentAlignment(Wt::AlignmentFlag::Center);
 

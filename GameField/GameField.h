@@ -7,8 +7,11 @@
 #include <Wt/WPushButton.h>
 #include <Wt/WApplication.h>
 #include <Wt/WStackedWidget.h>
+#include <Wt/Http/Client.h>
+#include <Wt/Http/Message.h>
 
 #include <iostream>
+#include <thread>
 
 #include <boost/asio/thread_pool.hpp>
 #include <boost/asio/post.hpp>
@@ -22,7 +25,7 @@
 
 class GameField: public Wt::WContainerWidget {
  public:
-    GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID);
+    GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID, size_t playerID);
     Wt::Signal<size_t> &cellPushed() {
         return cellPressed_;
     }
@@ -34,11 +37,22 @@ class GameField: public Wt::WContainerWidget {
 
     GameProgress gameProgress_;
 
+    size_t roomID_;
+
+    size_t playerID_;
+
+    void poll();
+
+    /*
     Player player_1;
 
     Player player_2;
 
     T_Room *room;
+    */
+    bool isEnemyBot_;
+
+    Wt::Http::Client *client_;
 
     bool playerOrder_;
 
@@ -53,6 +67,8 @@ class GameField: public Wt::WContainerWidget {
     std::vector<Wt::Signals::connection> connections_;
 
     Wt::Signal<size_t> cellPressed_;
+
+    void requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Message &msg);
 
     void processNewGameButton();
 

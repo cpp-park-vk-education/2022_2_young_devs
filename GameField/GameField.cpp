@@ -1,6 +1,7 @@
 #include "GameField.h"
 
 #include <iostream>
+#include <nlohmann/json.hpp>
 
 size_t convertToContinous_(size_t index)
 {
@@ -33,9 +34,9 @@ boost::asio::thread_pool pool(4);
 
 static size_t IdRoom = 166;
 
-GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID)
-    : gameInf_(GameInf()), gameProgress_(GameProgress()), Wt::WContainerWidget(),
-    playerOrder_(true) {
+GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID, size_t playerID)
+    : gameInf_(GameInf()), gameProgress_(GameProgress()), roomID_(roomID),
+    Wt::WContainerWidget(), playerOrder_(true), isEnemyBot_(isEnemyBot), playerID_(playerID) {
     setContentAlignment(Wt::AlignmentFlag::Center);
 
     gameStatus_ = addWidget(std::make_unique<Wt::WText>());
@@ -46,6 +47,8 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
     newGameButton_->clicked().connect(std::bind(&GameField::processNewGameButton, this));
     newGameButton_->hide();
 
+
+    /*
     bool isExist = gameInf_.stoppedGameExist(8);
     //TODO
     if (rows != 3) {
@@ -56,6 +59,7 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
                     std::bind(&GameField::processRestoreButton, this));
         }
     }
+     */
 
     table_ = addWidget(std::make_unique<Wt::WTable>());
     table_->resize(rows, columns);
@@ -76,7 +80,7 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
         //        std::bind(&GameField::processButtonPushed, this, std::placeholders::_1, cell)
         //        ));
     }
-
+    /*
     if (isEnemyBot) {
         rollbackButton_ = addWidget(std::make_unique<Wt::WPushButton>("rollback"));
         rollbackButton_->clicked().connect(std::bind(&GameField::processRollbackButton, this));
@@ -86,7 +90,8 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
         saveButton_ = addWidget(std::make_unique<Wt::WPushButton>("save"));
         saveButton_->clicked().connect(std::bind(&GameField::processSaveButton, this));
     }
-
+     */
+    /*
     if (rows == 9) {
         T_GameField *field = new ST_Field;
         T_GameLogic *logic = new ST_Logic;
@@ -125,6 +130,21 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
             gameInf_.addGame(4, 20, TypeGame::OT);
         }
     }
+    */
+
+    client_ = new Wt::Http::Client();
+
+    client_->setMaxRedirects(10);
+    client_->done().connect(this, &GameField::requestDone);
+    //std::thread t(&GameField::poll, this);
+    //t.join();
+}
+
+void GameField::poll() {
+    while (true) {
+        client_->get("127.0.0.1/pull?room_id=" + std::to_string(roomID_) +
+        "&player_id=" + std::to_string(playerID_));
+    }
 }
 
 GameField::~GameField() {
@@ -151,6 +171,21 @@ void GameField::processTableButton(Wt::WPushButton *button) {
     }
 
 
+    if (isEnemyBot_) {
+        std::string message = "{\"player_id\": " + std::to_string(playerID_) + ","
+                               "\"command\": \"s\","
+                               "\"value\": " + std::to_string(numberOfCell) + "}";
+
+        Wt::Http::Message postMessage;
+        postMessage.addBodyText(message);
+        client_->post("127.0.0.1:2000/bot/room/" + std::to_string(roomID_),
+                      postMessage);
+    } else {
+
+    }
+
+
+    /*
     // DODELAT
     if (cellButtons_.size() == 81) {
         if (playerOrder_) {
@@ -169,6 +204,7 @@ void GameField::processTableButton(Wt::WPushButton *button) {
             task();
         }
     }
+     */
 
     playerOrder_ = !playerOrder_;
     //boost::asio::post(pool, task);
@@ -179,7 +215,7 @@ void GameField::processTableButton(Wt::WPushButton *button) {
 void GameField::processNewGameButton() {
 
 }
-
+/*
 // TODO
 void GameField::processRestoreButton() {
     restoreButton_->hide();
@@ -226,7 +262,7 @@ void GameField::processSaveButton() {
     }
 }
 
-
+*/
 
 
 
@@ -238,3 +274,14 @@ void GameField::processSaveButton() {
     //if(e.key() == static_cast<Wt::Key>(button->text().toUTF8()[0]))
     //    processButton(button);
 //}
+
+void requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Message &msg) {
+    nlohmann::json bodyJSON = nlohmann::json::parse(msg.body());
+
+    if (bodyJSON["is_valid"]) {
+        for (size_t i = 0; i < 10; i++) {
+            std::cout << bodyJSON["room_id"] << std::endl;
+        }
+    }
+}
+
