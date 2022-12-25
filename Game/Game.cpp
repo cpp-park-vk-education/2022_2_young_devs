@@ -80,13 +80,13 @@ void Game::showGame() {
     if (!game_) {
         bool isEnemyBot = enemyType_->currentIndex() == 0;
         if (isEnemyBot) {
-            //client_->get("127.0.0.1:2000/get_room?with_bot=true");
+            client_->get("127.0.0.1:2000/get_room?with_bot=true");
         } else {
             //client_->get("127.0.0.1:2000/get_room?with_bot=false");
         }
         //client_->get("127.0.0.1:2000/get_room");
 
-        client_->get("http://jsonplaceholder.typicode.com/posts/10");
+        //client_->get("http://jsonplaceholder.typicode.com/posts/10");
         Wt::WApplication::instance()->enableUpdates(true);
     }
 }
@@ -119,20 +119,12 @@ void Game::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Message &
 
         bool isEnemyBot = enemyType_->currentIndex() == 0;
         size_t tableSize = (gameType_->currentIndex() == 0 ? 9 : 3);
-        //roomID_ = bodyJSON["room_id"];
-        roomID_ = bodyJSON["id"];
+        roomID_ = bodyJSON["room_id"];
+        //roomID_ = bodyJSON["id"];
         size_t playerID = bodyJSON["player_id"];
-
-
-        for (size_t i = 0; i < 10; i++) {
-            std::cout << game_ << std::endl;
-        }
 
         game_ = mainStack_->addWidget(std::make_unique<GameWidget>(tableSize, tableSize,
                                                                    isEnemyBot, roomID_, playerID));
-        for (size_t i = 0; i < 10; i++) {
-            std::cout << game_ << std::endl;
-        }
 
         Wt::WApplication::instance()->triggerUpdate();
         mainStack_->setCurrentWidget(game_);
