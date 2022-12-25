@@ -1,7 +1,6 @@
 
 #include "async.http.server.h"
 #include "game_room.h"
-#include "game_room.h"
 #include "room_builder.h"
 #include "helpers_func.h"
 
@@ -10,6 +9,7 @@
 #include <boost/shared_ptr.hpp>
 #include <vector>
 #include <thread>
+#include <nlohmann/json.hpp>
 
 static std::vector<GameRoom *> rooms;
 
@@ -49,30 +49,61 @@ std::string getParam(std::string const &query)
     return std::string(query.begin() + query.find('=') + 1, query.end());
 }
 
-StepRequest parsePath(std::string const &path)
+// StepRequest parsePath(std::string const &path)
+// {
+//     // std::string path(path.begin(), path.begin() + path.rfind('/'));
+//     size_t room_id = std::stoul(std::string(path.begin() + path.rfind('/') + 1, path.begin() + path.rfind('?')));
+//     std::string params(path.begin() + path.find('?') + 1, path.end());
+
+//     std::stringstream ss(params);
+//     std::string item;
+//     std::vector<std::string> elems;
+//     while (std::getline(ss, item, '&')) 
+//     {
+//         elems.push_back(item);
+//     }
+
+//     char command = getParam(elems[0])[0];
+//     size_t player_id = std::stoul(getParam(elems[1]));
+//     int value = std::stod(getParam(elems[2]));
+
+//     return { .room_id = room_id, .command = command, .player_id = player_id, .value = value };
+// }
+
+StepRequest parsePath(const Request &request)
 {
-    // std::string path(path.begin(), path.begin() + path.rfind('/'));
-    size_t room_id = std::stoul(std::string(path.begin() + path.rfind('/') + 1, path.begin() + path.rfind('?')));
-    std::string params(path.begin() + path.find('?') + 1, path.end());
+    std::cout << "BODY = " << request.body << " END BODY " <<std::endl;
+    nlohmann::json j = nlohmann::json::parse(request.body);
 
-    std::stringstream ss(params);
-    std::string item;
-    std::vector<std::string> elems;
-    while (std::getline(ss, item, '&')) 
-    {
-        elems.push_back(item);
-    }
-
-    char command = getParam(elems[0])[0];
-    size_t player_id = std::stoul(getParam(elems[1]));
-    int value = std::stod(getParam(elems[2]));
+    size_t room_id = j["rood_id"];
+    size_t command = j["command"];
+    size_t player_id = j["player_id"];
+    int value = j["value"];
 
     return { .room_id = room_id, .command = command, .player_id = player_id, .value = value };
 }
 
-Response HandlerGetBot(const Request &request)
+Response handler_post_set_step_bot(const Request &request)
 {
-    StepRequest stepReq = parsePath(request.path);
+    // StepRequest stepReq = parsePath(request.path);
+    if (request.method != "POST")
+    {
+        Response response;
+        response.status_code = 404;
+        response.status_message = "Not Found";
+        response.http_version = "HTTP/1.0";
+        response.body = "Not Found";
+        return response; 
+    }
+    StepRequest stepReq = parsePath(request);
+
+    Response response;
+    response.status_code = 200;
+    response.status_message = "OK";
+    response.http_version = "HTTP/1.1";
+    response.body = request.body;
+    std::cout << "response ==== " << request.body << std::endl; 
+    return response;
 
     auto optional_room 	= _findRoomById(rooms, stepReq.room_id);
     GameRoom *room;
@@ -103,24 +134,44 @@ Response HandlerGetBot(const Request &request)
 
     std::string body = strJson(report);
 
+    // Response response;
+    // response.status_code = 200;
+    // response.status_message = "OK";
+    // response.http_version = "HTTP/1.1";
+    // response.body = body;
+    // return response;
+}
+
+Response handler_post_set_step_multi(const Request &request)
+{
+
     Response response;
     response.status_code = 200;
     response.status_message = "OK";
-    response.http_version = "HTTP/1.1";
-    response.body = body;
+    response.http_version = "HTTP/1.0";
+    response.body = "{\"userId\": 1, \"nickname\" : \"Vinograduss\" }";
     return response;
 }
 
-Response HandlerGetMulti(const Request &request)
+Response handler_get_pull(const Request &request)
 {
-    // use data from request
-    StepRequest stepReq = parsePath(request.path);
 
     Response response;
     response.status_code = 200;
     response.status_message = "OK";
     response.http_version = "HTTP/1.0";
     response.body = "{\"userId\": 2, \"nickname\" : \"Vinograduss\" }";
+    return response;
+}
+
+Response handler_get_get_room(const Request &request)
+{
+
+    Response response;
+    response.status_code = 200;
+    response.status_message = "OK";
+    response.http_version = "HTTP/1.0";
+    response.body = "{\"userId\": 3, \"nickname\" : \"Vinograduss\" }";
     return response;
 }
 
@@ -140,8 +191,10 @@ namespace http {
             signals_.add(SIGTERM);  // сигнал от kill
             signals_.async_wait(boost::bind(&server::handle_stop, this));
 
-            request_router.addHandler("/bot/room", HandlerGetBot);
-            request_router.addHandler("/multiplayer/room", HandlerGetMulti);
+            request_router.addHandler("/bot/room", handler_post_set_step_bot);
+            request_router.addHandler("/multiplayer/room", handler_post_set_step_multi);
+            request_router.addHandler("/pull", handler_get_pull);
+            request_router.addHandler("/get_room", handler_get_get_room);
 
             // Open the acceptor with the option to reuse the address (i.e. SO_REUSEADDR).
             boost::asio::ip::tcp::resolver resolver(io_context_);

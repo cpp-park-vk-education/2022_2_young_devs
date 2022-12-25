@@ -187,9 +187,10 @@ std::string strJson(ReportAction report)
     json << "{" << "\"room_id\":" << report.room_id\
         << "," << "\"player_id\":" << report.player.id\
         << "," << "\"player_cell\":" << TypeCellNum(report.player.cell)\
-        << "," << "\"id_valid\":" << report.isValid\
+        << "," << "\"is_valid\":" << report.isValid\
         // если id_valid = false
         << "," << "\"message_error\":" << "\""s << report.error.messageError << "\""s\
+        << "," << "\"code_error\":"<< report.error.codeError\
         << "," << "\"is_end\":" << report.result.isEnd\
         // если is_end = true
         << "," << "\"draw\":" << report.result.draw\

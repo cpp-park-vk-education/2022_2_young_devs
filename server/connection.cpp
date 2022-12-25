@@ -21,6 +21,7 @@ std::vector<std::string> split(const std::string &s, char delim) {
 Request parse(std::string req_data)
 {
     Request request;
+    std::cout << req_data << ">>>>>>>" << std::endl;
     std::vector<std::string> blocks = split(req_data, '\n');
 
     //first line

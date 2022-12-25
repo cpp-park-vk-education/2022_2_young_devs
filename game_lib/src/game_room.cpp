@@ -81,6 +81,7 @@ std::tuple<Player, Player, ReportAction> T_Room::checkPlayer(Player player)
 ReportAction T_Room::DoAction(Player player, TypeAction type, DataAction data)
 {
     // atomic
+    puts("DoAction");
     busy = true;
 
     auto [cur_player, other_player, report] = checkPlayer(player);

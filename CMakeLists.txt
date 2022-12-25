@@ -32,7 +32,7 @@ set(BUILD_DIR "${PROJECT_BINARY_DIR}")
 
 # add_executable(${PROJECT_NAME} main.cpp)
 
-file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/server/*)
+file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/server_2/*)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
