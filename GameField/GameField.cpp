@@ -2,9 +2,36 @@
 
 #include <iostream>
 
+size_t convertToContinous_(size_t index)
+{
+    size_t block_no = index / 9;
+    size_t inner_block_no = index % 9;
+    size_t i = (block_no / 3 * 3) + inner_block_no / 3;
+    size_t j = (block_no % 3 * 3) + inner_block_no % 3;
+    return i * 9 + j;
+}
+
+std::vector<bool> GetDisabledButtons_(ReportAction report) {
+    if (report.steps.empty()) {
+        return std::vector<bool>(81, true);
+    }
+    size_t index = report.steps.back().index;
+    size_t block = index % 9;
+    std::vector<bool> indices(81);
+    for (size_t i = 0; i < 81; ++i) {
+        if (i / 9 != block) {
+            indices[convertToContinous_(i)] = false;
+        }
+        else {
+            indices[convertToContinous_(i)] = true;
+        }
+    }
+    return indices;
+}
+
 boost::asio::thread_pool pool(4);
 
-static size_t IdRoom = 152;
+static size_t IdRoom = 166;
 
 GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID)
     : gameInf_(GameInf()), gameProgress_(GameProgress()), Wt::WContainerWidget(),
@@ -19,11 +46,15 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
     newGameButton_->clicked().connect(std::bind(&GameField::processNewGameButton, this));
     newGameButton_->hide();
 
-
+    bool isExist = gameInf_.stoppedGameExist(8);
     //TODO
-    if (gameInf_.stoppedGameExist(9)) {
-        restoreButton_ = addWidget(std::make_unique<Wt::WPushButton>("restore"));
-        restoreButton_->clicked().connect(std::bind(&GameField::processRestoreButton, this));
+    if (rows != 3) {
+        if (isExist) {
+            restoreButton_ = addWidget(
+                    std::make_unique<Wt::WPushButton>("restore"));
+            restoreButton_->clicked().connect(
+                    std::bind(&GameField::processRestoreButton, this));
+        }
     }
 
     table_ = addWidget(std::make_unique<Wt::WTable>());
@@ -63,10 +94,22 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
                                           gameStatus_, newGameButton_, gameInf_);
         T_Bot *bot = new ST_Bot;
         player_1 = {.id = 0, .isBot = false, .cell = TypeCell::X};
-        player_2 = {.id = 1, .isBot = false, .cell = TypeCell::O};
+        if (!isEnemyBot) {
+            player_2 = {.id = 1, .isBot = false, .cell = TypeCell::O};
+            room = new T_Room(IdRoom, player_1, player_2, field, logic, output,
+                              nullptr, TypeGame::ST);
+        } else {
+            player_2 = {.isBot = true, .cell = TypeCell::O};
+            room = new T_Room(IdRoom, player_1, player_2, field, logic, output,
+                              bot, TypeGame::ST);
+        }
         // GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot);
-        room = new T_Room(IdRoom++, player_1, player_2, field, logic, output,
-                          nullptr, TypeGame::ST);
+        //room = new T_Room(IdRoom, player_1, player_2, field, logic, output,
+        //                  nullptr, TypeGame::ST);
+
+        if (!isExist) {
+            gameInf_.addGame(8, 20, TypeGame::ST);
+        }
     } else {
         T_GameField *field = new OT_Field;
         T_GameLogic *logic = new OT_Logic;
@@ -76,11 +119,12 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
         player_1 = {.id = 0, .isBot = false, .cell = TypeCell::X};
         player_2 = {.id = 1, .isBot = false, .cell = TypeCell::O};
         // GameRoom *room 		= new T_Room(player_1, player_2, field, logic, output, bot);
-        room = new T_Room(IdRoom++, player_1, player_2, field, logic, output,
+        room = new T_Room(IdRoom, player_1, player_2, field, logic, output,
                           nullptr, TypeGame::OT);
+        if (!isExist) {
+            gameInf_.addGame(4, 20, TypeGame::OT);
+        }
     }
-
-    //gameInf_.addGame(player_1.id, player_2.id, "active", typegame);
 }
 
 GameField::~GameField() {
@@ -140,7 +184,7 @@ void GameField::processNewGameButton() {
 void GameField::processRestoreButton() {
     restoreButton_->hide();
 
-    std::vector<StepInfo> stepsFromDB = gameProgress_.getMoves(12).steps;
+    std::vector<StepInfo> stepsFromDB = gameProgress_.getMoves(IdRoom).steps;
 
     room->Initialize(stepsFromDB);
 
@@ -148,6 +192,17 @@ void GameField::processRestoreButton() {
     for (auto &step: stepsFromDB) {
         cellValue = (step.cell == 1 ? "X" : "O");
         cellButtons_[step.index]->setText(cellValue);
+    }
+
+    size_t i = 0;
+    std::vector<bool> indices = GetDisabledButtons_({.steps = stepsFromDB});
+    for (const auto &index: indices) {
+        if (index) {
+            cellButtons_[i]->enable();
+        } else {
+            cellButtons_[i]->disable();
+        }
+        i++;
     }
 }
 
@@ -160,7 +215,15 @@ void GameField::processRollbackButton() {
 
 // TODO
 void GameField::processSaveButton() {
-    //gameProgress_.addMoves(id_game, vectorSteps);
+    for (size_t i = 0; i < 10; i++) {
+        std::cout << IdRoom << std::endl;
+    }
+    gameProgress_.addMoves(IdRoom, room->getSteps());
+    gameInf_.updateGameStatus(IdRoom, "stopped");
+
+    for (auto &cell: cellButtons_) {
+        cell->disable();
+    }
 }
 
 

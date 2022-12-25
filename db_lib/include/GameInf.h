@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DataBase.h"
+#include "../../game_lib/include/game_logic.h"
 
 struct GameTable
 {
