@@ -135,7 +135,7 @@ GameField::~GameField() {
 }
 
 void GameField::processGetInviteLink() {
-    inviteLink_->setText(std::to_string(roomID_));
+    inviteLink_->setText(hash_);
 }
 
 void GameField::processTableButton(Wt::WPushButton *button) {

@@ -136,10 +136,11 @@ void Game::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Message &
 
         nlohmann::json bodyJSON = nlohmann::json::parse(bodyStr);
 
-
         bool isEnemyBot = enemyType_->currentIndex() == 0;
         size_t tableSize = (gameType_->currentIndex() == 0 ? 9 : 3);
 
+        roomID_ = bodyJSON["room_id"];
+        /*
         if (!joinLink_->text().empty()) {
             std::string url = joinLink_->text().toUTF8();
             roomID_ = std::stoul(std::string(url.begin() + url.rfind('/') + 1,
@@ -151,6 +152,7 @@ void Game::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Message &
                 std::cout << roomID_ << std::endl;
             }
         }
+         */
 
         size_t playerID = bodyJSON["player_id"];
 
