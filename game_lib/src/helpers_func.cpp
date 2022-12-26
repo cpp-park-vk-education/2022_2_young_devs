@@ -216,15 +216,12 @@ std::string strJson(ReportAction report, bool save)
             << "\"index\":" <<  report.steps[i].index << ","\
             << "\"cell\":" << TypeCellNum(report.steps[i].cell) << "}";
 
-            if (i == report.steps.size() - 1)
-            {
-                json << "]";
-            }
-            else
+            if (i != report.steps.size() - 1)
             {
                 json << ",";
             }
         }
+        json << "]";
         if (save)
         {
             json << ", \"save\" : true";
