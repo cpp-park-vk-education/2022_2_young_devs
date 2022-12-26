@@ -182,6 +182,8 @@ void GameField::processNewGameButton() {
         cell->enable();
     }
 
+    client_->get("http://127.0.0.1:2000/new_game/room/" +
+                 std::to_string(roomID_));
 }
 
 /*
