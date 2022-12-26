@@ -175,8 +175,12 @@ void GameField::processTableButton(Wt::WPushButton *button) {
     }
 }
 
-// TODO
 void GameField::processNewGameButton() {
+    newGameButton_->hide();
+
+    for (auto &cell: cellButtons_) {
+        cell->enable();
+    }
 
 }
 
@@ -281,6 +285,7 @@ void GameField::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Mess
                     gameStatus_->setText("You lost!");
                 }
 
+                newGameButton_->show();
                 for (auto &cell: cellButtons_) {
                     cell->disable();
                 }

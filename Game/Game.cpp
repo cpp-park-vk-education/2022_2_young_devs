@@ -140,19 +140,6 @@ void Game::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Message &
         size_t tableSize = (gameType_->currentIndex() == 0 ? 9 : 3);
 
         roomID_ = bodyJSON["room_id"];
-        /*
-        if (!joinLink_->text().empty()) {
-            std::string url = joinLink_->text().toUTF8();
-            roomID_ = std::stoul(std::string(url.begin() + url.rfind('/') + 1,
-            url.find('?') == std::string::npos ? url.end() : url.begin() + url.find('?')));
-        } else {
-            roomID_ = bodyJSON["room_id"];
-
-            for (size_t i = 0; i < 10; i++) {
-                std::cout << roomID_ << std::endl;
-            }
-        }
-         */
 
         size_t playerID = bodyJSON["player_id"];
 
@@ -168,7 +155,6 @@ void Game::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Message &
         Wt::WApplication::instance()->triggerUpdate();
         Wt::WApplication::instance()->enableUpdates(false);
         mainStack_->setCurrentWidget(game_);
-        //Wt::WApplication::instance()->enableUpdates(false);
     } else {
         std::cout << ec.message() << std::endl;
     }
