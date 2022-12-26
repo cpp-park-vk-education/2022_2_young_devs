@@ -97,8 +97,6 @@ class GameField: public Wt::WContainerWidget {
     Wt::WPushButton *rollbackButton_;
 
     Wt::WPushButton *saveButton_;
-
-    //void processButtonPushed(const Wt::WKeyEvent &e, Wt::WPushButton *button);
 };
 
 

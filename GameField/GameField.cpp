@@ -41,8 +41,7 @@ void GameField::sendPool() {
 void GameField::pool2(std::string &in_) {
     while (true) {
         Wt::WServer::instance()->post(in_, std::bind(&GameField::sendPool, this));
-        std::this_thread::sleep_for(1000ms);
-
+        std::this_thread::sleep_for(300ms);
     }
 }
 
@@ -225,16 +224,6 @@ void GameField::processSaveButton() {
     client_->get("http://127.0.0.1:2000/bot/save/room/" + std::to_string(roomID_));
 }
 
-
-//void GameField::processButtonPushed(const Wt::WKeyEvent &e,
-//                                    Wt::WPushButton *button) {
-//    if (Wt::WCompositeWidget::isHidden())
-//        return;
-
-    //if(e.key() == static_cast<Wt::Key>(button->text().toUTF8()[0]))
-    //    processButton(button);
-//}
-
 std::mutex mutex;
 
 void GameField::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Message &msg) {
@@ -263,17 +252,26 @@ void GameField::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Mess
         int winnerID = bodyJSON["winner"];
 
         std::vector<int> cells = bodyJSON["field"];
-        size_t lastIndex = bodyJSON["steps"].back()["index"];
 
-        std::cout << lastIndex << std::endl;
+        size_t lastIndex;
+        if (!bodyJSON["steps"].empty()) {
+            lastIndex = bodyJSON["steps"].back()["index"];
+        } else {
+            lastIndex = 100;
+        }
 
-        std::vector<bool> disabledCells = GetDisabledButtons_(lastIndex);
+        std::vector<bool> disabledCells(81, true);
+        if (lastIndex != 100) {
+            disabledCells = GetDisabledButtons_(lastIndex);
+        }
 
         std::string value('\0', 1);
         if (isValid) {
             for (auto &cell: cellButtons_) {
                 cell->enable();
             }
+            puts("ENABLE");
+
             if (isEnd) {
                 if (draw) {
                     gameStatus_->setText("Draw!");
@@ -288,6 +286,7 @@ void GameField::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Mess
                 }
 
             } else {
+                puts("NOT IS END");
                 for (size_t i = 0; i < cells.size(); i++) {
                     if (cells[i] == -1) {
                         value = "O";
@@ -297,11 +296,12 @@ void GameField::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Mess
                         value = std::string('\0', 1);
                     }
 
+                    puts("CONVERTTOCONTINIOUS");
                     cellButtons_[convertToContinous_(i)]->setText(value);
                     Wt::WApplication::instance()->triggerUpdate();
                 }
 
-
+                puts("DISABLE");
                 for (size_t j = 0; j < cellButtons_.size(); j++) {
                     if (!disabledCells[j]) {
                         cellButtons_[j]->disable();
