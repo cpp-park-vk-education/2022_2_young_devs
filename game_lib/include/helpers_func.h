@@ -12,4 +12,4 @@ int get_rand(int start, int stop);
 
 
 
-std::string strJson(ReportAction report);
+std::string strJson(ReportAction report, bool save = false);

@@ -14,12 +14,31 @@
 #include <sstream>
 #include <nlohmann/json.hpp>
 
+#include <unistd.h>
+#include <ctime>
+std::string gen_random_string(const int len) {
+    static const char alphanum[] =
+        "0123456789"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "abcdefghijklmnopqrstuvwxyz";
+    std::string tmp_s;
+    tmp_s.reserve(len);
+
+    for (int i = 0; i < len; ++i) {
+        tmp_s += alphanum[rand() % (sizeof(alphanum) - 1)];
+    }
+    
+    return tmp_s;
+}
+
+
 static size_t ID = 0;
 static size_t PLAYER_ID = 0;
 
 struct Room
 {
     size_t id;
+    std::string hash;
     T_Room *room = nullptr;
     std::optional<Player> player_1 = std::nullopt;
     std::optional<Player> player_2 = std::nullopt;
@@ -31,6 +50,15 @@ struct Room
 static std::vector<Room> rooms;
 
 http::response<http::string_body> getRespOk(http::request<http::string_body> const &request)
+{
+    http::response<http::string_body> res{http::status::bad_request, request.version()};
+    res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
+    res.set(http::field::content_type, "application/json");
+    res.result(http::status::ok);
+    return res;
+}
+
+http::response<http::string_body> getRespOkPost(http::request<http::string_body> const &request)
 {
     http::response<http::string_body> res{http::status::bad_request, request.version()};
     res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
@@ -54,6 +82,11 @@ http::response<http::string_body> getRespError(http::request<http::string_body> 
 size_t getRoomIdFromURL(std::string const &url)
 {
     return std::stoul(std::string(url.begin() + url.rfind('/') + 1, url.find('?') == std::string::npos ? url.end() : url.begin() + url.find('?')));
+}
+
+std::string getRoomHashFromURL(std::string const &url)
+{
+    return std::string(url.begin() + url.rfind('/') + 1, url.find('?') == std::string::npos ? url.end() : url.begin() + url.find('?'));
 }
 
 std::vector<std::string> getVecParams(std::string const &url)
@@ -82,6 +115,18 @@ Room &GetRoomStructById(std::vector<Room> &items, size_t id)
 	throw std::runtime_error("exception GetRoomStructById...");
 }
 
+Room &GetRoomStructByHash(std::vector<Room> &items, std::string const &hash)
+{
+    for (auto &&item : items)
+	{
+		if (item.hash == hash)
+		{
+			return item;
+		}
+	}
+	throw std::runtime_error("exception GetRoomStructByHash...");
+}
+
 
 // std::optional<GameRoom *> findRoomById(std::vector<GameRoom *> &items, size_t id)
 std::optional<T_Room *> findRoomById(std::vector<Room> &items, size_t id)
@@ -108,21 +153,6 @@ std::optional<Room> findRoomStructById(std::vector<Room> &items, size_t id)
 	return std::nullopt;
 }
 
-bool UpdateLastReport(std::vector<Room> &items, size_t id, ReportAction const &report)
-{
-    for (auto &&item : items)
-	{
-		if (item.id == id)
-		{
-            item.lastReport = report;
-            item.notify = false;
-			return true;
-		}
-	}
-    return false;
-}
-
-
 T_Room *CreateRoomWithBot(size_t room_id, size_t player_id)
 {
 	T_Room *room = GameRoomBuilder()\
@@ -147,8 +177,7 @@ T_Room *CreateRoomMultiplayer(size_t room_id, size_t player_id_1, size_t player_
 
 size_t CreateEmptyRoom()
 {
-    
-    rooms.push_back({ .id = ID});
+    rooms.push_back({ .id = ID, .hash = gen_random_string(10)});
     return ID++;
 }
 
@@ -184,15 +213,20 @@ http::response<http::string_body> handlerSetStepBot(http::request<http::string_b
 
     StepRequest stepReq = parsePostBody(request.body());
 
-    auto optional_room 	= findRoomById(rooms, room_id);
-
+    // auto optional_room 	= findRoomById(rooms, room_id);
     
-    if (!optional_room)
-    {
-        res.body() = "{ \"is_valid\" : false, \"code_error\": 20, \"message_error\" : \"Game room does not exist\"}";
-        return res;
-    }
-    T_Room *room = *optional_room;
+    
+    // if (!optional_room)
+    // {
+    //     res.body() = "{ \"good\" : false, \"code_error\": 20, \"message_error\" : \"Game room does not exist\"}";
+    //     return res;
+    // }
+    // T_Room *room = *optional_room;
+
+
+    Room &roomStruct = GetRoomStructById(rooms, room_id);
+
+    T_Room *room = roomStruct.room;
 
     Player player = { .id = stepReq.player_id, .cell = TypeCell::X };
 
@@ -210,6 +244,8 @@ http::response<http::string_body> handlerSetStepBot(http::request<http::string_b
             report = room->DoAction({ .isBot = true, .cell = TypeCell::O}, TypeAction::Step);
         }
     }
+
+    roomStruct.lastReport = report;
 
     std::string body = strJson(report);
 
@@ -231,6 +267,7 @@ http::response<http::string_body> handlerSetStepMulti(http::request<http::string
     // auto optional_room_struct = findRoomStructById(rooms, room_id); 
 
     puts("5");
+
     Room &roomStruct = GetRoomStructById(rooms, room_id);
 
     // if (!optional_room_struct)
@@ -242,10 +279,11 @@ http::response<http::string_body> handlerSetStepMulti(http::request<http::string
     // }
     // Room roomStruct = *optional_room_struct;
     // T_Room *room = roomStruct.room;
+
     T_Room *room = roomStruct.room;
     if (!room)
     {
-        res.body() = "{ \"is_valid\" : false, \"code_error\": 20, \"message_error\" : \"Game room does not exist\"}";
+        res.body() = "{ \"good\" : false, \"code_error\": 20, \"message_error\" : \"Game room does not exist\"}";
         return res;
     }
 
@@ -262,7 +300,7 @@ http::response<http::string_body> handlerSetStepMulti(http::request<http::string
     }
     else
     {
-        res.body() = "{ \"is_valid\" : false, \"code_error\": 30, \"message_error\" : \"Player does not exist in this room\"}";
+        res.body() = "{ \"good\" : false, \"code_error\": 30, \"message_error\" : \"Player does not exist in this room\"}";
         return res;
     }
 
@@ -299,7 +337,7 @@ http::response<http::string_body> handlerPull(http::request<http::string_body> c
 {
     std::cout << "pull" << std::endl;
     std::cout << request.target() << std::endl;
-    
+
     auto check = [](Room const &roomStruct, size_t player_id) -> bool
     {
         Player player;
@@ -364,7 +402,7 @@ http::response<http::string_body> handlerGetRoom(http::request<http::string_body
         roomStruct.player_2 = std::optional<Player>({ .isBot = true });
     }
 
-    res.body() = "{ \"room_id\" : " + std::to_string(room_id) + ", player_id : " + std::to_string(roomStruct.player_1->id) + "}";
+    res.body() = "{ \"room_id\" : " + std::to_string(room_id) + ", \"player_id\" : " + std::to_string(roomStruct.player_1->id) + ", \"hash\" : \"" + roomStruct.hash + "\"}";
     return res;
 }
 
@@ -376,9 +414,11 @@ http::response<http::string_body> handlerJoin(http::request<http::string_body> c
 
     http::response<http::string_body> res = getRespOk(request);
 
-    size_t room_id = getRoomIdFromURL(std::string(request.target()));
+    // size_t room_id = getRoomIdFromURL(std::string(request.target()));
+    std::string room_hash = getRoomHashFromURL(std::string(request.target()));
     
-    Room &roomStruct = GetRoomStructById(rooms, room_id);
+    Room &roomStruct    = GetRoomStructByHash(rooms, room_hash);
+    size_t room_id      = roomStruct.id;
 
     if (!roomStruct.player_2)
     {
@@ -391,7 +431,30 @@ http::response<http::string_body> handlerJoin(http::request<http::string_body> c
         return res;
     }
 
-    res.body() = "{ \"good\" : true, \"player_id\":" + std::to_string(roomStruct.player_2->id) + "}";
+    res.body() = "{ \"good\" : true, \"player_id\":" + std::to_string(roomStruct.player_2->id) + ", \"room_id\" :" + std::to_string(room_id) + "}";
+    return res;
+}
+
+http::response<http::string_body> handlerSave(http::request<http::string_body> const &request)
+{
+    std::cout << "save" << std::endl;
+    std::cout << request.target() << std::endl;
+
+    puts("1");
+
+    http::response<http::string_body> res = getRespOk(request);
+
+    puts("2");
+    size_t room_id = getRoomIdFromURL(std::string(request.target()));
+    
+    puts("3");
+    Room &roomStruct = GetRoomStructById(rooms, room_id);
+
+    puts("4");
+    std::string body = strJson(roomStruct.lastReport, true);
+
+    puts("5");
+    res.body() = body;
     return res;
 }
 
@@ -405,6 +468,7 @@ namespace server3 {
             requestRouter_.addHandler("/pull", handlerPull);
             requestRouter_.addHandler("/get_room", handlerGetRoom);
             requestRouter_.addHandler("/join/room", handlerJoin);
+            requestRouter_.addHandler("/bot/save/room", handlerSave);
         }
 
 

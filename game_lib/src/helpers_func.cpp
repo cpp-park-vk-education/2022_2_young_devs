@@ -181,7 +181,7 @@ void LogReport(ReportAction report, std::string message, std::ostream &out)
     }
 }
 
-std::string strJson(ReportAction report)
+std::string strJson(ReportAction report, bool save)
 {
     std::stringstream json;
     json << "{" << "\"room_id\":" << report.room_id\
@@ -224,6 +224,10 @@ std::string strJson(ReportAction report)
             {
                 json << ",";
             }
+        }
+        if (save)
+        {
+            json << ", \"save\" : true";
         }
         json << "}";
         return json.str();
