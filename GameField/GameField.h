@@ -9,9 +9,11 @@
 #include <Wt/WStackedWidget.h>
 #include <Wt/Http/Client.h>
 #include <Wt/Http/Message.h>
+#include <Wt/WServer.h>
 
 #include <iostream>
 #include <thread>
+#include <chrono>
 
 #include <boost/asio/thread_pool.hpp>
 #include <boost/asio/post.hpp>
@@ -32,6 +34,8 @@ class GameField: public Wt::WContainerWidget {
 
     virtual ~GameField();
 
+    void sendPool();
+
  private:
     GameInf gameInf_;
 
@@ -43,16 +47,11 @@ class GameField: public Wt::WContainerWidget {
 
     std::thread t_;
 
-    void poll();
+    void pool2(std::string &i_);
 
-    /*
-    Player player_1;
-
-    Player player_2;
-
-    T_Room *room;
-    */
     bool isEnemyBot_;
+
+    Wt::WApplication *i_;
 
     Wt::Http::Client *client_;
 
@@ -91,10 +90,6 @@ class GameField: public Wt::WContainerWidget {
     Wt::WPushButton *saveButton_;
 
     //void processButtonPushed(const Wt::WKeyEvent &e, Wt::WPushButton *button);
-
-    ~GameField() {
-        t_.join();
-    }
 };
 
 

@@ -3,8 +3,6 @@
 #include <Wt/WApplication.h>
 #include <Wt/Http/Client.h>
 
-#include <unistd.h>
-
 #include "Game/Game.h"
 
 #include "User.h"
