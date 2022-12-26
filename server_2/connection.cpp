@@ -233,11 +233,12 @@ http::response<http::string_body> handlerSetStepBot(http::request<http::string_b
     std::cout << "command = " << stepReq.command << std::endl;
     std::cout << "stepReq.value = " << stepReq.value << std::endl;
 
-    TypeAction typeAction = stepReq.command == 's' ? TypeAction::Step : TypeAction::Rollback;  
+    TypeAction typeAction = stepReq.command == 's' ? TypeAction::Step : TypeAction::Rollback;
+  
 
     ReportAction report = room->DoAction(player, typeAction, { .value = stepReq.value });
 
-    if (report.isValid)
+    if (typeAction == TypeAction::Step && report.isValid)
     {
         if (!report.result.isEnd)
         {
