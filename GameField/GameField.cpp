@@ -46,9 +46,10 @@ void GameField::pool2(std::string &in_) {
     }
 }
 
-GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID, size_t playerID)
+GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID, size_t playerID, std::string hash)
     : gameInf_(GameInf()), gameProgress_(GameProgress()), roomID_(roomID), i_(Wt::WApplication::instance()),
-    Wt::WContainerWidget(), playerOrder_(true), isEnemyBot_(isEnemyBot), playerID_(playerID) {
+    Wt::WContainerWidget(), playerOrder_(true), isEnemyBot_(isEnemyBot), playerID_(playerID),
+    hash_(hash) {
     Wt::WApplication::instance()->enableUpdates(true);
 
     setContentAlignment(Wt::AlignmentFlag::Center);
@@ -104,10 +105,14 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
         //saveButton_ = addWidget(std::make_unique<Wt::WPushButton>("save"));
         //saveButton_->clicked().connect(std::bind(&GameField::processSaveButton, this));
     } else {
-        getInviteLink_ = addWidget(std::make_unique<Wt::WPushButton>("invite link"));
-        addWidget(std::make_unique<Wt::WBreak>());
-        inviteLink_ = addWidget(std::make_unique<Wt::WText>());
-        getInviteLink_->clicked().connect(std::bind(&GameField::processGetInviteLink, this));
+        if (hash_ != "") {
+            getInviteLink_ = addWidget(
+                    std::make_unique<Wt::WPushButton>("invite link"));
+            addWidget(std::make_unique<Wt::WBreak>());
+            inviteLink_ = addWidget(std::make_unique<Wt::WText>());
+            getInviteLink_->clicked().connect(
+                    std::bind(&GameField::processGetInviteLink, this));
+        }
 
 
         t_ = std::thread(std::bind(&GameField::pool2, this,
@@ -248,6 +253,8 @@ void GameField::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Mess
 
             //gameProgress_.addMoves(roomID_, STEPS);
             //gameInf_.updateGameStatus(roomID_, "stopped");
+
+            return;
         }
 
         size_t isValid = bodyJSON["is_valid"];

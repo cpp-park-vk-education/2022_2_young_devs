@@ -28,7 +28,7 @@
 
 class GameField: public Wt::WContainerWidget {
  public:
-    GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID, size_t playerID);
+    GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID, size_t playerID, std::string hash);
     Wt::Signal<size_t> &cellPushed() {
         return cellPressed_;
     }
@@ -39,6 +39,8 @@ class GameField: public Wt::WContainerWidget {
 
  private:
     GameInf gameInf_;
+
+    std::string hash_;
 
     GameProgress gameProgress_;
 

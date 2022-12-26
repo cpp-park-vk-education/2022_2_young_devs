@@ -134,8 +134,6 @@ void Game::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Message &
     if (!ec) {
         std::string bodyStr = msg.body();
 
-        std::cout << "GAME " << msg.body() << std::endl;
-
         nlohmann::json bodyJSON = nlohmann::json::parse(bodyStr);
 
 
@@ -143,17 +141,9 @@ void Game::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Message &
         size_t tableSize = (gameType_->currentIndex() == 0 ? 9 : 3);
 
         if (!joinLink_->text().empty()) {
-            // TODO
             std::string url = joinLink_->text().toUTF8();
             roomID_ = std::stoul(std::string(url.begin() + url.rfind('/') + 1,
             url.find('?') == std::string::npos ? url.end() : url.begin() + url.find('?')));
-
-            //roomID_ = joinLink_->text().toUTF8().back() - '0';
-
-            for (size_t i = 0; i < 10; i++) {
-                std::cout << "NEW ROOM " << roomID_ << std::endl;
-            }
-
         } else {
             roomID_ = bodyJSON["room_id"];
 
@@ -164,11 +154,14 @@ void Game::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Message &
 
         size_t playerID = bodyJSON["player_id"];
 
-        std::cout << "GAME APPLICATION" << Wt::WApplication::instance() << std::endl;
+        std::string hash = "";
 
+        if (bodyJSON.contains("hash")) {
+            hash = bodyJSON["hash"];
+        }
 
         game_ = mainStack_->addWidget(std::make_unique<GameWidget>(tableSize, tableSize,
-                                                                   isEnemyBot, roomID_, playerID));
+                                                                   isEnemyBot, roomID_, playerID, hash));
 
         Wt::WApplication::instance()->triggerUpdate();
         Wt::WApplication::instance()->enableUpdates(false);
