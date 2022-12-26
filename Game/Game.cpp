@@ -13,29 +13,45 @@ Game::Game(size_t roomID): game_(0), scores_(0), rules_(0),
 
     mainStack_ = new Wt::WStackedWidget();
 
-    std::unique_ptr<Wt::WContainerWidget> comboBoxes = std::make_unique<Wt::WContainerWidget>();
+    std::unique_ptr<Wt::WContainerWidget> auth = std::make_unique<Wt::WContainerWidget>();
 
-    joinLink_ = comboBoxes->addWidget(std::make_unique<Wt::WLineEdit>());
+    login_ = auth->addWidget(std::make_unique<Wt::WLineEdit>());
+    login_->setPlaceholderText("login");
+
+    auth->addWidget(std::make_unique<Wt::WBreak>());
+    auth->addWidget(std::make_unique<Wt::WBreak>());
+
+    password_ = auth->addWidget(std::make_unique<Wt::WLineEdit>());
+    password_->setEchoMode(Wt::EchoMode::Password);
+    password_->setPlaceholderText("password");
+
+    auth->addWidget(std::make_unique<Wt::WBreak>());
+    auth->addWidget(std::make_unique<Wt::WBreak>());
+
+    joinLink_ = auth->addWidget(std::make_unique<Wt::WLineEdit>());
     joinLink_->setPlaceholderText("invite link");
 
-    comboBoxes->addWidget(std::make_unique<Wt::WBreak>());
+    auth->addWidget(std::make_unique<Wt::WBreak>());
+    auth->addWidget(std::make_unique<Wt::WBreak>());
 
-    gameType_ = comboBoxes->addWidget(std::make_unique<Wt::WComboBox>());
+    gameType_ = auth->addWidget(std::make_unique<Wt::WComboBox>());
     gameType_->addItem("strategic");
     gameType_->addItem("classic");
 
-    comboBoxes->addWidget(std::make_unique<Wt::WBreak>());
+    auth->addWidget(std::make_unique<Wt::WBreak>());
+    auth->addWidget(std::make_unique<Wt::WBreak>());
 
-    enemyType_ = comboBoxes->addWidget(std::make_unique<Wt::WComboBox>());
+    enemyType_ = auth->addWidget(std::make_unique<Wt::WComboBox>());
     enemyType_->addItem("bot");
     enemyType_->addItem("player");
+    auth->addWidget(std::make_unique<Wt::WBreak>());
+    auth->addWidget(std::make_unique<Wt::WBreak>());
 
-    mainStack_->addWidget(std::move(comboBoxes));
+    mainStack_->addWidget(std::move(auth));
 
     addWidget(std::unique_ptr<Wt::WContainerWidget>(mainStack_));
 
     links_ = new Wt::WContainerWidget();
-    //links_->hide();
     addWidget(std::unique_ptr<Wt::WContainerWidget>(links_));
 
     backToGameAnchor_ = links_->addWidget(
@@ -88,7 +104,7 @@ void Game::showGame() {
                 Wt::WApplication::instance()->enableUpdates(true);
             }
         } else {
-            client_->get("http://127.0.0.1:2000/" + joinLink_->text().toUTF8());
+            client_->get("http://127.0.0.1:2000/join/room/" + joinLink_->text().toUTF8());
             Wt::WApplication::instance()->enableUpdates(true);
         }
     }

@@ -32,8 +32,6 @@ std::vector<bool> GetDisabledButtons_(size_t i) {
     return indices;
 }
 
-static size_t IdRoom = 166;
-
 void GameField::sendPool() {
     client_->get("http://127.0.0.1:2000/pull?room_id=" +
                  std::to_string(roomID_) +
@@ -96,24 +94,31 @@ GameField::GameField(size_t rows, size_t columns, bool isEnemyBot, size_t roomID
         //        std::bind(&GameField::processButtonPushed, this, std::placeholders::_1, cell)
         //        ));
     }
-    /*
+
     if (isEnemyBot) {
         rollbackButton_ = addWidget(std::make_unique<Wt::WPushButton>("rollback"));
         rollbackButton_->clicked().connect(std::bind(&GameField::processRollbackButton, this));
 
         addWidget(std::make_unique<Wt::WBreak>());
 
-        saveButton_ = addWidget(std::make_unique<Wt::WPushButton>("save"));
-        saveButton_->clicked().connect(std::bind(&GameField::processSaveButton, this));
+        //saveButton_ = addWidget(std::make_unique<Wt::WPushButton>("save"));
+        //saveButton_->clicked().connect(std::bind(&GameField::processSaveButton, this));
+    } else {
+        getInviteLink_ = addWidget(std::make_unique<Wt::WPushButton>("invite link"));
+        addWidget(std::make_unique<Wt::WBreak>());
+        inviteLink_ = addWidget(std::make_unique<Wt::WText>());
+        getInviteLink_->clicked().connect(std::bind(&GameField::processGetInviteLink, this));
+
+
+        t_ = std::thread(std::bind(&GameField::pool2, this,
+                                   Wt::WApplication::instance()->sessionId()));
     }
-     */
+
 
     client_ = new Wt::Http::Client();
 
     client_->setMaxRedirects(10);
     client_->done().connect(this, &GameField::requestDone);
-
-    t_ = std::thread(std::bind(&GameField::pool2, this, Wt::WApplication::instance()->sessionId()));
 }
 
 GameField::~GameField() {
@@ -122,6 +127,10 @@ GameField::~GameField() {
     }
 
     t_.join();
+}
+
+void GameField::processGetInviteLink() {
+    inviteLink_->setText(std::to_string(roomID_));
 }
 
 void GameField::processTableButton(Wt::WPushButton *button) {
@@ -166,6 +175,7 @@ void GameField::processTableButton(Wt::WPushButton *button) {
 void GameField::processNewGameButton() {
 
 }
+
 /*
 // TODO
 void GameField::processRestoreButton() {
@@ -192,29 +202,23 @@ void GameField::processRestoreButton() {
         i++;
     }
 }
+ */
 
 void GameField::processRollbackButton() {
-    T_RollbackTask task(room, player_1, 2);
-    //boost::asio::post(pool, task);
-    task();
+    std::string message = "{\"player_id\": " + std::to_string(playerID_) + ","
+                           "\"command\": \"r\","
+                           "\"value\": " + std::to_string(2) + "}";
+
+    Wt::Http::Message postMessage;
+    postMessage.addBodyText(message);
+    client_->post("http://127.0.0.1:2000/bot/room/" + std::to_string(roomID_),
+                  postMessage);
 }
 
 
-// TODO
 void GameField::processSaveButton() {
-    for (size_t i = 0; i < 10; i++) {
-        std::cout << IdRoom << std::endl;
-    }
-    gameProgress_.addMoves(IdRoom, room->getSteps());
-    gameInf_.updateGameStatus(IdRoom, "stopped");
-
-    for (auto &cell: cellButtons_) {
-        cell->disable();
-    }
+    client_->get("http://127.0.0.1:2000/bot/save/room/" + std::to_string(roomID_));
 }
-
-*/
-
 
 
 //void GameField::processButtonPushed(const Wt::WKeyEvent &e,
@@ -231,14 +235,19 @@ std::mutex mutex;
 void GameField::requestDone(Wt::AsioWrapper::error_code ec, const Wt::Http::Message &msg) {
     std::lock_guard locker(mutex);
     if (!ec) {
-
-        std::cout << "REQUESTDONE " << Wt::WApplication::instance() << std::endl;
-
         puts(msg.body().data());
         nlohmann::json bodyJSON = nlohmann::json::parse(msg.body());
 
         if (bodyJSON.contains("good")) {
             return;
+        }
+
+        //TODO
+        if (bodyJSON.contains("save")) {
+
+
+            //gameProgress_.addMoves(roomID_, STEPS);
+            //gameInf_.updateGameStatus(roomID_, "stopped");
         }
 
         size_t isValid = bodyJSON["is_valid"];

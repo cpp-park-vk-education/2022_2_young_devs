@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <Wt/WCompositeWidget.h>
+#include <Wt/WLineEdit.h>
 #include <Wt/WTable.h>
 #include <Wt/WPushButton.h>
 #include <Wt/WApplication.h>
@@ -81,7 +82,13 @@ class GameField: public Wt::WContainerWidget {
 
     void processTableButton(Wt::WPushButton *button);
 
+    void processGetInviteLink();
+
     Wt::WPushButton *newGameButton_;
+
+    Wt::WPushButton *getInviteLink_;
+
+    Wt::WText *inviteLink_;
 
     Wt::WPushButton *restoreButton_;
 

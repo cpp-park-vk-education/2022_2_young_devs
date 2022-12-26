@@ -53,6 +53,12 @@ class Game: public Wt::WContainerWidget {
 
     Wt::WAnchor *rulesAnchor_;
 
+    Wt::WContainerWidget *auth_;
+
+    Wt::WLineEdit *login_;
+
+    Wt::WLineEdit *password_;
+
     Wt::WContainerWidget *links_;
 
     Wt::Http::Client *client_;
