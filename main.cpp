@@ -203,3 +203,35 @@ int main()
 // 	vecRoomsTasks.push_back({ .room = CreateRoom(std::move(files[i])), .room_id = i});
 // }
 // работает, но после в функции Output при попытке записать в поток - seg fault
+
+
+struct StepInfo
+{
+    ssize_t     player_id;
+    size_t      index;
+    TypeCell    cell;
+};
+
+std::vector<StepInfo> getSteps(nlohmann::json &json)
+{
+	std::vector<StepInfo> vec;
+	for (size_t i = 0; i < json["steps"].size(); ++i)
+	{	
+		TypeCell cell = TypeCell::E;
+		size_t c = json["cell"][i]["cell"];
+		if (c == -1)
+		{
+			cell =  TypeCell::O;
+		}
+		else if (c == 1)
+		{
+			cell =  TypeCell::X;
+		}
+		vec.push_back(
+			{.player_id = json["steps"][i]["player_id"]},
+			{.index = json["steps"][i]["index"]},
+			{.index = cell },
+		)
+	}
+	return vec;
+}

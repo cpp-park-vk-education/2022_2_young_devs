@@ -42,3 +42,5 @@ GET /get_room?with_bot=false
 5)
 GET /join/room/1
 Возвращаю { player_id }
+
+

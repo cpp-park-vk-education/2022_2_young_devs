@@ -6,7 +6,6 @@
 #include "reports_bug.h"
 #include "cond_var.h"
 
-std::mutex tmp_mutex_2;
 
 std::condition_variable cond_var;
 
@@ -26,8 +25,6 @@ void GameRoom::Stop()
         _status = TypeStatus::Stopped;
     }
 }
-
-// GameRoom(isHas<size_t>(_static_ids, room_id) ? throw std::runtime_error("Room already exists") : room_id)
 
 T_Room::T_Room(size_t room_id, Player player_1, Player player_2, T_GameField *field, T_GameLogic *logic, T_Output *output, T_Bot *bot, TypeGame typeGame, bool logging) 
     : 
