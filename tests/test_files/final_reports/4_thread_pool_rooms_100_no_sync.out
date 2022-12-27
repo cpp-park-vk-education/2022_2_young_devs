@@ -1,0 +1,455 @@
+==========[ 66 ]==========
+ O  O  O  X  -  O  X  O  - 
+ X  X  X  O  X  -  X  X  - 
+ O  X  -  X  X  X  X  -  X 
+ O  X  X  O  O  O  X  O  - 
+ -  O  -  X  X  O  -  -  - 
+ O  -  -  -  -  -  X  -  - 
+ X  X  O  -  O  -  O  -  O 
+ -  O  O  -  -  -  -  -  - 
+ X  -  O  O  -  -  -  -  X 
+==========================
+
+
+==========[ 89 ]==========
+ -  -  X  O  -  -  -  X  O 
+ -  X  -  X  O  X  X  X  O 
+ -  -  O  X  -  X  -  O  - 
+ X  O  -  O  O  O  -  O  O 
+ X  X  -  O  X  O  X  O  X 
+ O  O  O  -  -  X  -  O  - 
+ -  -  -  -  X  X  -  O  X 
+ -  -  X  O  -  -  O  X  X 
+ -  -  O  -  X  O  -  X  - 
+==========================
+
+
+==========[ 11 ]==========
+ X  X  X  X  O  -  X  -  O 
+ -  O  O  X  X  X  -  X  O 
+ -  -  O  -  -  X  O  X  X 
+ -  O  O  -  O  O  -  O  X 
+ O  -  -  -  -  -  -  -  - 
+ X  O  -  X  -  -  -  X  O 
+ O  -  O  O  O  X  O  -  - 
+ X  -  -  X  -  X  X  X  - 
+ O  O  X  X  -  -  X  O  O 
+==========================
+
+
+==========[ 48 ]==========
+ -  O  X  -  X  -  X  -  X 
+ -  -  X  X  X  X  -  X  O 
+ X  -  X  -  O  O  X  O  - 
+ -  O  -  -  O  X  O  O  O 
+ -  O  -  X  O  X  X  O  - 
+ -  O  O  X  -  O  O  X  X 
+ O  -  O  O  -  O  O  X  O 
+ -  -  X  -  X  X  X  O  O 
+ O  -  X  -  X  -  -  -  X 
+==========================
+
+
+==========[ 5 ]==========
+ O  -  X  X  O  X  -  O  - 
+ O  O  X  X  -  -  O  O  O 
+ -  O  O  -  X  X  O  X  - 
+ -  -  -  X  -  X  X  O  X 
+ X  O  X  -  -  X  O  O  O 
+ O  -  X  X  O  O  -  O  - 
+ X  O  -  X  O  X  O  X  O 
+ -  X  -  -  X  X  -  O  X 
+ -  -  X  -  O  X  O  -  - 
+==========================
+
+
+==========[ 28 ]==========
+ X  O  -  O  O  O  -  X  - 
+ X  -  X  O  X  X  O  O  O 
+ -  X  X  X  X  O  -  -  O 
+ O  X  X  -  X  -  O  O  X 
+ -  -  X  -  -  -  -  O  - 
+ O  -  X  X  -  O  -  O  X 
+ -  X  X  O  X  X  O  O  - 
+ -  -  O  O  -  -  X  O  X 
+ O  O  O  X  -  -  X  O  X 
+==========================
+
+
+==========[ 18 ]==========
+ X  X  X  O  -  X  O  -  O 
+ O  O  X  O  X  O  O  O  X 
+ -  -  O  X  -  -  O  -  X 
+ O  X  X  X  O  X  O  O  X 
+ -  -  X  X  -  O  O  O  X 
+ -  X  X  X  -  O  -  X  O 
+ -  X  -  -  -  O  X  O  - 
+ O  X  -  -  O  O  X  X  X 
+ -  -  O  -  X  -  O  -  - 
+==========================
+
+
+==========[ 50 ]==========
+ O  X  O  -  -  -  -  X  - 
+ O  -  -  X  X  X  -  O  X 
+ X  X  O  O  O  -  O  -  - 
+ X  -  O  X  O  -  O  -  - 
+ X  O  -  X  O  X  O  O  - 
+ X  -  O  X  -  X  O  O  O 
+ O  O  X  X  -  -  X  -  X 
+ O  X  X  -  X  X  -  O  X 
+ X  O  X  O  -  X  O  O  - 
+==========================
+
+
+==========[ 73 ]==========
+ X  -  O  O  -  -  O  O  X 
+ O  X  X  X  -  O  O  X  X 
+ X  O  O  -  -  X  O  -  O 
+ X  X  O  O  -  X  X  O  O 
+ X  -  O  -  O  X  X  X  - 
+ X  O  -  -  O  O  -  O  - 
+ O  -  X  X  -  X  -  X  X 
+ O  O  O  O  X  -  -  -  O 
+ -  -  -  X  X  X  X  O  - 
+==========================
+
+
+==========[ 96 ]==========
+ O  O  -  O  -  X  X  X  X 
+ X  -  O  X  O  O  O  -  - 
+ X  O  X  -  X  O  -  X  - 
+ -  X  -  -  X  O  X  -  - 
+ O  O  O  -  -  X  -  X  - 
+ X  -  O  X  X  X  O  -  X 
+ O  O  O  X  X  O  X  O  O 
+ X  O  -  -  O  -  X  O  - 
+ X  X  O  O  O  O  X  X  - 
+==========================
+
+
+==========[ 83 ]==========
+ -  -  O  O  -  X  X  X  O 
+ -  O  X  O  O  O  -  O  X 
+ X  O  -  O  X  X  O  X  - 
+ -  X  -  -  X  O  X  X  O 
+ X  O  -  O  X  X  -  O  O 
+ -  O  X  -  X  X  O  -  - 
+ X  X  X  O  O  -  -  O  X 
+ X  -  -  -  X  X  O  -  - 
+ O  O  X  X  O  X  O  O  O 
+==========================
+
+
+==========[ 34 ]==========
+ O  -  O  X  -  X  -  X  - 
+ X  X  X  O  X  O  O  O  - 
+ -  X  -  O  -  O  -  -  O 
+ O  O  X  X  X  X  O  X  - 
+ O  X  O  O  O  X  X  O  - 
+ X  X  O  O  O  X  -  -  - 
+ -  O  -  -  X  -  O  O  - 
+ X  O  -  X  O  -  X  X  X 
+ X  O  X  X  O  O  O  X  X 
+==========================
+
+
+==========[ 95 ]==========
+ O  -  X  O  X  -  X  O  X 
+ X  -  X  X  -  X  X  O  X 
+ X  -  X  X  X  O  -  O  O 
+ O  O  O  -  X  X  O  O  X 
+ O  O  O  X  -  X  X  O  - 
+ X  X  O  X  -  X  -  -  O 
+ -  O  -  O  -  O  -  O  O 
+ O  O  O  X  O  -  X  O  - 
+ -  O  -  -  -  X  X  X  X 
+==========================
+
+
+==========[ 6 ]==========
+ -  -  -  O  X  O  O  O  O 
+ X  X  X  -  X  X  O  X  X 
+ -  X  X  X  X  X  X  X  - 
+ -  O  X  O  O  X  O  X  O 
+ X  -  O  X  O  X  -  O  O 
+ -  -  O  -  O  -  X  X  X 
+ -  O  -  O  O  X  O  O  X 
+ O  O  O  -  -  O  -  X  - 
+ X  -  O  O  -  O  X  X  O 
+==========================
+
+
+==========[ 4 ]==========
+ -  X  X  O  X  O  O  O  X 
+ O  O  X  O  -  O  X  O  X 
+ X  -  X  X  X  X  O  X  X 
+ X  O  O  O  X  X  X  X  O 
+ -  X  -  -  -  X  -  O  - 
+ X  X  -  -  X  X  X  -  O 
+ O  O  O  O  -  O  -  -  X 
+ X  O  -  O  O  O  O  -  O 
+ O  X  -  X  O  -  -  X  O 
+==========================
+
+
+==========[ 53 ]==========
+ X  O  X  X  -  X  O  X  O 
+ X  O  X  X  -  X  O  X  O 
+ -  O  O  -  -  O  O  O  O 
+ X  O  X  O  O  X  O  O  X 
+ O  O  -  X  -  X  O  -  - 
+ O  X  X  O  -  -  O  O  - 
+ -  -  X  O  -  X  X  -  O 
+ O  X  X  -  X  -  X  O  X 
+ -  -  X  X  O  X  X  X  O 
+==========================
+
+
+==========[ 90 ]==========
+ -  O  O  O  O  O  O  X  X 
+ O  X  X  X  X  X  O  X  X 
+ X  X  O  -  -  O  -  X  X 
+ X  X  X  -  X  O  X  O  O 
+ X  -  O  -  O  O  O  X  O 
+ O  X  O  -  -  O  O  X  X 
+ X  -  -  O  -  O  X  X  O 
+ O  -  X  O  -  X  X  -  O 
+ -  -  O  -  O  -  X  -  X 
+==========================
+
+
+==========[ 26 ]==========
+ X  X  O  X  O  X  X  O  O 
+ X  O  -  O  -  X  -  X  X 
+ -  O  X  O  X  X  O  O  O 
+ O  O  -  -  O  O  O  O  X 
+ -  X  X  O  X  O  X  O  X 
+ -  -  X  -  X  X  O  O  X 
+ -  X  X  O  -  X  O  X  X 
+ -  -  O  -  X  X  O  O  O 
+ X  -  X  -  -  O  O  -  O 
+==========================
+
+
+==========[ 97 ]==========
+ O  X  X  O  O  -  O  X  - 
+ X  X  X  O  O  -  O  -  O 
+ -  O  X  X  -  -  O  X  O 
+ X  -  X  X  X  O  O  X  O 
+ X  O  X  O  O  X  O  X  O 
+ X  -  O  X  -  -  O  O  X 
+ O  -  X  -  -  X  O  -  X 
+ O  O  X  -  -  X  O  X  X 
+ X  O  O  X  O  X  O  -  - 
+==========================
+
+
+==========[ 8 ]==========
+ X  X  O  X  -  -  -  O  O 
+ O  X  -  X  X  O  X  X  X 
+ X  X  O  -  O  -  O  X  - 
+ X  X  O  O  O  O  O  -  X 
+ O  X  X  X  O  -  -  X  O 
+ O  X  -  O  O  X  O  O  O 
+ O  -  X  O  O  X  O  -  - 
+ O  -  X  O  O  X  -  X  X 
+ X  X  X  O  -  X  -  X  O 
+==========================
+
+
+==========[ 14 ]==========
+ X  O  O  X  O  X  -  X  X 
+ O  X  -  X  -  X  X  O  O 
+ -  O  -  X  X  -  O  O  O 
+ -  O  O  X  X  -  O  -  X 
+ O  O  -  O  X  O  -  X  X 
+ X  X  X  O  X  -  X  O  X 
+ -  -  O  O  O  X  X  O  X 
+ X  O  O  X  O  O  -  -  O 
+ -  X  O  X  O  X  -  X  O 
+==========================
+
+
+==========[ 43 ]==========
+ -  X  X  X  -  -  X  O  O 
+ O  O  -  -  X  -  X  -  - 
+ O  X  O  O  X  O  X  O  O 
+ X  -  O  O  -  X  O  -  - 
+ X  O  X  O  X  O  X  O  - 
+ O  O  -  X  O  O  -  O  O 
+ X  O  O  X  O  X  O  X  X 
+ -  X  X  X  X  X  O  X  X 
+ O  -  X  -  O  O  X  X  X 
+==========================
+
+
+==========[ 49 ]==========
+ X  O  X  O  O  O  O  O  X 
+ O  X  O  X  X  X  O  -  - 
+ -  X  X  X  X  O  X  X  X 
+ X  X  -  -  O  O  X  O  O 
+ X  O  X  O  X  X  -  O  - 
+ X  O  O  O  O  -  X  -  X 
+ O  X  -  O  X  X  O  X  - 
+ O  X  O  O  X  O  X  X  - 
+ -  -  O  -  -  -  O  O  - 
+==========================
+
+
+==========[ 23 ]==========
+ O  X  X  O  X  X  O  X  - 
+ X  O  O  O  O  O  O  X  X 
+ -  O  O  X  O  X  O  O  - 
+ X  O  X  X  O  -  X  O  O 
+ -  O  -  X  X  X  X  -  - 
+ O  X  O  O  -  -  -  X  - 
+ X  O  X  X  X  O  O  X  O 
+ X  -  -  O  -  O  -  O  - 
+ O  X  X  X  O  X  O  X  X 
+==========================
+
+
+==========[ 33 ]==========
+ O  O  X  X  O  -  X  -  O 
+ O  X  X  X  O  O  -  O  - 
+ O  O  X  O  X  X  O  X  O 
+ X  O  O  X  X  X  O  X  X 
+ -  O  -  O  X  X  O  O  O 
+ O  X  X  O  -  O  -  -  - 
+ X  X  O  O  X  -  O  -  X 
+ X  -  X  X  X  -  X  O  X 
+ X  -  X  O  O  -  -  O  O 
+==========================
+
+
+==========[ 27 ]==========
+ X  O  X  -  -  -  -  O  - 
+ X  X  -  X  O  O  X  O  X 
+ X  X  -  O  X  X  X  -  O 
+ O  O  O  O  X  O  O  -  X 
+ O  O  O  X  -  X  O  X  O 
+ X  X  X  X  -  X  -  X  X 
+ O  -  O  O  X  -  O  X  X 
+ X  O  O  X  O  -  O  O  X 
+ X  O  O  O  -  O  X  -  O 
+==========================
+
+
+==========[ 58 ]==========
+ -  X  O  -  -  X  O  X  O 
+ X  X  -  X  O  -  X  X  X 
+ X  -  X  O  X  X  O  X  O 
+ X  O  X  O  -  O  -  -  X 
+ O  O  O  O  X  O  X  X  O 
+ X  -  -  X  O  O  X  O  X 
+ O  O  X  O  O  O  O  O  O 
+ O  X  O  -  -  X  O  X  - 
+ O  X  X  X  -  -  O  -  X 
+==========================
+
+
+==========[ 60 ]==========
+ O  X  O  X  X  O  X  O  O 
+ -  O  O  X  O  O  -  O  X 
+ X  O  -  O  X  -  X  X  X 
+ -  X  O  X  O  O  X  X  - 
+ X  X  O  X  X  X  O  O  - 
+ O  X  -  O  -  X  O  X  O 
+ -  -  X  O  O  X  X  O  X 
+ O  X  X  O  O  X  O  -  - 
+ -  X  X  O  X  O  -  O  - 
+==========================
+
+
+==========[ 41 ]==========
+ -  X  X  X  O  O  O  X  X 
+ X  O  O  -  X  X  -  O  X 
+ -  O  X  O  -  O  X  O  O 
+ -  -  O  O  O  -  O  X  X 
+ X  X  O  O  X  O  O  O  X 
+ -  O  X  O  X  -  O  X  X 
+ -  X  O  X  -  O  X  O  X 
+ X  -  O  O  X  O  -  X  X 
+ -  X  X  X  X  O  O  O  O 
+==========================
+
+
+==========[ 87 ]==========
+ X  O  X  X  O  X  -  O  O 
+ O  O  O  -  X  -  X  X  O 
+ X  -  O  O  O  X  X  X  O 
+ X  X  -  O  X  O  O  X  X 
+ O  X  -  O  X  O  O  X  X 
+ X  X  O  O  -  O  -  -  - 
+ X  O  O  X  -  O  O  -  X 
+ X  X  X  -  O  -  O  O  O 
+ O  O  X  O  -  X  X  X  X 
+==========================
+
+
+==========[ 51 ]==========
+ -  O  X  O  X  X  X  O  O 
+ O  X  X  O  X  X  X  O  X 
+ X  X  -  X  X  X  X  O  O 
+ O  O  -  O  O  X  O  O  X 
+ -  X  -  O  -  O  -  O  - 
+ X  X  X  -  X  O  O  O  X 
+ X  X  O  O  O  O  -  O  X 
+ -  X  O  X  -  X  O  X  X 
+ -  -  O  O  O  X  O  X  O 
+==========================
+
+
+==========[ 61 ]==========
+ X  O  O  O  -  -  X  X  O 
+ O  O  X  O  O  X  O  -  X 
+ X  X  X  X  X  O  O  X  X 
+ X  -  X  O  X  X  X  O  O 
+ O  X  O  -  O  X  O  -  - 
+ X  X  X  O  X  -  -  O  - 
+ O  X  O  O  O  O  O  X  X 
+ X  X  -  X  O  -  O  X  - 
+ O  X  X  O  X  O  O  O  - 
+==========================
+
+
+==========[ 84 ]==========
+ O  X  -  X  O  X  O  X  - 
+ X  X  X  X  O  O  -  X  O 
+ O  X  X  X  -  O  -  -  O 
+ O  O  -  X  O  X  O  X  X 
+ O  X  X  O  O  X  O  X  O 
+ X  X  -  O  O  X  X  X  X 
+ O  O  O  -  -  O  O  X  X 
+ X  O  O  -  O  O  O  X  O 
+ X  -  X  O  X  -  X  -  O 
+==========================
+
+
+==========[ 10 ]==========
+ X  -  X  -  -  X  -  O  O 
+ O  X  -  O  X  X  X  O  - 
+ X  O  O  -  X  O  X  O  X 
+ O  X  X  O  O  O  -  -  - 
+ O  X  X  O  X  -  O  O  O 
+ X  O  X  O  X  O  O  X  X 
+ O  O  -  X  O  O  X  X  X 
+ X  O  X  X  X  X  O  X  O 
+ X  O  O  O  X  O  X  O  - 
+==========================
+
+
+==========[ 38 ]==========
+ O  X  O  X  X  O  O  O  X 
+ O  O  O  O  O  X  -  -  X 
+ O  X  X  -  O  X  X  X  X 
+ X  O  X  X  -  -  X  O  O 
+ O  O  X  X  X  -  O  O  X 
+ X  O  -  O  O  X  X  X  O 
+ X  X  X  X  O  O  O  X  O 
+ X  -  O  X  X  X  X  -  O 
+ -  O  O  O  -  X  O  O  - 
+==========================
+
+

@@ -1,0 +1,46 @@
+0
+curl -X POST -H "Content-Type: application/json" -d '{"command":"s", "player_id" : 0, "value" : 67}' "127.0.0.1:2000/multiplayer/room/0"
+
+1
+-- кто ходит первым, если первым сходит нолик?
+
+curl -X POST -H "Content-Type: application/json" -d '{"command":"s", "player_id" : 1, "value" : 37}' "127.0.0.1:2000/multiplayer/room/0"
+
+curl -X POST -H "Content-Type: application/json" -d '{"command":"s", "player_id" : 1, "value" : 39}' "127.0.0.1:2000/bot/room/1"
+
+curl -vv "127.0.0.1:2000/get_room?with_bot=true"
+
+curl -vv "127.0.0.1:2000/get_room?with_bot=false"
+
+curl -vv "127.0.0.1:2000/pull?room_id=0&player_id=0"
+
+curl -vv "127.0.0.1:2000/join/room/0"
+
+
+
+1)
+POST /bot/room/1 
+{ player_id, command, value }
+Возвращаю отчет json
+
+
+2)
+POST /multiplayer/room/1 
+{ player_id, command, value }
+Возвращаю отчет json
+
+
+3)
+GET /pull?room_id=1&player_id=4
+Возвращаю json либо с отчетом либо с { good : false}
+в случае, если обновлений нет или запросил тот, кто и сходил последний (у него уже отрисовалось)
+
+4)
+GET /get_room?with_bot=false
+Возвращаю { room_id, player_id }
+
+5)
+GET /join/room/1
+Возвращаю { player_id }
+
+
